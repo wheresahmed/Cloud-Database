@@ -202,7 +202,8 @@ public class KVServer implements IKVServer {
 	            			"Unable to establish connection. \n", e);
 	            }
 	        }
-        }
+		}
+		logger.info("Server stopped!");
 	}
 
 	@Override
