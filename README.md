@@ -1,2 +1,2 @@
 # Cloud-Database
-ECE419 Cloud Database Project
+ECE419 - Distributed Systems: Cloud Database Project
