@@ -86,6 +86,7 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 		
 		// call getKV in persistent storage and return true if found
+		return false;
 	}
 
 	@Override
@@ -93,6 +94,7 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 
 		// call getKV in cache and return true if found
+		return false;
 	}
 
 	@Override
@@ -101,6 +103,7 @@ public class KVServer implements IKVServer {
 		
 		// try to get value in cache, if not found, try to get value
 		// in persistent storage
+		return "";
 	}
 
 	@Override
@@ -114,23 +117,23 @@ public class KVServer implements IKVServer {
     public void clearCache(){
 		// TODO Auto-generated method stub
 		logger.info("Clearing cache");
-		if (cache != null){
-			cache.clear();
-		}
+		// if (cache != null){
+		// 	cache.clear();
+		// }
 	}
 
 	@Override
     public void clearStorage(){
 		// TODO Auto-generated method stub
-		try {
-			pStore.clear();
-			logger.info("Clearing storage");
-			if (cache != null){
-				cache.clear();
-			}
-		} catch (IOException e) {
-            logger.error("Error: Exception in clear storage");
-        }
+		// try {
+		// 	pStore.clear();
+		// 	logger.info("Clearing storage");
+		// 	if (cache != null){
+		// 		cache.clear();
+		// 	}
+		// } catch (IOException e) {
+        //     logger.error("Error: Exception in clear storage");
+        // }
 	}
 
 	private boolean isRunning() {
@@ -182,7 +185,7 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 
 		running = initializeServer();
-		setupServer();
+		//setupServer();
 
 		if (serverSocket != null) {
 	        while(isRunning()){
