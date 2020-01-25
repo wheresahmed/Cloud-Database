@@ -13,7 +13,6 @@ import java.net.UnknownHostException;
 import shared.messages.KVMessage;
 import shared.messages.Message;
 import app_kvClient.ClientSocketListener;
-import app_kvClient.KVClient;
 import app_kvClient.TextMessage;
 
 
@@ -54,8 +53,9 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 
 		clientSocket = new Socket(address, port);
 		listeners = new HashSet<ClientSocketListener>();
-		running = true;
+		setRunning(true);
 
+		print("Connection established to server at " + address + " / " + port);
 		logger.info("Connection established");
 		listeners.add(this);
 
@@ -68,7 +68,7 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 	}
 
 	private void tearDownConnection() throws IOException {
-		running = false;
+		setRunning(false);
 		logger.info("tearing down the connection ...");
 		if (clientSocket != null) {
 			input.close();
@@ -95,50 +95,49 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 		}
 	}
 
-	
+
 	// Put and Get functions - take in the key and value, used by KVClient
 
 	@Override
 	public KVMessage put(String key, String value) throws Exception {
 
-		Message message = null;
-		StringBuilder msg = new StringBuilder();
-		
-		msg.append("put " + key + " " + value);
-		sendMessage(new TextMessage(msg.toString()));
+		StringBuilder sendMsgToServer = new StringBuilder();
+		sendMsgToServer.append("put " + key + " " + value);
+		sendMessage(new TextMessage(sendMsgToServer.toString()));
 
-		TextMessage latestMsg = receiveMessage();
-		handleNewMessage(latestMsg);
-		String[] splitMsg = latestMsg.getMsg().split("\\s+");
+		TextMessage latestMsgFromServer = receiveMessage();
+		handleNewMessage(latestMsgFromServer);
+		String[] splitMsg = latestMsgFromServer.getMsg().split("\\s+");
 
-		message = new Message(splitMsg);
-		return message;
+		Message msgToClient = null;
+		msgToClient = new Message(splitMsg);
+		return msgToClient;
 
 	}
 
 	@Override
 	public KVMessage get(String key) throws Exception {
 
-		Message message = null;
-		StringBuilder msg = new StringBuilder();
+		StringBuilder sendMsgToServer = new StringBuilder();
+		sendMsgToServer.append("get " + key);
+		sendMessage(new TextMessage(sendMsgToServer.toString()));
 
-		msg.append("get " + key);
-		sendMessage(new TextMessage(msg.toString()));
+		TextMessage latestMsgFromServer = receiveMessage();
+		handleNewMessage(latestMsgFromServer);
+		String[] splitMsg = latestMsgFromServer.getMsg().split("\\s+");
 
-		TextMessage latestMsg = receiveMessage();
-		handleNewMessage(latestMsg);
-		String[] splitMsg = latestMsg.getMsg().split("\\s+");
-
-		message = new Message(splitMsg);
-		return message;
+		Message msgToClient = null;
+		msgToClient = new Message(splitMsg);
+		return msgToClient;
 	}
 
 	// Sending and Receiving Messages Functionality - used by put and get to send the message and receive the response
 
 	/**
 	 * Method sends a TextMessage using this socket.
+	 *
 	 * @param msg the message that is to be sent.
-	 * @throws IOException some I/O error regarding the output stream 
+	 * @throws IOException some I/O error regarding the output stream
 	 */
 	public void sendMessage(TextMessage msg) throws IOException {
 		byte[] msgBytes = msg.getMsgBytes();
@@ -155,13 +154,13 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 		byte[] bufferBytes = new byte[BUFFER_SIZE];
 
 		/* read first char from stream */
-		byte read = (byte) input.read();	
+		byte read = (byte) input.read();
 		boolean reading = true;
 
-		while(read != 13 && reading) {/* carriage return */
+		while (read != 13 && reading) {/* carriage return */
 			/* if buffer filled, copy to msg array */
-			if(index == BUFFER_SIZE) {
-				if(msgBytes == null){
+			if (index == BUFFER_SIZE) {
+				if (msgBytes == null) {
 					tmp = new byte[BUFFER_SIZE];
 					System.arraycopy(bufferBytes, 0, tmp, 0, BUFFER_SIZE);
 				} else {
@@ -174,7 +173,7 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 				msgBytes = tmp;
 				bufferBytes = new byte[BUFFER_SIZE];
 				index = 0;
-			} 
+			}
 
 			/* only read valid characters, i.e. letters and numbers */
 			if((read > 31 && read < 127)) {
@@ -216,11 +215,11 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 
 		} else if (status == SocketStatus.DISCONNECTED) {
 			System.out.print(PROMPT);
-			System.out.println("Connection terminated: " 
+			System.out.println("Connection terminated: "
 					+ this.address + " / " + this.port);
 
 		} else if (status == SocketStatus.CONNECTION_LOST) {
-			System.out.println("Connection lost: " 
+			System.out.println("Connection lost: "
 					+ this.address + " / " + this.port);
 			System.out.print(PROMPT);
 		}
@@ -229,13 +228,31 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 
 	@Override
 	public void handleNewMessage(TextMessage msg) {
-		System.out.println(PROMPT+ msg.getMsg());
+		System.out.println(PROMPT + msg.getMsg());
 	}
 
 	// Error and Formatting Logic
 
-	private void printError(String error){
-		System.out.println(PROMPT + "Error! " +  error);
+	private void printError(String error) {
+		System.out.println(PROMPT + "Error! " + error);
+	}
+
+	private void print(String text) {
+		System.out.println(PROMPT + text);
+	}
+
+	// Helpers
+
+	public boolean isClientRunning() {
+		return running;
+	}
+
+	public boolean isRunning() {
+		return running;
+	}
+
+	public void setRunning(boolean run) {
+		running = run;
 	}
 
 }

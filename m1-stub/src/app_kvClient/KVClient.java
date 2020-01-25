@@ -12,7 +12,7 @@ import logger.LogSetup;
 
 import client.KVCommInterface;
 import client.KVStore;
-import shared.messages.KVMessage;;
+import shared.messages.KVMessage;
 
 public class KVClient implements IKVClient {
 
@@ -36,7 +36,6 @@ public class KVClient implements IKVClient {
                 this.handleCommand(cmdLine);
             } catch (IOException e) {
                 stop = true;
-
                 printError("CLI does not respond - Application terminated ");
             }
 
@@ -48,7 +47,9 @@ public class KVClient implements IKVClient {
 
         if (tokens[0].equals("quit")) {
             stop = true;
-            store.disconnect();
+            if (store != null && store.isClientRunning()) {
+                store.disconnect();
+            }
             System.out.println(PROMPT + "Application exit!");
 
         } else if (tokens[0].equals("connect")) {
@@ -75,28 +76,37 @@ public class KVClient implements IKVClient {
             }
 
         } else if (tokens[0].equals("put")) {
-            if (tokens.length == 3) {
-                try {
-                    String key = tokens[1];
-                    String value = tokens[2];
-                    KVMessage reply = store.put(key, value);
-                    if (reply.getStatus() == KVMessage.StatusType.PUT_SUCCESS) {
-                        printReply("PUT request was successful! Key value tuple has been created");
-                    } else if (reply.getStatus() == KVMessage.StatusType.PUT_UPDATE) {
-                        printReply("PUT request was successful! Key value tuple has been updated");
-                    } else if (reply.getStatus() == KVMessage.StatusType.PUT_ERROR) {
-                        printError("PUT request encountered an error");
-                    } else {
-                        printError("PUT request received unknown reply");
+            if (tokens.length >= 2) {
+                if (store != null && store.isClientRunning()) {
+                    try {
+                        String key = tokens[1];
+                        String value = "";
+                        for (int i = 2; i < tokens.length - 1; i++) {
+                            value += tokens[i];
+                            value += " ";
+                        }
+                        value += tokens[tokens.length - 1];
+                        KVMessage reply = store.put(key, value);
+                        if (reply.getStatus() == KVMessage.StatusType.PUT_SUCCESS) {
+                            printReply("PUT request was successful! Key value tuple has been created");
+                        } else if (reply.getStatus() == KVMessage.StatusType.PUT_UPDATE) {
+                            printReply("PUT request was successful! Key value tuple has been updated");
+                        } else if (reply.getStatus() == KVMessage.StatusType.PUT_ERROR) {
+                            printError("PUT request encountered an error");
+                        } else {
+                            printError("PUT request received unknown reply");
+                        }
+                    } catch (UnknownHostException e) {
+                        printError("Unknown Host!");
+                        logger.info("Unknown Host!", e);
+                    } catch (IOException e) {
+                        printError("Could not establish connection!");
+                        logger.warn("Could not establish connection!", e);
+                    } catch (Exception e) {
+                        printError("Unknown exception!");
                     }
-                } catch (UnknownHostException e) {
-                    printError("Unknown Host!");
-                    logger.info("Unknown Host!", e);
-                } catch (IOException e) {
-                    printError("Could not establish connection!");
-					logger.warn("Could not establish connection!", e);
-                } catch (Exception e) {
-                    printError("Unknown exception!");
+                } else {
+                    printError("Client not connected!");
                 }
             } else {
                 printError("Invalid number of parameters!");
@@ -104,31 +114,37 @@ public class KVClient implements IKVClient {
 
         } else if (tokens[0].equals("get")) {
             if (tokens.length == 2) {
-                try {
-                    String key = tokens[1];
-                    KVMessage reply = store.get(key);
-                    if (reply.getStatus() == KVMessage.StatusType.GET_SUCCESS) {
-                        printReply("GET successful, retrieved \"" + reply.getValue() + "\"");
-                    } else if (reply.getStatus() == KVMessage.StatusType.GET_ERROR) {
-                        printError("GET request encountered an error");
-                    } else {
-                        printError("GET request received unknown reply");
+                if (store != null && store.isClientRunning()) {
+                    try {
+                        String key = tokens[1];
+                        KVMessage reply = store.get(key);
+                        if (reply.getStatus() == KVMessage.StatusType.GET_SUCCESS) {
+                            printReply("GET successful, retrieved \"" + reply.getValue() + "\"");
+                        } else if (reply.getStatus() == KVMessage.StatusType.GET_ERROR) {
+                            printError("GET request encountered an error");
+                        } else {
+                            printError("GET request received unknown reply");
+                        }
+                    } catch (UnknownHostException e) {
+                        printError("Unknown Host!");
+                        logger.info("Unknown Host!", e);
+                    } catch (IOException e) {
+                        printError("Could not establish connection!");
+                        logger.warn("Could not establish connection!", e);
+                    } catch (Exception e) {
+                        printError("Unknown exception!");
                     }
-                } catch (UnknownHostException e) {
-                    printError("Unknown Host!");
-                    logger.info("Unknown Host!", e);
-                } catch (IOException e) {
-                    printError("Could not establish connection!");
-					logger.warn("Could not establish connection!", e);
-                } catch (Exception e) {
-                    printError("Unknown exception!");
+                } else {
+                    printError("Client not connected!");
                 }
             } else {
                 printError("Invalid number of parameters!");
             }
 
         } else if(tokens[0].equals("disconnect")) {
-            store.disconnect();
+            if (store != null && store.isClientRunning()) {
+                store.disconnect();
+            }
 
         } else if(tokens[0].equals("logLevel")) {
             if(tokens.length == 2) {
@@ -147,7 +163,7 @@ public class KVClient implements IKVClient {
         } else if(tokens[0].equals("help")) {
             printHelp();
         } else {
-            printError("Unknown command.");
+            printError("Unknown command");
             printHelp();
         }
     }
@@ -164,7 +180,7 @@ public class KVClient implements IKVClient {
 
         return store;
     }
-    
+
     private void printHelp() {
         StringBuilder sb = new StringBuilder();
         sb.append(PROMPT).append("KV CLIENT HELP (Usage):\n");
@@ -214,10 +230,10 @@ public class KVClient implements IKVClient {
         } else if(levelString.equals(Level.ERROR.toString())) {
             logger.setLevel(Level.ERROR);
             return Level.ERROR.toString();
-        } else if(levelString.equals(Level.FATAL.toString())) {
+        } else if (levelString.equals(Level.FATAL.toString())) {
             logger.setLevel(Level.FATAL);
             return Level.FATAL.toString();
-        } else if(levelString.equals(Level.OFF.toString())) {
+        } else if (levelString.equals(Level.OFF.toString())) {
             logger.setLevel(Level.OFF);
             return Level.OFF.toString();
         } else {
@@ -225,16 +241,21 @@ public class KVClient implements IKVClient {
         }
     }
 
-    private void printReply(String reply){
-        System.out.println(PROMPT + "Reply: " +  reply);
+    private void print(String text) {
+        System.out.println(PROMPT + text);
     }
 
-    private void printError(String error){
-        System.out.println(PROMPT + "Error: " +  error);
+    private void printReply(String reply) {
+        System.out.println(PROMPT + "Reply: " + reply);
+    }
+
+    private void printError(String error) {
+        System.out.println(PROMPT + "Error: " + error);
     }
 
     /**
      * Main entry point for the KV Client application.
+     *
      * @param args contains the port number at args[0].
      */
     public static void main(String[] args) {

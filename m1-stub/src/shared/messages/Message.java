@@ -59,7 +59,7 @@ public class Message implements KVMessage {
 		String value = "";
 		for (int i =4; i < server_response.length - 2; i++ ){
 			value += server_response[i];
-			value+= " ";
+			value += " ";
 		}
 		value += server_response[server_response.length -2];
 		return value;
