@@ -177,3 +177,398 @@
 2020-01-25 14:18:28,102 INFO  [Thread-1] root: Message received with GET request.
 2020-01-25 14:18:28,103 INFO  [Thread-1] root: SEND 	<127.0.0.1:43702>: 'GET_ERROR < a
  >'
+2020-01-25 14:45:12,932 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 14:45:12,935 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 14:45:12,935 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 14:45:12,937 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 14:47:30,020 INFO  [Thread-1] root: SEND 	<127.0.0.1:43816>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 14:47:30,021 INFO  [Thread-0] root: Connected to localhost on port 43816
+2020-01-25 14:47:49,076 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43816>: 'put a b'
+2020-01-25 14:47:49,077 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 14:47:49,078 INFO  [Thread-1] root: SEND 	<127.0.0.1:43816>: 'PUT_SUCCESS < a , b
+  >'
+2020-01-25 14:47:57,712 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43816>: 'put b c'
+2020-01-25 14:47:57,712 INFO  [Thread-1] root: SEND 	<127.0.0.1:43816>: 'put b c
+'
+2020-01-25 14:50:46,710 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 14:50:46,712 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 14:50:46,713 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 14:50:46,714 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 14:51:04,493 INFO  [Thread-1] root: SEND 	<127.0.0.1:43818>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 14:51:04,495 INFO  [Thread-0] root: Connected to localhost on port 43818
+2020-01-25 15:03:25,031 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43818>: 'get a'
+2020-01-25 15:03:25,032 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 15:03:25,032 INFO  [Thread-1] root: SEND 	<127.0.0.1:43818>: 'GET_ERROR < a
+ >'
+2020-01-25 15:16:44,166 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 15:16:44,168 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 15:16:44,169 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 15:16:44,170 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 15:17:06,415 INFO  [Thread-1] root: SEND 	<127.0.0.1:43842>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:17:06,416 INFO  [Thread-0] root: Connected to localhost on port 43842
+2020-01-25 15:17:39,544 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43842>: 'get a'
+2020-01-25 15:17:39,544 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 15:17:39,545 INFO  [Thread-1] root: SEND 	<127.0.0.1:43842>: 'GET_ERROR < a
+ >'
+2020-01-25 15:19:03,666 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 15:19:03,669 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 15:19:03,669 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 15:19:03,670 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 15:19:14,753 INFO  [Thread-1] root: SEND 	<127.0.0.1:43848>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:19:14,755 INFO  [Thread-0] root: Connected to localhost on port 43848
+2020-01-25 15:19:55,912 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43848>: 'get a'
+2020-01-25 15:19:55,912 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 15:19:55,913 INFO  [Thread-1] root: SEND 	<127.0.0.1:43848>: 'GET_ERROR < a
+ >'
+2020-01-25 15:24:54,770 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 15:24:54,772 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 15:24:54,772 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 15:24:54,774 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 15:25:10,829 INFO  [Thread-1] root: SEND 	<127.0.0.1:43864>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:25:10,831 INFO  [Thread-0] root: Connected to localhost on port 43864
+2020-01-25 15:25:40,726 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43864>: 'get a'
+2020-01-25 15:25:40,727 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 15:25:40,727 INFO  [Thread-1] root: SEND 	<127.0.0.1:43864>: 'GET_ERROR < a
+ >'
+2020-01-25 15:29:17,831 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 15:29:17,834 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 15:29:17,834 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 15:29:17,835 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 15:29:31,170 INFO  [Thread-1] root: SEND 	<127.0.0.1:43872>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:29:31,171 INFO  [Thread-0] root: Connected to localhost on port 43872
+2020-01-25 15:29:48,653 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43872>: 'get a'
+2020-01-25 15:29:48,653 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 15:29:48,654 INFO  [Thread-1] root: SEND 	<127.0.0.1:43872>: 'GET_ERROR < a
+ >'
+2020-01-25 15:36:58,416 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 15:36:58,419 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 15:36:58,419 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 15:36:58,420 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 15:37:06,780 INFO  [Thread-1] root: SEND 	<127.0.0.1:43900>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:37:06,782 INFO  [Thread-0] root: Connected to localhost on port 43900
+2020-01-25 15:38:40,440 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43900>: 'get a'
+2020-01-25 15:38:40,440 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 15:38:40,440 INFO  [Thread-1] root: SEND 	<127.0.0.1:43900>: 'GET_ERROR < a
+ >'
+2020-01-25 15:43:20,912 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 15:43:20,914 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 15:43:20,914 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 15:43:20,916 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 15:43:35,572 INFO  [Thread-1] root: SEND 	<127.0.0.1:43930>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:43:35,573 INFO  [Thread-0] root: Connected to localhost on port 43930
+2020-01-25 15:44:08,543 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43930>: 'get a'
+2020-01-25 15:44:08,544 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 15:44:08,544 INFO  [Thread-1] root: SEND 	<127.0.0.1:43930>: 'GET_ERROR < a
+ >'
+2020-01-25 15:44:57,775 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 15:44:57,777 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 15:44:57,778 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 15:44:57,779 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 15:45:07,163 INFO  [Thread-1] root: SEND 	<127.0.0.1:43934>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:45:07,164 INFO  [Thread-0] root: Connected to localhost on port 43934
+2020-01-25 15:45:16,743 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43934>: 'get a'
+2020-01-25 15:45:16,744 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 15:45:16,744 INFO  [Thread-1] root: SEND 	<127.0.0.1:43934>: 'GET_ERROR < a
+ >'
+2020-01-25 15:45:52,019 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 15:45:52,021 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 15:45:52,021 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 15:45:52,023 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 15:46:02,083 INFO  [Thread-1] root: SEND 	<127.0.0.1:43936>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:46:02,085 INFO  [Thread-0] root: Connected to localhost on port 43936
+2020-01-25 15:46:32,766 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43936>: 'get a'
+2020-01-25 15:46:32,766 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 15:46:32,767 INFO  [Thread-1] root: SEND 	<127.0.0.1:43936>: 'GET_ERROR < a
+ >'
+2020-01-25 15:50:21,721 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 15:50:21,724 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 15:50:21,724 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 15:50:21,725 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 15:50:34,034 INFO  [Thread-1] root: SEND 	<127.0.0.1:43944>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:50:34,036 INFO  [Thread-0] root: Connected to localhost on port 43944
+2020-01-25 15:50:42,248 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43944>: 'get a'
+2020-01-25 15:50:42,248 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 15:50:42,249 INFO  [Thread-1] root: SEND 	<127.0.0.1:43944>: 'GET_ERROR < a
+ >'
+2020-01-25 15:51:55,586 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 15:51:55,589 INFO  [Thread-0] root: Server listening on port: 8080
+2020-01-25 15:51:55,589 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 15:51:55,591 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 15:52:06,296 INFO  [Thread-1] root: SEND 	<127.0.0.1:43950>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:52:06,298 INFO  [Thread-0] root: Connected to localhost on port 43950
+2020-01-25 15:52:14,769 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:43950>: 'get a'
+2020-01-25 15:52:14,770 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 15:52:14,771 INFO  [Thread-1] root: SEND 	<127.0.0.1:43950>: 'GET_SUCCESS < a
+ >'
+2020-01-25 16:20:05,006 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 16:20:05,009 ERROR [Thread-0] root: Error! Cannot open server socket:
+2020-01-25 16:20:05,009 ERROR [Thread-0] root: Port 8080 is already bound!
+2020-01-25 16:20:05,009 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 16:20:05,011 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 16:20:05,011 INFO  [Thread-0] root: Server stopped!
+2020-01-25 16:20:20,668 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 16:20:20,670 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 16:20:20,670 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 16:20:20,672 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 16:20:39,068 INFO  [Thread-1] root: SEND 	<127.0.0.1:52684>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:20:39,070 INFO  [Thread-0] root: Connected to localhost on port 52684
+2020-01-25 16:21:00,297 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52684>: 'get a'
+2020-01-25 16:21:00,298 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 16:21:00,299 INFO  [Thread-1] root: SEND 	<127.0.0.1:52684>: 'GET_SUCCESS < a
+ >'
+2020-01-25 16:23:07,730 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 16:23:07,733 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 16:23:07,733 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 16:23:07,734 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 16:23:50,063 INFO  [Thread-1] root: SEND 	<127.0.0.1:52736>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:23:50,064 INFO  [Thread-0] root: Connected to localhost on port 52736
+2020-01-25 16:24:07,053 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52736>: 'get a'
+2020-01-25 16:24:07,053 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 16:24:07,054 INFO  [Thread-1] root: SEND 	<127.0.0.1:52736>: 'GET_SUCCESS < a
+, b  >'
+2020-01-25 16:24:15,965 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52736>: 'get a'
+2020-01-25 16:24:15,966 INFO  [Thread-1] root: SEND 	<127.0.0.1:52736>: 'get a
+'
+2020-01-25 16:26:40,479 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 16:26:40,482 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 16:26:40,482 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 16:26:40,484 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 16:26:47,217 INFO  [Thread-1] root: SEND 	<127.0.0.1:52744>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:26:47,218 INFO  [Thread-0] root: Connected to localhost on port 52744
+2020-01-25 16:26:53,576 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52744>: 'put a b'
+2020-01-25 16:26:53,576 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 16:26:53,577 INFO  [Thread-1] root: SEND 	<127.0.0.1:52744>: 'PUT_SUCCESS < a , b
+  >'
+2020-01-25 16:27:27,370 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52744>: 'put b a'
+2020-01-25 16:27:27,370 INFO  [Thread-1] root: SEND 	<127.0.0.1:52744>: 'put b a
+'
+2020-01-25 16:42:08,923 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 16:42:08,925 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 16:42:08,925 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 16:42:08,927 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 16:42:39,653 INFO  [Thread-1] root: SEND 	<127.0.0.1:52830>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:42:39,655 INFO  [Thread-0] root: Connected to localhost on port 52830
+2020-01-25 16:42:48,680 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52830>: 'get a'
+2020-01-25 16:42:48,681 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 16:46:55,802 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 16:46:55,805 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 16:46:55,805 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 16:46:55,806 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 16:47:05,989 INFO  [Thread-1] root: SEND 	<127.0.0.1:52860>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:47:05,990 INFO  [Thread-0] root: Connected to localhost on port 52860
+2020-01-25 16:47:16,989 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52860>: 'get a'
+2020-01-25 16:47:16,989 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 16:47:16,998 INFO  [Thread-1] root: SEND 	<127.0.0.1:52860>: 'GET_SUCCESS < a
+, -1 >'
+2020-01-25 16:48:34,148 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 16:48:34,151 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 16:48:34,151 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 16:48:34,153 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 16:48:44,901 INFO  [Thread-1] root: SEND 	<127.0.0.1:52862>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:48:44,902 INFO  [Thread-0] root: Connected to localhost on port 52862
+2020-01-25 16:48:56,413 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52862>: 'get a'
+2020-01-25 16:48:56,413 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 16:48:56,421 INFO  [Thread-1] root: SEND 	<127.0.0.1:52862>: 'GET_SUCCESS < a
+, lineNum >'
+2020-01-25 16:49:10,836 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52862>: 'get a'
+2020-01-25 16:49:10,836 INFO  [Thread-1] root: SEND 	<127.0.0.1:52862>: 'get a
+'
+2020-01-25 16:53:28,685 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 16:53:28,687 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 16:53:28,687 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 16:53:28,689 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 16:53:45,098 INFO  [Thread-1] root: SEND 	<127.0.0.1:52878>: 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:53:45,099 INFO  [Thread-0] root: Connected to localhost on port 52878
+2020-01-25 16:54:00,424 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52878>: 'get a'
+2020-01-25 16:54:00,424 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 16:54:00,432 INFO  [Thread-1] root: SEND 	<127.0.0.1:52878>: 'GET_SUCCESS < a
+, lineNum >'
+2020-01-25 16:54:09,605 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52878>: 'get a'
+2020-01-25 16:54:09,606 INFO  [Thread-1] root: SEND 	<127.0.0.1:52878>: 'get a
+'
+2020-01-25 16:54:29,505 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 16:54:29,508 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 16:54:29,508 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 16:54:29,509 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:01:51,768 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:01:51,771 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:01:51,771 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:01:51,772 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:03:44,369 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:03:44,371 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:03:44,371 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:03:44,373 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:03:54,347 INFO  [Thread-0] root: Connected to localhost on port 52896
+2020-01-25 17:04:01,512 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52896>: 'put a b'
+2020-01-25 17:04:01,513 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:04:01,523 INFO  [Thread-1] root: SEND 	<127.0.0.1:52896>: 'PUT_UPDATE < a , b  >'
+2020-01-25 17:04:47,344 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52896>: 'put c d'
+2020-01-25 17:04:47,344 INFO  [Thread-1] root: SEND 	<127.0.0.1:52896>: 'put c d
+'
+2020-01-25 17:05:48,395 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52896>: 'get a'
+2020-01-25 17:05:48,395 INFO  [Thread-1] root: SEND 	<127.0.0.1:52896>: 'get a
+'
+2020-01-25 17:08:39,070 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:08:39,072 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:08:39,073 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:08:39,074 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:08:45,289 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:08:45,292 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:08:45,292 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:08:45,293 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:09:12,076 INFO  [Thread-0] root: Connected to localhost on port 52902
+2020-01-25 17:09:22,478 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52902>: 'put a b'
+2020-01-25 17:09:22,478 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:09:22,488 INFO  [Thread-1] root: SEND 	<127.0.0.1:52902>: 'PUT_UPDATE < a , b  >'
+2020-01-25 17:11:16,453 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52902>: 'put c d'
+2020-01-25 17:11:16,454 INFO  [Thread-1] root: SEND 	<127.0.0.1:52902>: 'put c d
+'
+2020-01-25 17:11:33,199 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52902>: 'put c d'
+2020-01-25 17:11:33,199 INFO  [Thread-1] root: SEND 	<127.0.0.1:52902>: 'put c d
+'
+2020-01-25 17:14:51,947 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:14:51,949 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:14:51,949 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:14:51,951 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:15:08,227 INFO  [Thread-0] root: Connected to localhost on port 52920
+2020-01-25 17:15:12,209 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52920>: 'put a b'
+2020-01-25 17:15:12,210 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:15:12,219 INFO  [Thread-1] root: SEND 	<127.0.0.1:52920>: 'PUT_UPDATE < a , b  >'
+2020-01-25 17:15:23,014 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52920>: 'put c d'
+2020-01-25 17:15:23,015 INFO  [Thread-1] root: SEND 	<127.0.0.1:52920>: 'put c d
+'
+2020-01-25 17:22:13,183 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:22:13,185 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:22:13,185 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:22:13,187 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:22:25,996 INFO  [Thread-0] root: Connected to localhost on port 52926
+2020-01-25 17:22:42,036 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52926>: 'put c d'
+2020-01-25 17:22:42,037 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:22:42,046 INFO  [Thread-1] root: SEND 	<127.0.0.1:52926>: 'PUT_UPDATE < c , d  >'
+2020-01-25 17:24:19,576 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52926>: 'put a b'
+2020-01-25 17:24:19,576 INFO  [Thread-1] root: SEND 	<127.0.0.1:52926>: 'put a b
+'
+2020-01-25 17:29:28,410 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:29:28,413 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:29:28,413 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:29:28,414 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:29:37,409 INFO  [Thread-0] root: Connected to localhost on port 52932
+2020-01-25 17:29:50,952 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52932>: 'put a b'
+2020-01-25 17:29:50,952 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:29:50,952 INFO  [Thread-1] root: SEND 	<127.0.0.1:52932>: 'PUT_SUCCESS < a , b  >'
+2020-01-25 17:29:57,779 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52932>: 'put c b'
+2020-01-25 17:29:57,779 INFO  [Thread-1] root: SEND 	<127.0.0.1:52932>: 'put c b
+'
+2020-01-25 17:31:00,044 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:31:00,046 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:31:00,046 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:31:00,046 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:31:07,073 INFO  [Thread-0] root: Connected to localhost on port 52936
+2020-01-25 17:31:27,323 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52936>: 'put a b'
+2020-01-25 17:31:27,324 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:31:27,324 INFO  [Thread-1] root: SEND 	<127.0.0.1:52936>: 'PUT_SUCCESS < a , b  >'
+2020-01-25 17:31:31,456 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52936>: 'put a b'
+2020-01-25 17:31:31,456 INFO  [Thread-1] root: SEND 	<127.0.0.1:52936>: 'put a b
+'
+2020-01-25 17:34:57,303 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:34:57,306 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:34:57,306 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:34:57,307 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:35:14,937 INFO  [Thread-0] root: Connected to localhost on port 52942
+2020-01-25 17:35:18,400 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52942>: 'put a b'
+2020-01-25 17:35:18,400 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:35:18,400 INFO  [Thread-1] root: SEND 	<127.0.0.1:52942>: 'PUT_SUCCESS < a , b  >'
+2020-01-25 17:35:28,169 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52942>: 'put a b'
+2020-01-25 17:35:28,170 INFO  [Thread-1] root: SEND 	<127.0.0.1:52942>: 'put a b
+'
+2020-01-25 17:36:36,732 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:36:36,734 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:36:36,734 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:36:36,736 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:36:59,923 INFO  [Thread-0] root: Connected to localhost on port 52964
+2020-01-25 17:37:03,270 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52964>: 'put a b'
+2020-01-25 17:37:03,271 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:37:03,271 INFO  [Thread-1] root: SEND 	<127.0.0.1:52964>: 'PUT_SUCCESS < a , b  >'
+2020-01-25 17:37:10,074 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52964>: 'put c d'
+2020-01-25 17:37:10,074 INFO  [Thread-1] root: SEND 	<127.0.0.1:52964>: 'put c d
+'
+2020-01-25 17:37:44,432 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:37:44,434 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:37:44,434 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:37:44,436 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:37:54,421 INFO  [Thread-0] root: Connected to localhost on port 52970
+2020-01-25 17:37:58,738 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52970>: 'put a b'
+2020-01-25 17:38:34,622 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:38:34,625 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:38:34,625 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:38:34,626 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:38:44,571 INFO  [Thread-0] root: Connected to localhost on port 52978
+2020-01-25 17:38:48,359 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52978>: 'put a b'
+2020-01-25 17:38:48,359 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:38:48,359 INFO  [Thread-1] root: SEND 	<127.0.0.1:52978>: 'PUT_SUCCESS < a , b  >'
+2020-01-25 17:38:53,150 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52978>: 'put c d'
+2020-01-25 17:38:53,151 INFO  [Thread-1] root: SEND 	<127.0.0.1:52978>: 'put c d
+'
+2020-01-25 17:39:30,027 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:39:30,030 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:39:30,030 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:39:30,031 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:39:41,936 INFO  [Thread-0] root: Connected to localhost on port 52980
+2020-01-25 17:39:44,963 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52980>: 'put a v'
+2020-01-25 17:39:44,964 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:39:44,964 INFO  [Thread-1] root: SEND 	<127.0.0.1:52980>: 'PUT_SUCCESS < a , v  >'
+2020-01-25 17:39:48,940 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:52980>: 'put c d'
+2020-01-25 17:39:48,940 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:39:48,940 INFO  [Thread-1] root: SEND 	<127.0.0.1:52980>: 'PUT_SUCCESS < c , d  >'
+2020-01-25 17:48:31,859 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:48:31,861 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:48:31,861 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:48:31,863 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:49:00,737 INFO  [Thread-0] root: Connected to localhost on port 53006
+2020-01-25 17:49:28,062 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53006>: 'put a b'
+2020-01-25 17:49:28,062 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:49:28,072 INFO  [Thread-1] root: SEND 	<127.0.0.1:53006>: 'PUT_UPDATE < a , b  >'
+2020-01-25 17:50:03,550 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53006>: 'get a'
+2020-01-25 17:51:22,012 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 17:51:22,014 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 17:51:22,015 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 17:51:22,016 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 17:51:36,098 INFO  [Thread-0] root: Connected to localhost on port 53008
+2020-01-25 17:51:42,094 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53008>: 'put a b'
+2020-01-25 17:51:42,094 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:51:42,104 INFO  [Thread-1] root: SEND 	<127.0.0.1:53008>: 'PUT_UPDATE < a , b  >'
+2020-01-25 17:51:50,101 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53008>: 'put c d'
+2020-01-25 17:51:50,101 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 17:51:50,104 INFO  [Thread-1] root: SEND 	<127.0.0.1:53008>: 'PUT_UPDATE < c , d  >'
+2020-01-25 17:51:54,463 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53008>: 'get a'
+2020-01-25 17:51:54,463 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 17:51:54,464 INFO  [Thread-1] root: SEND 	<127.0.0.1:53008>: 'GET_SUCCESS < a, lineNum >'
+2020-01-25 17:52:03,340 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53008>: 'get f'
+2020-01-25 17:52:03,340 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 17:52:03,342 INFO  [Thread-1] root: SEND 	<127.0.0.1:53008>: 'GET_SUCCESS < f, -1 >'
+2020-01-25 17:53:59,575 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53008>: 'get u'
+2020-01-25 17:53:59,576 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 17:53:59,577 INFO  [Thread-1] root: SEND 	<127.0.0.1:53008>: 'GET_SUCCESS < u, -1 >'
+2020-01-25 18:08:15,979 INFO  [Thread-0] root: Initialize server ...
+2020-01-25 18:08:15,982 INFO  [Thread-0] root: Server listening on port: 8081
+2020-01-25 18:08:15,982 INFO  [Thread-0] root: Setting up the server...
+2020-01-25 18:08:15,983 INFO  [Thread-0] root: Using cache strategy: LRU
+2020-01-25 18:08:26,564 INFO  [Thread-0] root: Connected to localhost on port 53030
+2020-01-25 18:08:33,613 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53030>: 'put a b'
+2020-01-25 18:08:33,614 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 18:08:33,615 INFO  [Thread-1] root: SEND 	<127.0.0.1:53030>: 'PUT_SUCCESS < a , b  >'
+2020-01-25 18:08:44,296 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53030>: 'put c d'
+2020-01-25 18:08:44,296 INFO  [Thread-1] root: Message received with PUT request.
+2020-01-25 18:08:44,298 INFO  [Thread-1] root: SEND 	<127.0.0.1:53030>: 'PUT_SUCCESS < c , d  >'
+2020-01-25 18:08:49,067 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53030>: 'get a'
+2020-01-25 18:08:49,067 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 18:08:49,068 INFO  [Thread-1] root: SEND 	<127.0.0.1:53030>: 'GET_SUCCESS < a, b  >'
+2020-01-25 18:08:59,178 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53030>: 'get d'
+2020-01-25 18:08:59,178 INFO  [Thread-1] root: Message received with GET request.
+2020-01-25 18:08:59,179 INFO  [Thread-1] root: SEND 	<127.0.0.1:53030>: 'GET_ERROR < d,  >'
+2020-01-25 18:09:46,402 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53030>: ''
+2020-01-25 18:09:46,403 INFO  [Thread-1] root: SEND 	<127.0.0.1:53030>: '
+'
+2020-01-25 18:09:46,403 INFO  [Thread-1] root: RECEIVE 	<127.0.0.1:53030>: ''
+2020-01-25 18:09:46,403 ERROR [Thread-1] root: Error! Connection lost!
+2020-01-25 18:12:22,953 ERROR [Thread-1] root: Error! Connection lost!

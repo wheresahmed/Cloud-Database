@@ -1,0 +1,193 @@
+2020-01-25 14:47:16,963 WARN  [main] root: Could not establish connection!
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at java.net.Socket.<init>(Socket.java:452)
+	at java.net.Socket.<init>(Socket.java:229)
+	at client.KVStore.connect(KVStore.java:55)
+	at app_kvClient.KVClient.newConnection(KVClient.java:159)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:59)
+	at app_kvClient.KVClient.run(KVClient.java:36)
+	at app_kvClient.KVClient.main(KVClient.java:244)
+2020-01-25 14:47:30,018 INFO  [main] root: Connection established
+2020-01-25 14:47:49,076 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 14:47:49,076 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 14:47:57,712 INFO  [main] root: Send message:	 'put b c'
+2020-01-25 14:47:57,712 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , b'
+2020-01-25 14:51:04,491 INFO  [main] root: Connection established
+2020-01-25 15:03:25,031 INFO  [main] root: Send message:	 'get a'
+2020-01-25 15:03:25,032 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:17:06,413 INFO  [main] root: Connection established
+2020-01-25 15:17:39,544 INFO  [main] root: Send message:	 'get a'
+2020-01-25 15:17:39,544 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:19:14,752 INFO  [main] root: Connection established
+2020-01-25 15:19:55,911 INFO  [main] root: Send message:	 'get a'
+2020-01-25 15:19:55,912 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:25:10,828 INFO  [main] root: Connection established
+2020-01-25 15:25:40,726 INFO  [main] root: Send message:	 'get a'
+2020-01-25 15:25:40,727 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:29:31,168 INFO  [main] root: Connection established
+2020-01-25 15:29:48,653 INFO  [main] root: Send message:	 'get a'
+2020-01-25 15:29:48,653 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:37:06,779 INFO  [main] root: Connection established
+2020-01-25 15:38:40,439 INFO  [main] root: Send message:	 'get a'
+2020-01-25 15:38:40,440 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:43:35,570 INFO  [main] root: Connection established
+2020-01-25 15:44:08,543 INFO  [main] root: Send message:	 'get a'
+2020-01-25 15:44:08,544 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:45:07,161 INFO  [main] root: Connection established
+2020-01-25 15:45:16,743 INFO  [main] root: Send message:	 'get a'
+2020-01-25 15:45:16,744 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:46:02,082 INFO  [main] root: Connection established
+2020-01-25 15:46:32,766 INFO  [main] root: Send message:	 'get a'
+2020-01-25 15:46:32,766 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:50:34,032 INFO  [main] root: Connection established
+2020-01-25 15:50:42,248 INFO  [main] root: Send message:	 'get a'
+2020-01-25 15:50:42,248 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 15:52:06,295 INFO  [main] root: Connection established
+2020-01-25 15:52:14,769 INFO  [main] root: Send message:	 'get a'
+2020-01-25 15:52:14,770 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 16:20:39,067 INFO  [main] root: Connection established
+2020-01-25 16:21:00,297 INFO  [main] root: Send message:	 'get a'
+2020-01-25 16:21:00,298 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:23:50,062 INFO  [main] root: Connection established
+2020-01-25 16:24:07,052 INFO  [main] root: Send message:	 'get a'
+2020-01-25 16:24:07,053 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:24:15,965 INFO  [main] root: Send message:	 'get a'
+2020-01-25 16:24:15,965 INFO  [main] root: Receive message:	 'GET_SUCCESS < a'
+2020-01-25 16:26:47,215 INFO  [main] root: Connection established
+2020-01-25 16:26:53,575 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 16:26:53,576 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:27:27,370 INFO  [main] root: Send message:	 'put b a'
+2020-01-25 16:27:27,370 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , b'
+2020-01-25 16:42:39,652 INFO  [main] root: Connection established
+2020-01-25 16:42:48,680 INFO  [main] root: Send message:	 'get a'
+2020-01-25 16:42:48,680 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:47:05,987 INFO  [main] root: Connection established
+2020-01-25 16:47:16,989 INFO  [main] root: Send message:	 'get a'
+2020-01-25 16:47:16,989 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:48:44,900 INFO  [main] root: Connection established
+2020-01-25 16:48:56,412 INFO  [main] root: Send message:	 'get a'
+2020-01-25 16:48:56,413 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:49:10,835 INFO  [main] root: Send message:	 'get a'
+2020-01-25 16:49:10,836 INFO  [main] root: Receive message:	 'GET_SUCCESS < a'
+2020-01-25 16:53:45,097 INFO  [main] root: Connection established
+2020-01-25 16:54:00,423 INFO  [main] root: Send message:	 'get a'
+2020-01-25 16:54:00,424 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8081'
+2020-01-25 16:54:09,605 INFO  [main] root: Send message:	 'get a'
+2020-01-25 16:54:09,605 INFO  [main] root: Receive message:	 'GET_SUCCESS < a'
+2020-01-25 17:03:54,344 INFO  [main] root: Connection established
+2020-01-25 17:04:01,512 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:04:01,523 INFO  [main] root: Receive message:	 'PUT_UPDATE < a , b  >'
+2020-01-25 17:04:47,344 INFO  [main] root: Send message:	 'put c d'
+2020-01-25 17:04:47,344 INFO  [main] root: Receive message:	 ''
+2020-01-25 17:05:48,395 INFO  [main] root: Send message:	 'get a'
+2020-01-25 17:05:48,395 INFO  [main] root: Receive message:	 'put c d'
+2020-01-25 17:09:12,073 INFO  [main] root: Connection established
+2020-01-25 17:09:22,477 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:09:22,488 INFO  [main] root: Receive message:	 'PUT_UPDATE < a , b  >'
+2020-01-25 17:11:16,453 INFO  [main] root: Send message:	 'put c d'
+2020-01-25 17:11:16,454 INFO  [main] root: Receive message:	 ''
+2020-01-25 17:11:33,199 INFO  [main] root: Send message:	 'put c d'
+2020-01-25 17:11:33,199 INFO  [main] root: Receive message:	 'put c d'
+2020-01-25 17:15:08,224 INFO  [main] root: Connection established
+2020-01-25 17:15:12,209 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:15:12,219 INFO  [main] root: Receive message:	 'PUT_UPDATE < a , b  >'
+2020-01-25 17:15:23,014 INFO  [main] root: Send message:	 'put c d'
+2020-01-25 17:15:23,015 INFO  [main] root: Receive message:	 ''
+2020-01-25 17:22:25,993 INFO  [main] root: Connection established
+2020-01-25 17:22:42,035 INFO  [main] root: Send message:	 'put c d'
+2020-01-25 17:22:42,046 INFO  [main] root: Receive message:	 'PUT_UPDATE < c , d  >'
+2020-01-25 17:24:19,576 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:24:19,576 INFO  [main] root: Receive message:	 ''
+2020-01-25 17:29:37,390 INFO  [main] root: Connection established
+2020-01-25 17:29:50,951 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:29:50,952 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , b  >'
+2020-01-25 17:29:57,779 INFO  [main] root: Send message:	 'put c b'
+2020-01-25 17:29:57,779 INFO  [main] root: Receive message:	 ''
+2020-01-25 17:31:07,070 INFO  [main] root: Connection established
+2020-01-25 17:31:27,322 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:31:27,324 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , b  >'
+2020-01-25 17:31:31,456 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:31:31,456 INFO  [main] root: Receive message:	 ''
+2020-01-25 17:35:14,934 INFO  [main] root: Connection established
+2020-01-25 17:35:18,399 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:35:18,400 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , b  >'
+2020-01-25 17:35:28,169 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:35:28,170 INFO  [main] root: Receive message:	 ''
+2020-01-25 17:36:59,920 INFO  [main] root: Connection established
+2020-01-25 17:37:03,270 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:37:03,271 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , b  >'
+2020-01-25 17:37:10,074 INFO  [main] root: Send message:	 'put c d'
+2020-01-25 17:37:10,075 INFO  [main] root: Receive message:	 ''
+2020-01-25 17:37:54,419 INFO  [main] root: Connection established
+2020-01-25 17:37:58,737 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:37:58,739 WARN  [main] root: Could not establish connection!
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:224)
+	at client.KVStore.receiveMessage(KVStore.java:158)
+	at client.KVStore.put(KVStore.java:110)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:82)
+	at app_kvClient.KVClient.run(KVClient.java:36)
+	at app_kvClient.KVClient.main(KVClient.java:244)
+2020-01-25 17:38:14,497 WARN  [main] root: Could not establish connection!
+java.net.SocketException: Broken pipe (Write failed)
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at client.KVStore.sendMessage(KVStore.java:146)
+	at client.KVStore.put(KVStore.java:108)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:82)
+	at app_kvClient.KVClient.run(KVClient.java:36)
+	at app_kvClient.KVClient.main(KVClient.java:244)
+2020-01-25 17:38:44,568 INFO  [main] root: Connection established
+2020-01-25 17:38:48,358 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:38:48,359 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , b  >'
+2020-01-25 17:38:53,150 INFO  [main] root: Send message:	 'put c d'
+2020-01-25 17:38:53,151 INFO  [main] root: Receive message:	 ''
+2020-01-25 17:39:41,933 INFO  [main] root: Connection established
+2020-01-25 17:39:44,963 INFO  [main] root: Send message:	 'put a v'
+2020-01-25 17:39:44,964 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , v  >'
+2020-01-25 17:39:48,940 INFO  [main] root: Send message:	 'put c d'
+2020-01-25 17:39:48,940 INFO  [main] root: Receive message:	 'PUT_SUCCESS < c , d  >'
+2020-01-25 17:49:00,734 INFO  [main] root: Connection established
+2020-01-25 17:49:28,061 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:49:28,072 INFO  [main] root: Receive message:	 'PUT_UPDATE < a , b  >'
+2020-01-25 17:50:03,550 INFO  [main] root: Send message:	 'get a'
+2020-01-25 17:50:03,552 WARN  [main] root: Could not establish connection!
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:224)
+	at client.KVStore.receiveMessage(KVStore.java:158)
+	at client.KVStore.get(KVStore.java:128)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:109)
+	at app_kvClient.KVClient.run(KVClient.java:36)
+	at app_kvClient.KVClient.main(KVClient.java:244)
+2020-01-25 17:51:36,095 INFO  [main] root: Connection established
+2020-01-25 17:51:42,093 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 17:51:42,104 INFO  [main] root: Receive message:	 'PUT_UPDATE < a , b  >'
+2020-01-25 17:51:50,101 INFO  [main] root: Send message:	 'put c d'
+2020-01-25 17:51:50,105 INFO  [main] root: Receive message:	 'PUT_UPDATE < c , d  >'
+2020-01-25 17:51:54,463 INFO  [main] root: Send message:	 'get a'
+2020-01-25 17:51:54,465 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, lineNum >'
+2020-01-25 17:52:03,340 INFO  [main] root: Send message:	 'get f'
+2020-01-25 17:52:03,342 INFO  [main] root: Receive message:	 'GET_SUCCESS < f, -1 >'
+2020-01-25 17:53:59,575 INFO  [main] root: Send message:	 'get u'
+2020-01-25 17:53:59,577 INFO  [main] root: Receive message:	 'GET_SUCCESS < u, -1 >'
+2020-01-25 18:08:26,561 INFO  [main] root: Connection established
+2020-01-25 18:08:33,613 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 18:08:33,616 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , b  >'
+2020-01-25 18:08:44,296 INFO  [main] root: Send message:	 'put c d'
+2020-01-25 18:08:44,298 INFO  [main] root: Receive message:	 'PUT_SUCCESS < c , d  >'
+2020-01-25 18:08:49,067 INFO  [main] root: Send message:	 'get a'
+2020-01-25 18:08:49,069 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, b  >'
+2020-01-25 18:08:59,178 INFO  [main] root: Send message:	 'get d'
+2020-01-25 18:08:59,179 INFO  [main] root: Receive message:	 'GET_ERROR < d,  >'

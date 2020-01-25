@@ -92,9 +92,11 @@ public class KVServer implements IKVServer {
 		// call getKV in persistent storage and return true if found
 		if(key.isEmpty() || key == null) return false;
 
+		System.out.println("Finding key");
 		String value = persistentDb.find(key);
 
 		if (value == null)  return false;
+		System.out.println("Found key");
 		return true;
 	}
 
