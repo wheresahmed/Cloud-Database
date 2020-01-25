@@ -5,6 +5,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.NameNotFoundException;
+
 import java.io.IOException;
 
 import logger.LogSetup;
@@ -32,6 +35,7 @@ public class KVServer implements IKVServer {
 	private String strategy;
     private ServerSocket serverSocket;
 	private boolean running;
+	private static KVServer server;
 
 	// @TODO: figure out what is this ClientConnection?
 	private ArrayList<ClientConnection> connections;
@@ -86,7 +90,12 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 		
 		// call getKV in persistent storage and return true if found
-		return false;
+		if(key.isEmpty() || key == null) return false;
+
+		String value = persistentDb.find(key);
+
+		if (value == null)  return false;
+		return true;
 	}
 
 	@Override
@@ -94,6 +103,9 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 
 		// call getKV in cache and return true if found
+		// if (cache != null) {
+		// 	if (cache.containsKey(key)) return true;
+		// }
 		return false;
 	}
 
@@ -103,7 +115,16 @@ public class KVServer implements IKVServer {
 		
 		// try to get value in cache, if not found, try to get value
 		// in persistent storage
-		return "";
+
+		String value = "";
+		if (inCache(key)) {
+			// value = cache.get(key);
+		} else if (inStorage(key)) {
+			value = persistentDb.find(key);
+		} else {
+			throw new NameNotFoundException();
+		}
+		return value;
 	}
 
 	@Override
@@ -111,6 +132,13 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 		
 		// put in persistent storage and in cache based on policy
+		System.out.println("In putKV : " + key + " : " + value);
+		if (inCache(key) && value.equals("") && value.equals("null") || value == null) {
+			// cache.remove(key);
+		} else {
+			persistentDb.add(key, value);
+			// cache.put(key, value);
+		}
 	}
 
 	@Override
@@ -189,7 +217,7 @@ public class KVServer implements IKVServer {
 	            try {
 	                Socket client = serverSocket.accept();                
 	                ClientConnection connection = 
-	                		new ClientConnection(client);
+	                		new ClientConnection(client, server);
 					new Thread(connection).start();
 					
 					this.connections.add(connection);
@@ -242,7 +270,7 @@ public class KVServer implements IKVServer {
 				System.out.println("Usage: Server <port>!");
 			} else {
 				// KVServer(port, cacheSize, cache replacement strategy)
-				KVServer server = new KVServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
+				server = new KVServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
 
 				new TServer(server).start();
 			}
