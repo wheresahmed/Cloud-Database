@@ -125,15 +125,11 @@ public class KVServer implements IKVServer {
 	@Override
     public void clearStorage(){
 		// TODO Auto-generated method stub
-		try {
-			persistentDb.clearDb();
-			logger.info("Clearing storage");
-			// if (cache != null){
-			// 	cache.clear();
-			// }
-		} catch (IOException e) {
-            logger.error("Error: Exception in clear storage");
-        }
+		persistentDb.clearDb();
+		logger.info("Clearing storage");
+		// if (cache != null){
+		// 	cache.clear();
+		// }
 	}
 
 	private boolean isRunning() {
@@ -166,13 +162,13 @@ public class KVServer implements IKVServer {
 		persistentDb.initializeDb();
 
 		// setup cache strategy
-		if (this.strategy.contains("LRU")) {
+		if (this.strategy.compareToIgnoreCase("LRU") == 0) {
 			logger.info("Using cache strategy: LRU");
 			// @TODO: setup LRU cache
-		} else if (this.strategy.contains("LFU")) {
+		} else if (this.strategy.compareToIgnoreCase("LFU") == 0) {
 			logger.info("Using cache strategy: LFU");
 			// @TODO: setup LFU cache
-		} else if (this.strategy.contains("FIFO")) {
+		} else if (this.strategy.compareToIgnoreCase("FIFO") == 0) {
 			logger.info("Using cache strategy: FIFO");
 			// @TODO: setup FIFO cache
 		} else {

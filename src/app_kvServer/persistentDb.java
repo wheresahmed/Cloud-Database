@@ -115,10 +115,12 @@ public class persistentDb {
 
     public static void clearDb() {
         File file = new File("persistentDb.txt");
-        try {
-            file.delete();
-        } catch (IOException e) {
-            logger.error("Error! Cannot delete file persistentDb.txt"); 
-        }
+        if (file.delete()) {
+            logger.info("Success! DB deleted!");
+        } 
+        else
+        { 
+            logger.error("Error! Failed to delete the DB."); 
+        } 
     }
 }
