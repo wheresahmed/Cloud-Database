@@ -23,9 +23,9 @@ public class persistentDb {
             writer = new PrintWriter("persistentDb.txt", "UTF-8");
             writer.close();
         } catch (FileNotFoundException e) {
-            logger.error("Error! Cannot open file persistentDb.txt"); 
+            logger.error("Error in initialization! Cannot open file persistentDb.txt"); 
         } catch (UnsupportedEncodingException e) {
-            logger.error("Error! UTF-8 is unsupported for writing to file"); 
+            logger.error("Error in initialization! UTF-8 is unsupported for writing to file"); 
         }
     }
 
@@ -41,16 +41,16 @@ public class persistentDb {
                     String value = "";
                     // skip key and colon
                     for(int i = 2; i < tokens.length; i++) {
-                        value += tokens[i];
+                        value += tokens[i] + " ";
                     }
                     return value;
                 }
             }
             br.close();
         } catch (FileNotFoundException e) {
-            logger.error("Error! Cannot open file persistentDb.txt"); 
+            logger.error("Error in finding! Cannot open file persistentDb.txt"); 
         } catch (IOException e) {
-            logger.error("Error! Cannot read from file persistentDb.txt"); 
+            logger.error("Error in finding! Cannot read from file persistentDb.txt"); 
         }
         return null;
     }
@@ -58,7 +58,7 @@ public class persistentDb {
     public static void add(String key, String value) {
         if (key.isEmpty() || key == null) {
             // invalid key
-            logger.error("Error: Empty key not allowed.");
+            logger.error("Error in adding: Empty key not allowed.");
             return;
         }
         if (value.isEmpty() || value.equals("null") || value == null) {
@@ -83,7 +83,7 @@ public class persistentDb {
             bw.close();
             fw.close();
         } catch (IOException e) {
-            logger.error("Error! Cannot open file persistentDb.txt"); 
+            logger.error("Error in adding! Cannot open file persistentDb.txt"); 
         }
     }
 
@@ -107,9 +107,9 @@ public class persistentDb {
 			fw.write(sb.toString());
 			fw.close();
         } catch (FileNotFoundException e) {
-            logger.error("Error! Cannot open file persistentDb.txt"); 
+            logger.error("Error in deletion! Cannot open file persistentDb.txt"); 
         } catch (IOException e) {
-            logger.error("Error! Cannot read from file persistentDb.txt"); 
+            logger.error("Error in deletion! Cannot read from file persistentDb.txt"); 
         }
     }
 
@@ -120,7 +120,7 @@ public class persistentDb {
         } 
         else
         { 
-            logger.error("Error! Failed to delete the DB."); 
+            logger.error("Error! Failed to clear the DB."); 
         } 
     }
 }

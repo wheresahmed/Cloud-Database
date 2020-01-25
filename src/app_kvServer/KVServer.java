@@ -32,6 +32,7 @@ public class KVServer implements IKVServer {
 	private String strategy;
     private ServerSocket serverSocket;
 	private boolean running;
+	private static KVServer server;
 
 	// @TODO: figure out what is this ClientConnection?
 	private ArrayList<ClientConnection> connections;
@@ -189,7 +190,7 @@ public class KVServer implements IKVServer {
 	            try {
 	                Socket client = serverSocket.accept();                
 	                ClientConnection connection = 
-	                		new ClientConnection(client);
+	                		new ClientConnection(client, server);
 					new Thread(connection).start();
 					
 					this.connections.add(connection);
@@ -242,7 +243,7 @@ public class KVServer implements IKVServer {
 				System.out.println("Usage: Server <port>!");
 			} else {
 				// KVServer(port, cacheSize, cache replacement strategy)
-				KVServer server = new KVServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
+				server = new KVServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
 
 				new TServer(server).start();
 			}

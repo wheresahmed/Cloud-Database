@@ -7,7 +7,6 @@ import java.net.Socket;
 
 import org.apache.log4j.*;
 
-
 /**
  * Represents a connection end point for a particular client that is 
  * connected to the server. This class is responsible for message reception 
@@ -26,14 +25,17 @@ public class ClientConnection implements Runnable {
 	private Socket clientSocket;
 	private InputStream input;
 	private OutputStream output;
+
+	private KVServer server = null;
 	
 	/**
 	 * Constructs a new CientConnection object for a given TCP socket.
 	 * @param clientSocket the Socket object for the client connection.
 	 */
-	public ClientConnection(Socket clientSocket) {
+	public ClientConnection(Socket clientSocket, KVServer server) {
 		this.clientSocket = clientSocket;
 		this.isOpen = true;
+		this.server = server;
 	}
 	
 	/**
@@ -53,7 +55,73 @@ public class ClientConnection implements Runnable {
 			while(isOpen) {
 				try {
 					TextMessage latestMsg = receiveMessage();
-					sendMessage(latestMsg);
+					String msg = latestMsg.getMsg();
+
+					// parse msg and take action accordingly
+					String[] token = msg.split(" ");
+
+					switch(token[0]) 
+					{ 
+						case "put": 
+							logger.info("Message received with PUT request.");
+
+							if (token.length >= 2) {
+								msg = "INVALID_PUT";
+							} else {
+								if ((token.length == 3 && token[2].equalsIgnoreCase("null")) || token.length == 2) {
+									// delete operation
+									if (server.inStorage(token[1])) {
+										msg = "DELETE_SUCCESS < "; 
+									} else {
+										msg = "DELETE_ERROR < "; 
+									}
+								} else if (token.length > 2) {
+									if (server.inStorage(token[1])) {
+										msg = "PUT_UPDATE < ";
+									} else {
+										msg = "PUT_SUCCESS < ";
+									}
+								}
+
+								String value = "";
+
+								for (int i = 2; i < token.length; i++) {
+									value += token[i] + " ";
+								}
+
+								value.trim();
+
+								try {
+									server.putKV(token[1], value);
+								} catch (Exception e) {
+									logger.error("PUT ERROR! Error in PUT function");
+								}
+
+								msg += token[1] + " , " + value + " >";
+							}
+
+							sendMessage(new TextMessage(msg));
+							break; 
+						case "get": 
+							logger.info("Message received with GET request."); 
+							
+							if (token.length == 2 && server.inStorage(token[1])) {
+								try {
+									String value = server.getKV(token[1]);
+									msg = "GET_SUCCESS < ";
+								} catch (Exception e) {
+									logger.error("GET_ERROR! Could not find key in DB.");
+								}
+							} else {
+								msg = "GET_ERROR < ";
+							}
+
+							msg += token[1] + " >";
+							sendMessage(new TextMessage(msg));
+							break; 
+						default: 
+							sendMessage(latestMsg);		 
+					}
 					
 				/* connection either terminated by the client or lost due to 
 				 * network problems*/	
