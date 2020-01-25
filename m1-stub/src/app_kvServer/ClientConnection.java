@@ -47,85 +47,85 @@ public class ClientConnection implements Runnable {
 			output = clientSocket.getOutputStream();
 			input = clientSocket.getInputStream();
 		
-			sendMessage(new TextMessage(
-					"Connection to MSRG Echo server established: " 
-					+ clientSocket.getLocalAddress() + " / "
-					+ clientSocket.getLocalPort()));
+			// sendMessage(new TextMessage(
+			// 		"Connection to MSRG Echo server established: " 
+			// 		+ clientSocket.getLocalAddress() + " / "
+			// 		+ clientSocket.getLocalPort()));
 			
 			while(isOpen) {
 				try {
 					TextMessage latestMsg = receiveMessage();
-					String msg = latestMsg.getMsg();
+					String msg = "";
 
 					// parse msg and take action accordingly
-					String[] token = msg.split(" ");
-					System.out.println("MSG: " + msg + "\n");
-					// System.out.println("TOKEN[0]: " + token[0]);
+					String[] token = null;
+					token = latestMsg.getMsg().trim().split("\\s+");
+					// System.out.println("MSG: " + latestMsg.getMsg() + "\n");
+					System.out.println("TOKEN[0]: " + token[0]);
+					System.out.println("TOKEN LEN: " + token.length);
 
-					switch(token[0]) 
-					{ 
-						case "put": 
-							logger.info("Message received with PUT request.");
+					if(token[0].equals("put")) {
+						logger.info("Message received with PUT request.");
 
-							if (!(token.length >= 2)) {
-								msg = "INVALID_PUT";
-							} else {
-								if ((token.length == 3 && token[2].equalsIgnoreCase("null")) || token.length == 2) {
-									// delete operation
-									if (server.inStorage(token[1])) {
-										msg = "DELETE_SUCCESS < "; 
-									} else {
-										msg = "DELETE_ERROR < "; 
-									}
-								} else if (token.length > 2) {
-									if (server.inStorage(token[1])) {
-										msg = "PUT_UPDATE < ";
-									} else {
-										msg = "PUT_SUCCESS < ";
-									}
+						if (!(token.length >= 2)) {
+							msg = "INVALID_PUT";
+						} else {
+							if ((token.length == 3 && token[2].equalsIgnoreCase("null")) || token.length == 2) {
+								// delete operation
+								if (server.inStorage(token[1])) {
+									msg = "DELETE_SUCCESS < "; 
+								} else {
+									msg = "DELETE_ERROR < "; 
 								}
-
-								String value = "";
-
-								for (int i = 2; i < token.length; i++) {
-									value += token[i] + " ";
+							} else if (token.length > 2) {
+								if (server.inStorage(token[1])) {
+									msg = "PUT_UPDATE < ";
+								} else {
+									msg = "PUT_SUCCESS < ";
 								}
-
-								value.trim();
-
-								try {
-									server.putKV(token[1], value);
-								} catch (Exception e) {
-									logger.error("PUT ERROR! Error in PUT function");
-								}
-
-								msg += token[1] + " , " + value + " >";
 							}
 
-							sendMessage(new TextMessage(msg));
-							break; 
-						case "get": 
-							System.out.println("In GET");
-							logger.info("Message received with GET request."); 
-							
-							if (token.length == 2 && server.inStorage(token[1])) {
-								try {
-									String value = server.getKV(token[1]);
-									msg = "GET_SUCCESS < ";
-								} catch (Exception e) {
-									logger.error("GET_ERROR! Could not find key in DB.");
-								}
-							} else {
-								msg = "GET_ERROR < ";
+							String value = "";
+
+							for (int i = 2; i < token.length; i++) {
+								value += token[i] + " ";
 							}
 
-							msg += token[1] + " >";
-							sendMessage(new TextMessage(msg));
-							break; 
-						default: 
-							System.out.println("In default");
-							sendMessage(latestMsg);		 
-					}
+							value.trim();
+
+							try {
+								server.putKV(token[1], value);
+							} catch (Exception e) {
+								logger.error("PUT ERROR! Error in PUT function");
+							}
+
+							msg += token[1] + " , " + value + " >";
+						}
+
+						sendMessage(new TextMessage(msg));
+					} else if (token[0].equals("get")) {
+						System.out.println("In GET");
+						logger.info("Message received with GET request."); 
+						System.out.println("Key : " + token[1]);
+						String value = "";
+						
+						if (token.length == 2 && server.inStorage(token[1])) {
+							try {
+								value = server.getKV(token[1]);
+								msg = "GET_SUCCESS < ";
+							} catch (Exception e) {
+								logger.error("GET_ERROR! Could not find key in DB.");
+							}
+						} else {
+							msg = "GET_ERROR < ";
+						}
+
+						msg += token[1] + ", " + value + " >";
+						sendMessage(new TextMessage(msg));
+					} else {
+						System.out.println("In default");
+						sendMessage(latestMsg);		
+					} 
 					
 				/* connection either terminated by the client or lost due to 
 				 * network problems*/	

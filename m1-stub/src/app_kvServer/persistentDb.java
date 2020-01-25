@@ -1,6 +1,7 @@
 package app_kvServer;
 
 import java.io.*;
+import java.util.Scanner; 
 import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
@@ -21,23 +22,50 @@ public class persistentDb {
     public static void initializeDb() {
         try {
             writer = new PrintWriter("persistentDb.txt", "UTF-8");
+            writer.flush();
             writer.close();
-        } catch (FileNotFoundException e) {
+            // String fileName = "persistentDb.txt"; 
+            // File fileObject = new File(fileName);	
+            // PrintWriter out = new PrintWriter(fileObject);
+        } catch (IOException e) { //FileNotFoundException e) {
             logger.error("Error in initialization! Cannot open file persistentDb.txt"); 
-        } catch (UnsupportedEncodingException e) {
-            logger.error("Error in initialization! UTF-8 is unsupported for writing to file"); 
         }
     }
 
     public static String find(String key) {
+        // File file = new File("persistentDb.txt");
+    
+        // try {
+        //     Scanner scanner = new Scanner(file);
+
+        //     int lineNum = 0;
+        //     while (scanner.hasNextLine()) {
+        //         String line = scanner.nextLine();
+        //         String[] words = line.split(" "); 
+        //         if (words[0].trim().equals(key.trim())) {
+        //             return "lineNum"; 
+        //         }
+        //         lineNum++; 
+        //     }
+        // }
+        // catch (FileNotFoundException e) {
+        //     System.out.println("File not found" + e);
+        // }
+        
+        // return "-1"; 
         try {
+            System.out.println("In FIND DB");
             File file = new File("persistentDb.txt");
             BufferedReader br = new BufferedReader(new FileReader(file)); 
 
             String st; 
             while ((st = br.readLine()) != null) {
+                System.out.println(st);
                 String[] tokens = st.split(" ");
-                if(tokens[0].equals(key)) {
+                System.out.println(tokens[0]);
+                System.out.println(key);
+                if(tokens[0].equals(key.trim())) {
+                    System.out.println("In FIND DB: found key");
                     String value = "";
                     // skip key and colon
                     for(int i = 2; i < tokens.length; i++) {
@@ -104,8 +132,10 @@ public class persistentDb {
             br.close();
             FileWriter fw = new FileWriter(new File("persistentDb.txt"));
 			//Write entire string buffer into the file
-			fw.write(sb.toString());
-			fw.close();
+            fw.write(sb.toString());
+            fw.flush();
+            fw.close();
+            br.close();
         } catch (FileNotFoundException e) {
             logger.error("Error in deletion! Cannot open file persistentDb.txt"); 
         } catch (IOException e) {
