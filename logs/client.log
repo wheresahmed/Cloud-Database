@@ -1,0 +1,48 @@
+2020-01-25 13:54:56,014 INFO  [main] root: Connection established
+2020-01-25 13:55:33,279 INFO  [main] root: Send message:	 'put y z'
+2020-01-25 13:55:33,279 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 13:57:00,064 INFO  [main] root: Connection established
+2020-01-25 13:57:10,301 INFO  [main] root: Send message:	 'put y z'
+2020-01-25 13:57:10,302 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 13:57:53,166 INFO  [main] root: Send message:	 'get y'
+2020-01-25 13:57:53,166 INFO  [main] root: Receive message:	 'PUT_SUCCESS < y , z'
+2020-01-25 13:59:26,383 INFO  [main] root: Send message:	 'get y'
+2020-01-25 13:59:26,383 INFO  [main] root: Receive message:	 '>'
+2020-01-25 14:02:58,024 INFO  [main] root: Connection established
+2020-01-25 14:03:56,620 INFO  [main] root: Send message:	 'put y x'
+2020-01-25 14:03:56,621 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 14:04:09,048 INFO  [main] root: Send message:	 'get y'
+2020-01-25 14:04:09,048 INFO  [main] root: Receive message:	 'PUT_SUCCESS < y , x'
+2020-01-25 14:04:17,339 INFO  [main] root: Send message:	 'get y'
+2020-01-25 14:04:17,339 INFO  [main] root: Receive message:	 '>'
+2020-01-25 14:06:14,370 INFO  [main] root: Connection established
+2020-01-25 14:06:20,413 INFO  [main] root: Send message:	 'put u i'
+2020-01-25 14:06:20,413 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 14:06:23,193 INFO  [main] root: Send message:	 'get u'
+2020-01-25 14:06:23,193 INFO  [main] root: Receive message:	 'PUT_SUCCESS < u , i'
+2020-01-25 14:06:27,419 INFO  [main] root: Send message:	 'get u'
+2020-01-25 14:06:27,420 INFO  [main] root: Receive message:	 '>'
+2020-01-25 14:07:42,673 INFO  [main] root: Connection established
+2020-01-25 14:07:44,377 INFO  [main] root: Send message:	 'put u i'
+2020-01-25 14:07:44,377 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 14:07:52,017 INFO  [main] root: Send message:	 'get u'
+2020-01-25 14:07:52,018 INFO  [main] root: Receive message:	 'PUT_SUCCESS < u , i'
+2020-01-25 14:07:54,749 INFO  [main] root: Send message:	 'get u'
+2020-01-25 14:07:54,750 INFO  [main] root: Receive message:	 '>'
+2020-01-25 14:10:00,907 INFO  [main] root: Connection established
+2020-01-25 14:10:03,491 INFO  [main] root: Send message:	 'put u i'
+2020-01-25 14:10:03,491 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 14:10:21,110 INFO  [main] root: Send message:	 'get u'
+2020-01-25 14:10:21,110 INFO  [main] root: Receive message:	 'PUT_SUCCESS < u , i'
+2020-01-25 14:12:03,348 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 14:12:03,348 INFO  [main] root: Receive message:	 '>'
+2020-01-25 14:14:30,478 INFO  [main] root: Connection established
+2020-01-25 14:14:45,817 INFO  [main] root: Send message:	 'put u i'
+2020-01-25 14:14:45,817 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'
+2020-01-25 14:14:48,814 INFO  [main] root: Send message:	 'get u'
+2020-01-25 14:14:48,814 INFO  [main] root: Receive message:	 'PUT_SUCCESS < u , i'
+2020-01-25 14:17:28,886 INFO  [main] root: Send message:	 'put a b'
+2020-01-25 14:17:28,887 INFO  [main] root: Receive message:	 '>'
+2020-01-25 14:18:23,940 INFO  [main] root: Connection established
+2020-01-25 14:18:28,102 INFO  [main] root: Send message:	 'get a'
+2020-01-25 14:18:28,102 INFO  [main] root: Receive message:	 'Connection to MSRG Echo server established: /127.0.0.1 / 8080'

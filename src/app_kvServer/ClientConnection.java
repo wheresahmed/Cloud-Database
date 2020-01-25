@@ -59,13 +59,15 @@ public class ClientConnection implements Runnable {
 
 					// parse msg and take action accordingly
 					String[] token = msg.split(" ");
+					System.out.println("MSG: " + msg + "\n");
+					// System.out.println("TOKEN[0]: " + token[0]);
 
 					switch(token[0]) 
 					{ 
 						case "put": 
 							logger.info("Message received with PUT request.");
 
-							if (token.length >= 2) {
+							if (!(token.length >= 2)) {
 								msg = "INVALID_PUT";
 							} else {
 								if ((token.length == 3 && token[2].equalsIgnoreCase("null")) || token.length == 2) {
@@ -103,6 +105,7 @@ public class ClientConnection implements Runnable {
 							sendMessage(new TextMessage(msg));
 							break; 
 						case "get": 
+							System.out.println("In GET");
 							logger.info("Message received with GET request."); 
 							
 							if (token.length == 2 && server.inStorage(token[1])) {
@@ -120,6 +123,7 @@ public class ClientConnection implements Runnable {
 							sendMessage(new TextMessage(msg));
 							break; 
 						default: 
+							System.out.println("In default");
 							sendMessage(latestMsg);		 
 					}
 					
