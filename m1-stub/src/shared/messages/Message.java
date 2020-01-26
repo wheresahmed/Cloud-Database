@@ -16,7 +16,7 @@ public class Message implements KVMessage {
 			this.key = server_response[2];
 			this.value = "";
 
-		} else if (status.equals("SUCCESS")) {
+		} else if (status.equals("GET_SUCCESS")) {
 
 			this.status = KVMessage.StatusType.GET_SUCCESS;
 			this.key = server_response[2];
@@ -39,6 +39,7 @@ public class Message implements KVMessage {
 			this.status = KVMessage.StatusType.PUT_ERROR;
 			this.key = server_response[2];
 			this.value = findValue(server_response);
+
 		} else if (status.equals("DELETE_SUCCESS")) {
 
 			this.status = KVMessage.StatusType.DELETE_SUCCESS;

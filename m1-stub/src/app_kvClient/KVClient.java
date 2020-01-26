@@ -81,16 +81,22 @@ public class KVClient implements IKVClient {
                     try {
                         String key = tokens[1];
                         String value = "";
-                        for (int i = 2; i < tokens.length - 1; i++) {
-                            value += tokens[i];
-                            value += " ";
+                        if (tokens.length > 2) {
+                            for (int i = 2; i < tokens.length - 1; i++) {
+                                value += tokens[i];
+                                value += " ";
+                            }
+                            value += tokens[tokens.length - 1];
                         }
-                        value += tokens[tokens.length - 1];
                         KVMessage reply = store.put(key, value);
                         if (reply.getStatus() == KVMessage.StatusType.PUT_SUCCESS) {
                             printReply("PUT request was successful! Key value tuple has been created");
                         } else if (reply.getStatus() == KVMessage.StatusType.PUT_UPDATE) {
                             printReply("PUT request was successful! Key value tuple has been updated");
+                        } else if (reply.getStatus() == KVMessage.StatusType.DELETE_SUCCESS) {
+                            printReply("DELETE request was successful! Key value tuple has been deleted");
+                        } else if (reply.getStatus() == KVMessage.StatusType.DELETE_ERROR) {
+                            printReply("DELETE request was unsuccessful! Key value tuple is not in database");
                         } else if (reply.getStatus() == KVMessage.StatusType.PUT_ERROR) {
                             printError("PUT request encountered an error");
                         } else {
@@ -119,9 +125,9 @@ public class KVClient implements IKVClient {
                         String key = tokens[1];
                         KVMessage reply = store.get(key);
                         if (reply.getStatus() == KVMessage.StatusType.GET_SUCCESS) {
-                            printReply("GET successful, retrieved \"" + reply.getValue() + "\"");
+                            printReply("GET successful, retrieved \"" + reply.getValue() + "\"" + " using key " + "\"" + reply.getKey());
                         } else if (reply.getStatus() == KVMessage.StatusType.GET_ERROR) {
-                            printError("GET request encountered an error");
+                            printError("GET request encountered an error, the key is not in the database");
                         } else {
                             printError("GET request received unknown reply");
                         }
