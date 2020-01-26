@@ -36,10 +36,10 @@ public class KVServer implements IKVServer {
 	private int port;
 	private int cacheSize;
 	private String strategy;
-        private ServerSocket serverSocket;
+	private ServerSocket serverSocket;
 	private boolean running;
 	private static KVServer server;
-        private Map<String,String>cache;
+	private Map<String,String>cache;
 	// @TODO: figure out what is this ClientConnection?
 	private ArrayList<ClientConnection> connections;
 	// @TODO: initialize cache and persistent storage
@@ -49,18 +49,8 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 		this.port = port;
 		this.cacheSize = cacheSize;
-      		this.strategy = strategy;
-	        if (strategy.equalsIgnoreCase("LRU")){
-		  cache=Collections.synchronizedMap(new lru_cache(cacheSize));
-	       }
-	       else if (strategy.equalsIgnoreCase("FIFO")){
-		  cache=Collections.synchronizedMap(new fifo_cache(cacheSize));
-
-	       }
-	       else if (strategy.equalsIgnoreCase("LFU")){
-		  cache=Collections.synchronizedMap(new lfu_cache(cacheSize, 0.5f));
-	       }
-       }
+		this.strategy = strategy;
+	}
 	
 	@Override
 	public int getPort(){
@@ -100,7 +90,7 @@ public class KVServer implements IKVServer {
 	@Override
     public boolean inStorage(String key){
 		// TODO Auto-generated method stub
-		
+
 		// call getKV in persistent storage and return true if found
 		if(key.isEmpty() || key == null) return false;
 
@@ -108,7 +98,6 @@ public class KVServer implements IKVServer {
 		String value = persistentDb.find(key);
 
 		if (value == null)  return false;
-		// System.out.println("Found key");
 		return true;
 	}
 
@@ -146,7 +135,6 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 		
 		// put in persistent storage and in cache based on policy
-		// System.out.println("In putKV : " + key + " : " + value);
 		if (inCache(key) && value.equals("") && value.equals("null") || value == null) {
 			 cache.remove(key);
 		} else {
@@ -206,13 +194,13 @@ public class KVServer implements IKVServer {
 		// setup cache strategy
 		if (this.strategy.compareToIgnoreCase("LRU") == 0) {
 			logger.info("Using cache strategy: LRU");
-			// @TODO: setup LRU cache
+			cache = Collections.synchronizedMap(new lru_cache(cacheSize));
 		} else if (this.strategy.compareToIgnoreCase("LFU") == 0) {
 			logger.info("Using cache strategy: LFU");
-			// @TODO: setup LFU cache
+			cache = Collections.synchronizedMap(new lfu_cache(cacheSize, 0.5f));
 		} else if (this.strategy.compareToIgnoreCase("FIFO") == 0) {
 			logger.info("Using cache strategy: FIFO");
-			// @TODO: setup FIFO cache
+			cache = Collections.synchronizedMap(new fifo_cache(cacheSize));
 		} else {
 			// no cache strategy
 			logger.info("No cache strategy specified.");
@@ -231,7 +219,7 @@ public class KVServer implements IKVServer {
 	            try {
 	                Socket client = serverSocket.accept();                
 	                ClientConnection connection = 
-	                		new ClientConnection(client, server);
+	                		new ClientConnection(client, this);
 					new Thread(connection).start();
 					
 					this.connections.add(connection);
@@ -285,7 +273,6 @@ public class KVServer implements IKVServer {
 			} else {
 				// KVServer(port, cacheSize, cache replacement strategy)
 				server = new KVServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
-
 				new TServer(server).start();
 			}
 		} catch (IOException e) {

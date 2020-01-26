@@ -33,28 +33,8 @@ public class persistentDb {
     }
 
     public static String find(String key) {
-        // File file = new File("persistentDb.txt");
-    
-        // try {
-        //     Scanner scanner = new Scanner(file);
-
-        //     int lineNum = 0;
-        //     while (scanner.hasNextLine()) {
-        //         String line = scanner.nextLine();
-        //         String[] words = line.split(" "); 
-        //         if (words[0].trim().equals(key.trim())) {
-        //             return "lineNum"; 
-        //         }
-        //         lineNum++; 
-        //     }
-        // }
-        // catch (FileNotFoundException e) {
-        //     System.out.println("File not found" + e);
-        // }
-        
-        // return "-1"; 
         try {
-            // System.out.println("In FIND DB");
+            //System.out.println("In FIND DB");
             File file = new File("persistentDb.txt");
             BufferedReader br = new BufferedReader(new FileReader(file)); 
 
@@ -78,7 +58,7 @@ public class persistentDb {
         } catch (FileNotFoundException e) {
             logger.error("Error in finding! Cannot open file persistentDb.txt"); 
         } catch (IOException e) {
-            logger.error("Error in finding! Cannot read from file persistentDb.txt"); 
+            logger.error("Error in finding! Cannot read from file persistentDb.txt");
         }
         return null;
     }

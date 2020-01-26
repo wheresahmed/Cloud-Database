@@ -2,6 +2,7 @@ package testing;
 
 import java.io.IOException;
 
+import app_kvServer.TServer;
 import org.apache.log4j.Level;
 
 import app_kvServer.KVServer;
@@ -15,7 +16,7 @@ public class AllTests {
 	static {
 		try {
 			new LogSetup("logs/testing/test.log", Level.ERROR);
-			new KVServer(50000, 10, "FIFO");
+			new TServer(new KVServer(50000, 10, "FIFO")).start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
