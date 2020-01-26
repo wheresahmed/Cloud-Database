@@ -9,11 +9,14 @@ import java.util.List;
 import javax.naming.NameNotFoundException;
 
 import java.io.IOException;
-
+import java.util.Map;
+import java.util.Collections;
 import logger.LogSetup;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import java.util.NoSuchElementException;
+import java.util.stream.*;
 
 
 public class KVServer implements IKVServer {
@@ -33,10 +36,10 @@ public class KVServer implements IKVServer {
 	private int port;
 	private int cacheSize;
 	private String strategy;
-    private ServerSocket serverSocket;
+        private ServerSocket serverSocket;
 	private boolean running;
 	private static KVServer server;
-
+        private Map<String,String>cache;
 	// @TODO: figure out what is this ClientConnection?
 	private ArrayList<ClientConnection> connections;
 	// @TODO: initialize cache and persistent storage
@@ -46,15 +49,24 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 		this.port = port;
 		this.cacheSize = cacheSize;
-		this.strategy = strategy;
-	}
+      		this.strategy = strategy;
+	        if (strategy.equalsIgnoreCase("LRU")){
+		  cache=Collections.synchronizedMap(new lru_cache(cacheSize));
+	       }
+	       else if (strategy.equalsIgnoreCase("FIFO")){
+		  cache=Collections.synchronizedMap(new fifo_cache(cacheSize));
+
+	       }
+	       else if (strategy.equalsIgnoreCase("LFU")){
+		  cache=Collections.synchronizedMap(new lfu_cache(cacheSize, 0.5f));
+	       }
+       }
 	
 	@Override
 	public int getPort(){
 		// TODO Auto-generated method stub
 		return this.port;
 	}
-
 	@Override
     public String getHostname(){
 		// TODO Auto-generated method stub
@@ -105,9 +117,9 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 
 		// call getKV in cache and return true if found
-		// if (cache != null) {
-		// 	if (cache.containsKey(key)) return true;
-		// }
+		 if (cache != null) {
+		 	if (cache.containsKey(key)) return true;
+		 }
 		return false;
 	}
 
@@ -120,7 +132,7 @@ public class KVServer implements IKVServer {
 
 		String value = "";
 		if (inCache(key)) {
-			// value = cache.get(key);
+		      value = cache.get(key);
 		} else if (inStorage(key)) {
 			value = persistentDb.find(key);
 		} else {
@@ -136,10 +148,10 @@ public class KVServer implements IKVServer {
 		// put in persistent storage and in cache based on policy
 		// System.out.println("In putKV : " + key + " : " + value);
 		if (inCache(key) && value.equals("") && value.equals("null") || value == null) {
-			// cache.remove(key);
+			 cache.remove(key);
 		} else {
 			persistentDb.add(key, value);
-			// cache.put(key, value);
+			cache.put(key, value);
 		}
 	}
 
@@ -147,9 +159,9 @@ public class KVServer implements IKVServer {
     public void clearCache(){
 		// TODO Auto-generated method stub
 		logger.info("Clearing cache");
-		// if (cache != null){
-		// 	cache.clear();
-		// }
+		if (cache != null){
+		 	cache.clear();
+		}
 	}
 
 	@Override
@@ -157,9 +169,9 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 		persistentDb.clearDb();
 		logger.info("Clearing storage");
-		// if (cache != null){
-		// 	cache.clear();
-		// }
+		if (cache != null){
+			cache.clear();
+		}
 	}
 
 	private boolean isRunning() {
