@@ -89,7 +89,6 @@ public class ClientConnection implements Runnable {
 
 							for (int i = 2; i < token.length; i++) {
 								value += token[i] + " ";
-								System.out.println(value);
 							}
 
 							value.trim();
