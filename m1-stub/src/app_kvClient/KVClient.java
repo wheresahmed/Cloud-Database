@@ -125,7 +125,7 @@ public class KVClient implements IKVClient {
                         String key = tokens[1];
                         KVMessage reply = store.get(key);
                         if (reply.getStatus() == KVMessage.StatusType.GET_SUCCESS) {
-                            printReply("GET successful, retrieved \"" + reply.getValue() + "\"" + " using key " + "\"" + reply.getKey());
+                            printReply("GET successful, value has been retrieved");
                         } else if (reply.getStatus() == KVMessage.StatusType.GET_ERROR) {
                             printError("GET request encountered an error, the key is not in the database");
                         } else {

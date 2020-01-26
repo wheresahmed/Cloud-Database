@@ -35,8 +35,6 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 	private InputStream input;
 
 	private static final String PROMPT = "M1_Client> ";
-	private static final int MAXKEYLENGTH = 20;
-	private static final int MAXVALUELENGTH = 1024 * 120;
 	private static final int BUFFER_SIZE = 1024;
 	private static final int DROP_SIZE = 1024 * BUFFER_SIZE;
 
