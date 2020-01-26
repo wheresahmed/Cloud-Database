@@ -54,18 +54,18 @@ public class persistentDb {
         
         // return "-1"; 
         try {
-            System.out.println("In FIND DB");
+            // System.out.println("In FIND DB");
             File file = new File("persistentDb.txt");
             BufferedReader br = new BufferedReader(new FileReader(file)); 
 
             String st; 
             while ((st = br.readLine()) != null) {
-                System.out.println(st);
+                // System.out.println(st);
                 String[] tokens = st.split(" ");
-                System.out.println(tokens[0]);
-                System.out.println(key);
+                // System.out.println(tokens[0]);
+                // System.out.println(key);
                 if(tokens[0].equals(key.trim())) {
-                    System.out.println("In FIND DB: found key");
+                    // System.out.println("In FIND DB: found key");
                     String value = "";
                     // skip key and colon
                     for(int i = 2; i < tokens.length; i++) {
@@ -89,7 +89,7 @@ public class persistentDb {
             logger.error("Error in adding: Empty key not allowed.");
             return;
         }
-        if (value.isEmpty() || value.equals("null") || value == null) {
+        if (value.isEmpty() || value.trim().equals("null") || value == null) {
             // delete operation
             deleteLine(key);
             return;
@@ -98,7 +98,6 @@ public class persistentDb {
             // modify key operation
             deleteLine(key);
         }
-
         try {
             FileWriter fw = new FileWriter("persistentDb.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -124,14 +123,14 @@ public class persistentDb {
             String st; 
             while ((st = br.readLine()) != null) {
                 String[] tokens = st.split(" ");
-                if (!tokens[0].equals(key)) {
+                if (!tokens[0].trim().equals(key.trim())) {
                     sb.append(st + "\n");
                 }
             }
 
             br.close();
             FileWriter fw = new FileWriter(new File("persistentDb.txt"));
-			//Write entire string buffer into the file
+            //Write entire string buffer into the file
             fw.write(sb.toString());
             fw.flush();
             fw.close();

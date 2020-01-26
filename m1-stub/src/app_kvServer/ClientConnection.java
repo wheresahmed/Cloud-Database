@@ -61,8 +61,8 @@ public class ClientConnection implements Runnable {
 					String[] token = null;
 					token = latestMsg.getMsg().trim().split("\\s+");
 					// System.out.println("MSG: " + latestMsg.getMsg() + "\n");
-					System.out.println("TOKEN[0]: " + token[0]);
-					System.out.println("TOKEN LEN: " + token.length);
+					// System.out.println("TOKEN[0]: " + token[0]);
+					// System.out.println("TOKEN LEN: " + token.length);
 
 					if(token[0].equals("put")) {
 						logger.info("Message received with PUT request.");
@@ -89,6 +89,7 @@ public class ClientConnection implements Runnable {
 
 							for (int i = 2; i < token.length; i++) {
 								value += token[i] + " ";
+								System.out.println(value);
 							}
 
 							value.trim();
@@ -104,9 +105,9 @@ public class ClientConnection implements Runnable {
 
 						sendMessage(new TextMessage(msg));
 					} else if (token[0].equals("get")) {
-						System.out.println("In GET");
+						// System.out.println("In GET");
 						logger.info("Message received with GET request."); 
-						System.out.println("Key : " + token[1]);
+						// System.out.println("Key : " + token[1]);
 						String value = "";
 						
 						if (token.length == 2 && server.inStorage(token[1])) {
@@ -123,7 +124,7 @@ public class ClientConnection implements Runnable {
 						msg += token[1] + ", " + value + " >";
 						sendMessage(new TextMessage(msg));
 					} else {
-						System.out.println("In default");
+						// System.out.println("In default");
 						sendMessage(latestMsg);		
 					} 
 					
