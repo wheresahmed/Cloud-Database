@@ -92,11 +92,11 @@ public class KVServer implements IKVServer {
 		// call getKV in persistent storage and return true if found
 		if(key.isEmpty() || key == null) return false;
 
-		System.out.println("Finding key");
+		// System.out.println("Finding key");
 		String value = persistentDb.find(key);
 
 		if (value == null)  return false;
-		System.out.println("Found key");
+		// System.out.println("Found key");
 		return true;
 	}
 
@@ -134,7 +134,7 @@ public class KVServer implements IKVServer {
 		// TODO Auto-generated method stub
 		
 		// put in persistent storage and in cache based on policy
-		System.out.println("In putKV : " + key + " : " + value);
+		// System.out.println("In putKV : " + key + " : " + value);
 		if (inCache(key) && value.equals("") && value.equals("null") || value == null) {
 			// cache.remove(key);
 		} else {
