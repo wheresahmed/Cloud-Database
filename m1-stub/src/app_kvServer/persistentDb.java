@@ -21,9 +21,12 @@ public class persistentDb {
     */
     public static void initializeDb() {
         try {
-            writer = new PrintWriter("persistentDb.txt", "UTF-8");
-            writer.flush();
-            writer.close();
+            File f = new File("persistentDb.txt");
+            if (!f.exists()) {
+                writer = new PrintWriter("persistentDb.txt", "UTF-8");
+                writer.flush();
+                writer.close();
+            }
             // String fileName = "persistentDb.txt"; 
             // File fileObject = new File(fileName);	
             // PrintWriter out = new PrintWriter(fileObject);
