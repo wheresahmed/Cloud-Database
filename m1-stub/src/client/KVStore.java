@@ -35,6 +35,9 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 	private InputStream input;
 
 	private static final String PROMPT = "M1_Client> ";
+
+	private static final int MAXKEYLENGTH = 20;
+	private static final int MAXVALUELENGTH = 1024 * 120;
 	private static final int BUFFER_SIZE = 1024;
 	private static final int DROP_SIZE = 1024 * BUFFER_SIZE;
 
@@ -98,34 +101,49 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 
 	@Override
 	public KVMessage put(String key, String value) throws Exception {
-
-		StringBuilder sendMsgToServer = new StringBuilder();
-		sendMsgToServer.append("put " + key + " " + value);
-		sendMessage(new TextMessage(sendMsgToServer.toString()));
-
-		TextMessage latestMsgFromServer = receiveMessage();
-		handleNewMessage(latestMsgFromServer);
-		String[] splitMsg = latestMsgFromServer.getMsg().split("\\s+");
-
 		Message msgToClient = null;
-		msgToClient = new Message(splitMsg);
-		return msgToClient;
 
+		if (isLengthInvalid(key, MAXKEYLENGTH)) {
+			printError("Put request was unsuccessful! Key was too large");
+			String[] error= {"PUT_ERROR", "<", key, ",", value, ">"};
+			msgToClient = new Message(error);
+		} else if (!value.equals("") && isLengthInvalid(value, MAXVALUELENGTH)) {
+			printError("Put request was unsuccessful! Value was too large");
+			String[] error= {"PUT_ERROR", "<", key, ",", value, ">"};
+			msgToClient = new Message(error);
+		} else {
+			StringBuilder sendMsgToServer = new StringBuilder();
+			sendMsgToServer.append("put " + key + " " + value);
+			sendMessage(new TextMessage(sendMsgToServer.toString()));
+
+			TextMessage latestMsgFromServer = receiveMessage();
+			handleNewMessage(latestMsgFromServer);
+			String[] splitMsg = latestMsgFromServer.getMsg().split("\\s+");
+
+			msgToClient = new Message(splitMsg);
+		}
+		return msgToClient;
 	}
 
 	@Override
 	public KVMessage get(String key) throws Exception {
-
-		StringBuilder sendMsgToServer = new StringBuilder();
-		sendMsgToServer.append("get " + key);
-		sendMessage(new TextMessage(sendMsgToServer.toString()));
-
-		TextMessage latestMsgFromServer = receiveMessage();
-		handleNewMessage(latestMsgFromServer);
-		String[] splitMsg = latestMsgFromServer.getMsg().split("\\s+");
-
 		Message msgToClient = null;
-		msgToClient = new Message(splitMsg);
+
+		if (isLengthInvalid(key, MAXKEYLENGTH)) {
+			printError("Get request was unsuccessful! Key was too large");
+			String[] error= {"GET_ERROR", "<", key};
+			msgToClient = new Message(error);
+		} else {
+			StringBuilder sendMsgToServer = new StringBuilder();
+			sendMsgToServer.append("get " + key);
+			sendMessage(new TextMessage(sendMsgToServer.toString()));
+
+			TextMessage latestMsgFromServer = receiveMessage();
+			handleNewMessage(latestMsgFromServer);
+			String[] splitMsg = latestMsgFromServer.getMsg().split("\\s+");
+
+			msgToClient = new Message(splitMsg);
+		}
 		return msgToClient;
 	}
 
@@ -251,6 +269,11 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 
 	public void setRunning(boolean run) {
 		running = run;
+	}
+
+	public boolean isLengthInvalid(String input, int threshold ){
+		TextMessage message = new TextMessage(input);
+		return message.getMsgBytes().length > threshold;
 	}
 
 }
