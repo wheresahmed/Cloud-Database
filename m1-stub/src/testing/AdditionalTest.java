@@ -29,7 +29,7 @@ public class AdditionalTest extends TestCase {
 	public void setUp() {
 
 		try{
-			new TServer(new KVServer(60007, 3, "LFU")).start();
+			new TServer(new KVServer(60000, 3, "LFU")).start();
 
 		}catch( Exception e){
 		}
@@ -41,15 +41,15 @@ public class AdditionalTest extends TestCase {
 		}
 
 		try{
-			new TServer(new KVServer(50001, 3, "FIFO")).start();
+			new TServer(new KVServer(50000, 3, "FIFO")).start();
 
 		}catch( Exception e){
 		}
 
-		kvClientLFU = new KVStore("localhost", 60007);
+		kvClientLFU = new KVStore("localhost", 60000);
 		kvClientLRU = new KVStore("localhost", 40000);
-		kvClientFIFO = new KVStore("localhost", 50001);
-		kvClientFIFOTwin = new KVStore("localhost", 50001);
+		kvClientFIFO = new KVStore("localhost", 50000);
+		kvClientFIFOTwin = new KVStore("localhost", 50000);
 
 		try {
 			kvClientLFU.connect();
@@ -80,77 +80,10 @@ public class AdditionalTest extends TestCase {
 		persistentDb.clearDb();
 	}
 
-	//Testing proper LFUOperation
-	@Test
-	public void testLFU() {
-
-		String[] keys = {"a","b","c","d"};
-		String[] values = {"1","2","3","4"};
-
-		KVMessage response = null;
-		Exception ex = null;
-
-		for(int i = 0; i < 3; i++){
-
-			try {
-				response = kvClientLFU.put(keys[i], values[i]);
-			} catch (Exception e) {
-				ex = e;
-			}
-
-			assertTrue(ex == null && response.getStatus() == StatusType.PUT_SUCCESS);
-		}
-
-		for (int i = 0 ; i < 5; i ++){
-			try {
-				response = kvClientLFU.get(keys[0]);
-			} catch (Exception e) {
-				ex = e;
-			}
-
-			assertTrue(ex == null && response.getStatus() == StatusType.GET_SUCCESS);
-		}
-
-		for(int i = 0; i < 3; i++){
-
-			try {
-				response = kvClientLFU.get(keys[i]);
-			} catch (Exception e) {
-				ex = e;
-			}
-
-			assertTrue(ex == null && response.getStatus() == StatusType.GET_SUCCESS);
-		}
-
-		try {
-			response = kvClientLFU.put(keys[3], values[3]);
-		} catch (Exception e) {
-			ex = e;
-		}
-
-
-		assertTrue(ex == null && response.getStatus() == StatusType.PUT_SUCCESS);
-
-		try {
-			response = kvClientLFU.get(keys[1]);
-		} catch (Exception e) {
-			ex = e;
-		}
-
-		//replaced the second key as it has the lowest frequency and not the first as a was
-		//accessed many times
-		assertTrue(ex == null && response.getStatus() == StatusType.GET_SUCCESS);
-
-
-	}
-
-
-	//Testing proper LRUOperation
 	@Test
 	public void testLRU() {
-
-		String[] keys = {"a","b","c","d"};
-		String[] values = {"1","2","3","4"};
+		String[] keys = {"blah","hi","car","flower"};
+		String[] values = {"a","b","c","d"};
 
 		KVMessage response = null;
 		Exception ex = null;
@@ -202,20 +135,16 @@ public class AdditionalTest extends TestCase {
 			ex = e;
 		}
 
-		//replaced the first key as it is the least recently used
 		assertTrue(ex == null && response.getStatus() == StatusType.GET_SUCCESS);
 
 
 	}
 
-
-
-	//Testing proper FIFOOperation
 	@Test
 	public void testFIFO() {
 
-		String[] keys = {"a","b","c","d"};
-		String[] values = {"1","2","3","4"};
+		String[] keys = {"blah","hi","car","flower"};
+		String[] values = {"a","b","c","d"};
 
 		KVMessage response = null;
 		Exception ex = null;
@@ -267,38 +196,71 @@ public class AdditionalTest extends TestCase {
 			ex = e;
 		}
 
-		//replaced the first key as it is the first in
+		assertTrue(ex == null && response.getStatus() == StatusType.GET_SUCCESS);
+
+
+	}
+	@Test
+	public void testLFU() {
+
+		String[] keys = {"blah","hi","car","flower"};
+		String[] values = {"a","b","c","d"};
+
+		KVMessage response = null;
+		Exception ex = null;
+
+		for(int i = 0; i < 3; i++){
+
+			try {
+				response = kvClientLFU.put(keys[i], values[i]);
+			} catch (Exception e) {
+				ex = e;
+			}
+
+			assertTrue(ex == null && response.getStatus() == StatusType.PUT_SUCCESS);
+		}
+
+
+		for(int i = 0; i < 3; i++){
+
+			try {
+				response = kvClientLFU.get(keys[i]);
+			} catch (Exception e) {
+				ex = e;
+			}
+
+			assertTrue(ex == null && response.getStatus() == StatusType.GET_SUCCESS);
+		}
+		for (int i = 0 ; i < 5; i ++){
+			try {
+				response = kvClientLFU.get(keys[0]);
+			} catch (Exception e) {
+				ex = e;
+			}
+
+			assertTrue(ex == null && response.getStatus() == StatusType.GET_SUCCESS);
+		}
+
+		try {
+			response = kvClientLFU.put(keys[3], values[3]);
+		} catch (Exception e) {
+			ex = e;
+		}
+
+
+		assertTrue(ex == null && response.getStatus() == StatusType.PUT_SUCCESS);
+
+		try {
+			response = kvClientLFU.get(keys[1]);
+		} catch (Exception e) {
+			ex = e;
+		}
+
 		assertTrue(ex == null && response.getStatus() == StatusType.GET_SUCCESS);
 
 
 	}
 
-	//Bad Keys
-	@Test
-	public void testBadkeys() {
-
-		String[] keys = {"a r","byfgqwiylfgeafilubqwieo"}; //keys with spaces or too large
-		String[] values = {"1","2"};
-
-		KVMessage response = null;
-		Exception ex = null;
-
-		for(int i = 0; i < 2; i++){
-
-			try {
-				response = kvClientFIFO.put(keys[i], values[i]);
-			} catch (Exception e) {
-				ex = e;
-			}
-
-			assertTrue(ex == null && response.getStatus() == StatusType.PUT_ERROR);
-		}
-
-
-
-	}
-
-	// Persistent Storage Tests
 
 	/* Tests the following cases:
 	 * Case 1: All key-value pairs are in storage. Including evicted entries.
@@ -306,9 +268,8 @@ public class AdditionalTest extends TestCase {
 	@Test
 	public void testBasicPersistence() {
 
-		// File should have all the entries
-		String[] keys = {"a1", "c2", "e3", "g4", "j5"};
-		String[] values = {"b", "d", "f", "h", "k"};
+		String[] keys = {"a", "c", "e", "g", "j"};
+		String[] values = {"1", "2", "3", "4", "5"};
 
 		KVMessage response = null;
 		Exception ex = null;
@@ -333,14 +294,12 @@ public class AdditionalTest extends TestCase {
 
 			assertTrue(ex == null && response.getStatus() == StatusType.GET_SUCCESS);
 		}
-		System.out.println(persistentDb.find("a1"));
-		assertTrue(persistentDb.find("a1") != null);
-		assertTrue(persistentDb.find("c2") !=null);
-		assertTrue(persistentDb.find("e3") !=null);
-		assertTrue(persistentDb.find("g4") !=null);
-		assertTrue(persistentDb.find("j5") !=null);
+		assertTrue(persistentDb.find("a") != null);
+		assertTrue(persistentDb.find("c") !=null);
+		assertTrue(persistentDb.find("e") !=null);
+		assertTrue(persistentDb.find("g") !=null);
+		assertTrue(persistentDb.find("j") !=null);
 	}
-
 	/* Tests the following cases:
 	 * Case 2: Entry updated in file correctly
 	 */
@@ -387,14 +346,14 @@ public class AdditionalTest extends TestCase {
 
 
 	/* Tests the following cases:
-	 * Case 3: File removes key-value pairs for put <Key, "">
+	 * Case 2: File removes key-value pairs for put <Key, "">
 	 */
 	@Test
-	public void testKeyValueRevomalFile() {
+	public void testKeyValueRemoveFile() {
 
 		// File should have all the entries and a's value as z
-		String[] keys = {"Name", "Place", "Animal", "Thing"};
-		String[] values = {"King Kong", "Skull Island", "Gorilla", "Caves"};
+		String[] keys = {"a", "b", "c", "d"};
+		String[] values = {"1", "2", "3", "4"};
 
 		KVMessage response = null;
 		Exception ex = null;
@@ -426,11 +385,57 @@ public class AdditionalTest extends TestCase {
 		}
 
 		assertTrue(ex == null && (response.getStatus() == StatusType.DELETE_SUCCESS));
-		assertTrue(persistentDb.find("Name") != null);
-		assertTrue(persistentDb.find("Place") != null);
-		assertTrue(persistentDb.find("Animal") != null);
-		assertTrue(persistentDb.find("Thing") == null);
+		assertTrue(persistentDb.find("a") != null);
+		assertTrue(persistentDb.find("b") != null);
+		assertTrue(persistentDb.find("c") != null);
+		assertTrue(persistentDb.find("d") == null);
 	}
+	/* Tests the following cases:
+	 * Case 2: File removes key-value pairs for put <Key, "">
+	 */
+	@Test
+	public void testNullKeyValueRemoveFile() {
+
+		// File should have all the entries and a's value as z
+		String[] keys = {"a", "b", "c", "d"};
+		String[] values = {"1", "2", "3", "4"};
+
+		KVMessage response = null;
+		Exception ex = null;
+
+		for(int i = 0; i < keys.length; i++){
+
+			try {
+				response = kvClientFIFO.put(keys[i], values[i]);
+			} catch (Exception e) {
+				ex = e;
+			}
+
+			assertTrue(ex == null && (response.getStatus() == StatusType.PUT_SUCCESS));
+		}
+		for(int i = 0; i < keys.length; i++){
+
+			try {
+				response = kvClientFIFO.get(keys[i]);
+			} catch (Exception e) {
+				ex = e;
+			}
+
+			assertTrue(ex == null && response.getStatus() == StatusType.GET_SUCCESS);
+		}
+		try {
+			response = kvClientFIFO.put(keys[keys.length-1], "null");
+		} catch (Exception e) {
+			ex = e;
+		}
+
+		assertTrue(ex == null && (response.getStatus() == StatusType.DELETE_SUCCESS));
+		assertTrue(persistentDb.find("a") != null);
+		assertTrue(persistentDb.find("b") != null);
+		assertTrue(persistentDb.find("c") != null);
+		assertTrue(persistentDb.find("d") == null);
+	}
+
 
 	/* Tests the following cases:
 	 * Case 4: Checks if the keys and values are parsed correctly in the file
@@ -442,8 +447,8 @@ public class AdditionalTest extends TestCase {
 	public void testKeyValueParsingInFile() {
 
 		// File should have all the entries and a's value as z
-		String[] keys = {"k1", "k2", "k3"};
-		String[] values = {"v1", "k1", "v3"};
+		String[] keys = {"a", "b", "c"};
+		String[] values = {"1", "2", "3"};
 
 		KVMessage response = null;
 		Exception ex = null;
@@ -459,9 +464,9 @@ public class AdditionalTest extends TestCase {
 			assertTrue(ex == null && (response.getStatus() == StatusType.PUT_SUCCESS ||
 					response.getStatus() == StatusType.PUT_UPDATE));
 		}
-		assertTrue(persistentDb.find("k1") != null);
-		assertTrue(persistentDb.find("k2") != null);
-		assertTrue(persistentDb.find("k3") != null);
+		assertTrue(persistentDb.find("a") != null);
+		assertTrue(persistentDb.find("b") != null);
+		assertTrue(persistentDb.find("c") != null);
 		for(int i = 0; i < keys.length; i++){
 
 			try {
@@ -474,7 +479,7 @@ public class AdditionalTest extends TestCase {
 					&& response.getValue().equals(values[i]));
 		}
 		try {
-			response = kvClientFIFO.put("v3", "");
+			response = kvClientFIFO.put("d", "");
 		} catch (Exception e) {
 			ex = e;
 		}
@@ -490,8 +495,8 @@ public class AdditionalTest extends TestCase {
 	public void testMultiClientPersistenceTest() {
 
 		// File should have all the entries and a's value as z
-		String[] keys = {"k1", "k2", "k3"};
-		String[] values = {"v1", "v2", "v3"};
+		String[] keys = {"1", "2", "3"};
+		String[] values = {"1", "2", "3"};
 
 		KVMessage response = null;
 		KVMessage response2 = null;
@@ -512,20 +517,19 @@ public class AdditionalTest extends TestCase {
 			assertTrue(ex == null && (response.getStatus() == StatusType.PUT_SUCCESS ||
 					response.getStatus() == StatusType.PUT_UPDATE));
 		}
-		assertTrue(persistentDb.find("k1") != null);
-		assertTrue(persistentDb.find("k2") != null);
-		assertTrue(persistentDb.find("k3") != null);
+		assertTrue(persistentDb.find("1") != null);
+		assertTrue(persistentDb.find("2") != null);
+		assertTrue(persistentDb.find("3") != null);
 
-		// overwrite twin's entry
 		try {
-			response = kvClientFIFO.put(keys[1], "v419");
+			response = kvClientFIFO.put(keys[1], "blah");
 		} catch (Exception e) {
 			ex = e;
 		}
 
 		assertTrue(ex == null &&
 				(response.getStatus() == StatusType.PUT_SUCCESS || response.getStatus() == StatusType.PUT_UPDATE));
-		assertTrue(persistentDb.find("k2") !=null);
+		assertTrue(persistentDb.find("2") !=null);
 	}
 
 	//Bad Values
@@ -556,8 +560,6 @@ public class AdditionalTest extends TestCase {
 			//value too large
 			assertTrue(ex == null && response.getStatus() == StatusType.PUT_ERROR);
 		}
-
-
 
 	}
 
@@ -729,7 +731,7 @@ public class AdditionalTest extends TestCase {
 
 
 
-			System.out.println("The "+ cacheType[i] + " cache throughput is " + load/timeElapsedSeconds + " req/sec, overall latency "
+			System.out.println(cacheType[i] + " throughput is " + load/timeElapsedSeconds + " req/sec, overall latency "
 					+ timeElapsedSeconds + " secs, put throughput " +
 					putLoad/putElapsedSeconds +" req/sec, and get throughput is " +  getLoad/getElapsedSeconds + " req/sec" +"put load: "+ putLoad+"get load:" +getLoad);
 
@@ -741,6 +743,7 @@ public class AdditionalTest extends TestCase {
 
 	//Performance testing
 	//Using a cache size of 500
+/*
 	@Test
 	public void testPerformance() {
 
@@ -753,6 +756,8 @@ public class AdditionalTest extends TestCase {
 
 
 	}
+*/
+
 
 
 

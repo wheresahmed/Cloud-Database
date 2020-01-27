@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="m1-stub">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/m1-stub/m1-server.jar!/" />
+      <root url="jar://$PROJECT_DIR$/m1-stub/m1-client.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
