@@ -50,7 +50,16 @@ public class KVServer implements IKVServer {
 		this.port = port;
 		this.cacheSize = cacheSize;
 		this.strategy = strategy;
-	}
+		if (strategy.equalsIgnoreCase("LRU")){
+		  cache = Collections.synchronizedMap(new lru_cache(cacheSize));
+		}
+		else if (strategy.equalsIgnoreCase("FIFO")){
+		  cache = Collections.synchronizedMap(new fifo_cache(cacheSize));
+		}
+		else if (strategy.equalsIgnoreCase("LFU")){
+		  cache = Collections.synchronizedMap(new lfu_cache(cacheSize, 0.5f));
+	    }
+    }
 	
 	@Override
 	public int getPort(){
