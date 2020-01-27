@@ -126,13 +126,11 @@ public class persistentDb {
     }
 
     public static void clearDb() {
-        File file = new File("persistentDb.txt");
-        if (file.delete()) {
-            logger.info("Success! DB deleted!");
-        } 
-        else
-        { 
-            logger.error("Error! Failed to clear the DB."); 
-        } 
+        try {
+            PrintWriter pw = new PrintWriter("persistentDb.txt");
+            pw.close();
+        } catch (IOException e) { //FileNotFoundException e) {
+            logger.error("Error in clearing db! Cannot recreate file persistentDb.txt"); 
+        }
     }
 }
