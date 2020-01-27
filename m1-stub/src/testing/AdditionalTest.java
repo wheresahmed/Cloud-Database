@@ -743,7 +743,7 @@ public class AdditionalTest extends TestCase {
 
 	//Performance testing
 	//Using a cache size of 500
-/*
+
 	@Test
 	public void testPerformance() {
 
@@ -756,7 +756,6 @@ public class AdditionalTest extends TestCase {
 
 
 	}
-*/
 
 
 
