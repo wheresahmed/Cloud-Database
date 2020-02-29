@@ -71,7 +71,7 @@ public class ECS {
    public ECS(int num_servers,int cache_size, String cache_strategy){
       zk_start();
       zk_connect();
-     // ecs_nodes_initialize(num_servers);
+      ecs_nodes_initialize(num_servers);
       storage_cache_size=cache_size;
       storage_cache_strategy=cache_strategy;
      // launch_servers(cache_size,cache_strategy);
@@ -127,4 +127,87 @@ public class ECS {
 	 e.printStackTrace();
       }
    }
+   private void ecs_nodes_initialize(int num_servers){
+      File file =new File(confFile);
+      servers_launched=0;
+      String current_data;
+      String data="";
+      try{
+	 Scanner scanner=new Scanner(file);
+	 while(scanner.hasNextLine()){
+	    String line=scanner.nextLine();
+	    String[]words=line.split(" ");
+	    String server_name=words[0];
+	    String host=words[1];
+	    String port=words[2];
+	    ECSNode node=new ECSNode(server_name,host,Integer.parseInt(port));
+	    if (servers_launched>=num_servers){
+	       idleNodes.add(node);
+	    } else {
+	       storageNodes.add(node);
+	       servers_launched++;
+	       metadata.put(node.getNodeHash(),node);
+	    }
+	    total_servers++;
+	 }
+	 for (int i=0;i<storageNodes.size();i++){
+	    ECSNode node=storageNodes.get(i);
+	    node.setRange(getServerRange(node.getNodeHash()));
+	    current_data=node.getNodeHost()+":" + node.getNodePort()+" "+node.getNodeHashRange()[0]+"-"+node.getNodeHashRange()[1]+"\n";
+	    data+=current_data;
+	 }
+	 if (!exists(dataPath)){
+	    createZnode(dataPath,data);
+	 }
+	 setData(dataPath,data);
+      }catch(FileNotFoundException e){
+	 System.out.println("File not found"+ e); 
+      }
+
+   }
+   private void setData(String path, String data){
+      try{
+	 zk.setData(path,data.getBytes(),zk.exists(path,true).getVersion());
+      }catch (Exception e){
+	 System.out.println(e.getMessage());
+      }
+   }
+   private void createZnode(String path, String data){
+      try{
+	 zk.create(path,data.getBytes(),ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
+      }catch(Exception e){
+	 System.out.println(e.getMessage());
+      }
+   }
+   public ArrayList<String> getServerRange(String hash){
+      ArrayList<String>res=new ArrayList<String>();
+      if(metadata==null)return res;
+      String previous=null;
+      boolean found=false;
+      int count=0;
+      for(Map.Entry<String,ECSNode>entry :this.metadata.entrySet()){
+	 if(entry.getKey().equals(hash)&&count!=0){
+	    found=true;
+	    break;
+	 }
+	 previous=entry.getKey();
+	 count++;
+      }
+      if(previous!=null){
+	 res.add(previous);
+	 res.add(hash);
+      }
+
+      return res;
+   }
+   private boolean exists(String path){
+      Stat stat =new Stat();
+      try{
+	 stat=zk.exists(path,false);
+      }catch(Exception e){
+	 System.out.println(e.getMessage());
+      }
+      return stat!=null;
+   }
+
 }

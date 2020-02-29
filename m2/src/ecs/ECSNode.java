@@ -35,6 +35,9 @@ public class ECSNode implements IECSNode{
    public int getNodePort(){
       return this.nodePort;
    }
+   public void setRange(ArrayList<String>range){
+      nodeRange=range;
+   }
    public String[] getNodeHashRange(){
       return nodeRange.toArray(new String[nodeRange.size()]);
    }
