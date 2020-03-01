@@ -52,6 +52,24 @@ public class Message implements KVMessage {
 			this.key = server_response[2];
 			this.value = "";
 
+		} else if (status.equals("SERVER_STOPPED")) {
+
+			this.status = KVMessage.StatusType.SERVER_STOPPED;
+			this.key = "";
+			this.value = "";
+
+		} else if (status.equals("SERVER_WRITE_LOCK")) {
+
+			this.status = KVMessage.StatusType.SERVER_WRITE_LOCK;
+			this.key = "";
+			this.value = "";
+
+		} else if (status.equals("SERVER_NOT_RESPONSIBLE")) {
+
+			this.status = KVMessage.StatusType.SERVER_NOT_RESPONSIBLE;
+			this.key = "";
+			this.value = "";
+
 		}
 	}
 

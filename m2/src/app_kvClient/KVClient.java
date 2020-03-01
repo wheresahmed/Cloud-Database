@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -20,6 +22,9 @@ public class KVClient implements IKVClient {
     private static final String PROMPT = "M1_Client> ";
     private BufferedReader stdin;
     private boolean stop = false;
+
+    // Metadata Structure - "ip:port", range of hash values
+	private Map<String,String[]> metadata = new HashMap<>();
 
     private String serverAddress;
     private int serverPort;
@@ -88,7 +93,7 @@ public class KVClient implements IKVClient {
                             }
                             value += tokens[tokens.length - 1];
                         }
-                        KVMessage reply = store.put(key, value);
+                        KVMessage reply = retryput(key,value);
                         if (reply.getStatus() == KVMessage.StatusType.PUT_SUCCESS) {
                             printReply("PUT request was successful! Key value tuple has been created");
                         } else if (reply.getStatus() == KVMessage.StatusType.PUT_UPDATE) {
@@ -99,6 +104,12 @@ public class KVClient implements IKVClient {
                             printReply("DELETE request was unsuccessful! Key value tuple is not in database");
                         } else if (reply.getStatus() == KVMessage.StatusType.PUT_ERROR) {
                             printError("PUT request encountered an error");
+                        } else if (reply.getStatus() == KVMessage.StatusType.SERVER_STOPPED) {
+                            printError("Request encountered a server error");
+                        } else if (reply.getStatus() == KVMessage.StatusType.SERVER_WRITE_LOCK) {
+                            printError("Request encountered a server write error");
+                        } else if (reply.getStatus() == KVMessage.StatusType.SERVER_NOT_RESPONSIBLE) {
+                            printError("Request encountered a non-server error");
                         } else {
                             printError("PUT request received unknown reply");
                         }
@@ -123,11 +134,17 @@ public class KVClient implements IKVClient {
                 if (store != null && store.isClientRunning()) {
                     try {
                         String key = tokens[1];
-                        KVMessage reply = store.get(key);
+                        KVMessage reply = retryget(key);
                         if (reply.getStatus() == KVMessage.StatusType.GET_SUCCESS) {
                             printReply("GET successful, value has been retrieved");
                         } else if (reply.getStatus() == KVMessage.StatusType.GET_ERROR) {
                             printError("GET request encountered an error, the key is not in the database");
+                        } else if (reply.getStatus() == KVMessage.StatusType.SERVER_STOPPED) {
+                            printError("Request encountered a server error");
+                        } else if (reply.getStatus() == KVMessage.StatusType.SERVER_WRITE_LOCK) {
+                            printError("Request encountered a server write error");
+                        } else if (reply.getStatus() == KVMessage.StatusType.SERVER_NOT_RESPONSIBLE) {
+                            printError("Request encountered a non-server error");
                         } else {
                             printError("GET request received unknown reply");
                         }
@@ -183,9 +200,69 @@ public class KVClient implements IKVClient {
 
     @Override
     public KVCommInterface getStore() {
-
         return store;
     }
+
+    private void retryput(String key, String value) throws Exception {
+		KVMessage msg;
+
+		do {
+			String address = store.searchKey(key);
+			if (!address.equals(serverAddress + ":" + Integer.toString(serverPort))) {
+				
+                if (store!=null && store.isClientRunning()) {
+					store.disconnect();
+					store = null;
+				}
+
+				String [] addrArray= address.split(":");
+				connect(addrArray[0], Integer.parseInt(addrArray[1]));
+			}
+
+			msg = store.put(key, value); 
+
+		} while (msg.getStatus() == KVMessage.StatusType.SERVER_NOT_RESPONSIBLE);
+
+		if (store.port != serverPort || !store.address.equals(serverAddress)) {
+
+			if (store!=null && store.isClientRunning()){
+				store.disconnect();
+				store=null;
+			}
+
+			connect(serverAddress, serverPort);
+		}
+	}
+
+	private void retryget(String key) throws Exception{
+		KVMessage msg;
+
+		do {
+			String address = store.searchKey(key);
+			if (!address.equals(serverAddress + ":" + Integer.toString(serverPort))) {
+
+				if (store!=null && store.isClientRunning())){
+					store.disconnect();
+					store=null;
+				}
+
+				String [] addrArray= address.split(":");
+				connect(addrArray[0], Integer.parseInt(addrArray[1]));
+			}
+
+			msg = store.get(key);
+		} while (msg.getStatus() == KVMessage.StatusType.SERVER_NOT_RESPONSIBLE);
+		
+		if (store.port != serverPort || !store.address.equals(serverAddress)) {
+			
+            if (store!=null && store.isClientRunning()){
+				store.disconnect();
+				store = null;
+			}
+
+			connect(serverAddress, serverPort);
+		}
+	}
 
     private void printHelp() {
         StringBuilder sb = new StringBuilder();
@@ -223,24 +300,31 @@ public class KVClient implements IKVClient {
 
         if(levelString.equals(Level.ALL.toString())) {
             logger.setLevel(Level.ALL);
+            store.logger.setLevel(Level.ALL);
             return Level.ALL.toString();
         } else if(levelString.equals(Level.DEBUG.toString())) {
             logger.setLevel(Level.DEBUG);
+            store.logger.setLevel(Level.DEBUG);
             return Level.DEBUG.toString();
         } else if(levelString.equals(Level.INFO.toString())) {
             logger.setLevel(Level.INFO);
+            store.logger.setLevel(Level.INFO);
             return Level.INFO.toString();
         } else if(levelString.equals(Level.WARN.toString())) {
             logger.setLevel(Level.WARN);
+            store.logger.setLevel(Level.WARN);
             return Level.WARN.toString();
         } else if(levelString.equals(Level.ERROR.toString())) {
             logger.setLevel(Level.ERROR);
+            store.logger.setLevel(Level.ERROR);
             return Level.ERROR.toString();
         } else if (levelString.equals(Level.FATAL.toString())) {
             logger.setLevel(Level.FATAL);
+            store.logger.setLevel(Level.FATAL);
             return Level.FATAL.toString();
         } else if (levelString.equals(Level.OFF.toString())) {
             logger.setLevel(Level.OFF);
+            store.logger.setLevel(Level.OFF);
             return Level.OFF.toString();
         } else {
             return LogSetup.UNKNOWN_LEVEL;

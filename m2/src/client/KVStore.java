@@ -6,6 +6,11 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Map;
+import java.util.HashMap;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.apache.log4j.Logger;
 import java.net.UnknownHostException;
@@ -23,12 +28,12 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 	 * @param port the port of the KVServer
 	 */
 
-	private String address;
-	private int port;
+	public String address;
+	public int port;
 
 	private boolean running;
 
-	private Logger logger = Logger.getRootLogger();
+	public Logger logger = Logger.getRootLogger();
 	private Set<ClientSocketListener> listeners;
 	private Socket clientSocket;
 	private OutputStream output;
@@ -41,10 +46,18 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 	private static final int BUFFER_SIZE = 1024;
 	private static final int DROP_SIZE = 1024 * BUFFER_SIZE;
 
+	// Metadata Structure - "ip:port", range of hash values
+	private Map<String,String[]> metadata = new HashMap<>();
+
 	public KVStore(String address, int port) {
 
 		this.address = address;
 		this.port = port;
+
+		String key = address + ":" + Integer.toString(port);
+		String[] value = {"00000000000000000000000000000000","ffffffffffffffffffffffffffffffff"};
+		
+		this.metadata.put(key, value);
 	}
 
 	// Manage Connection to Server
@@ -96,6 +109,76 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 		}
 	}
 
+	// Manage Metadata Handling
+
+	private void loadMetadata(String[] data) {
+
+		for (int i = 0; i < data.length; i +=2) {
+			String[] value = data[i+1].split("-");
+			this.metadata.put(data[i],value);
+		}
+
+	}
+
+	// Inspired from: https://stackoverflow.com/questions/415953/how-can-i-generate-an-md5-hash
+	public String convertToMD5(String md5) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] array = md.digest(md5.getBytes());
+			StringBuffer sb = new StringBuffer();
+
+			for (int i = 0; i < array.length; ++i) {
+				sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+			}
+
+			return sb.toString();
+
+		} catch (NoSuchAlgorithmException e) {
+
+		}	      
+		return null;
+	} 
+
+	public String searchKey(String key){
+		String keyHash = convertToMD5(key);
+		
+		for (Map.Entry <String,String[]> pair : this.metadata.entrySet()) {
+
+			String start = pair.getValue()[0];
+			String end = pair.getValue()[1];
+
+			if (start.compareTo(end) >= 0) {
+				if (keyHash.compareTo(start) >0 || keyHash.compareTo(end) <= 0 ) {
+					return  pair.getKey();
+				}			
+			}
+			else {
+				if (keyHash.compareTo(start) >0 && keyHash.compareTo(end) <= 0 ) {
+					return pair.getKey();
+				}
+			}
+		}
+
+		return "";
+	}
+
+	private void receiveMetadata(String[] msg) {
+		String[] metadata = new String [msg.length -1];
+
+		for (int i = 1; i < msg.length; i ++ ) {
+			metadata[i-1] =  msg[i];
+		}
+
+		loadMetadata(metadata);
+	}
+
+	private void printMetadata() {
+
+		for(Map.Entry <String,String[]> pair : this.metadata.entrySet()) {
+			System.out.println(pair.getKey() + " " + pair.getValue()[0] + " to " + pair.getValue()[1] );
+		}
+
+	}
 
 	// Put and Get functions - take in the key and value, used by KVClient
 
@@ -117,8 +200,15 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 			sendMessage(new TextMessage(sendMsgToServer.toString()));
 
 			TextMessage latestMsgFromServer = receiveMessage();
-			handleNewMessage(latestMsgFromServer);
+			// handleNewMessage(latestMsgFromServer);
 			String[] splitMsg = latestMsgFromServer.getMsg().split("\\s+");
+
+			if (splitMsg[0].equals("SERVER_NOT_RESPONSIBLE")) {
+				handleNewMessage(new TextMessage(splitMsg[0]));
+				receiveMetadata(splitMsg);
+			} else {
+				handleNewMessage(latestMsgFromServer);
+			}
 
 			msgToClient = new Message(splitMsg);
 		}
@@ -139,8 +229,15 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 			sendMessage(new TextMessage(sendMsgToServer.toString()));
 
 			TextMessage latestMsgFromServer = receiveMessage();
-			handleNewMessage(latestMsgFromServer);
+			// handleNewMessage(latestMsgFromServer);
 			String[] splitMsg = latestMsgFromServer.getMsg().split("\\s+");
+
+			if (splitMsg[0].equals("SERVER_NOT_RESPONSIBLE")) {
+				handleNewMessage(new TextMessage(splitMsg[0]));
+				receiveMetadata(splitMsg);
+			} else {
+				handleNewMessage(latestMsg);
+			}
 
 			msgToClient = new Message(splitMsg);
 		}
@@ -197,10 +294,10 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 				index++;
 			}
 
-			/* stop reading is DROP_SIZE is reached */
-			if(msgBytes != null && msgBytes.length + index >= DROP_SIZE) {
-				reading = false;
-			}
+			// /* stop reading is DROP_SIZE is reached */
+			// if(msgBytes != null && msgBytes.length + index >= DROP_SIZE) {
+			// 	reading = false;
+			// }
 
 			/* read next char from stream */
 			read = (byte) input.read();
@@ -230,14 +327,14 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 		if(status == SocketStatus.CONNECTED) {
 
 		} else if (status == SocketStatus.DISCONNECTED) {
-			System.out.print(PROMPT);
-			System.out.println("Connection terminated: "
+			logger.debug(PROMPT);
+			logger.debug("Connection terminated: "
 					+ this.address + " / " + this.port);
 
 		} else if (status == SocketStatus.CONNECTION_LOST) {
-			System.out.println("Connection lost: "
+			logger.debug("Connection lost: "
 					+ this.address + " / " + this.port);
-			System.out.print(PROMPT);
+			logger.debug(PROMPT);
 		}
 
 	}
