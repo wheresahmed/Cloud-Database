@@ -111,15 +111,18 @@ public class ECS {
    private void zk_connect(){
       final CountDownLatch connected_signal=new CountDownLatch(1);
       try{
+         System.out.println("before zookeeper connect");
 	 zk=new ZooKeeper(ZK_CONN,ZK_TIMEOUT,new Watcher(){
 	    public void process (WatchedEvent we){
 	       if (we.getState()==KeeperState.SyncConnected){
 		  connected_signal.countDown();
 	       }
 	    }
-	 });
+    });
+    System.out.println("after zookeeper connect");
       }catch(IOException e){
-	 logger.error("Client connection to Zookeeper failed");
+         System.out.println("Hit Exception in zk_connect");
+	//  logger.error("Client connection to Zookeeper failed");
       }
       try{
 	 connected_signal.await();

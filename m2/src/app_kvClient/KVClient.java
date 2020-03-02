@@ -203,7 +203,7 @@ public class KVClient implements IKVClient {
         return store;
     }
 
-    private void retryput(String key, String value) throws Exception {
+    private KVMessage retryput(String key, String value) throws Exception {
 		KVMessage msg;
 
 		do {
@@ -216,7 +216,7 @@ public class KVClient implements IKVClient {
 				}
 
 				String [] addrArray= address.split(":");
-				connect(addrArray[0], Integer.parseInt(addrArray[1]));
+				newConnection(addrArray[0], Integer.parseInt(addrArray[1]));
 			}
 
 			msg = store.put(key, value); 
@@ -230,24 +230,26 @@ public class KVClient implements IKVClient {
 				store=null;
 			}
 
-			connect(serverAddress, serverPort);
-		}
+			newConnection(serverAddress, serverPort);
+        }
+        
+        return msg;
 	}
 
-	private void retryget(String key) throws Exception{
+	private KVMessage retryget(String key) throws Exception{
 		KVMessage msg;
 
 		do {
 			String address = store.searchKey(key);
 			if (!address.equals(serverAddress + ":" + Integer.toString(serverPort))) {
 
-				if (store!=null && store.isClientRunning())){
+				if (store!=null && store.isClientRunning()){
 					store.disconnect();
 					store=null;
 				}
 
 				String [] addrArray= address.split(":");
-				connect(addrArray[0], Integer.parseInt(addrArray[1]));
+				newConnection(addrArray[0], Integer.parseInt(addrArray[1]));
 			}
 
 			msg = store.get(key);
@@ -260,8 +262,10 @@ public class KVClient implements IKVClient {
 				store = null;
 			}
 
-			connect(serverAddress, serverPort);
-		}
+			newConnection(serverAddress, serverPort);
+        }
+        
+        return msg;
 	}
 
     private void printHelp() {
