@@ -236,7 +236,7 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 				handleNewMessage(new TextMessage(splitMsg[0]));
 				receiveMetadata(splitMsg);
 			} else {
-				handleNewMessage(latestMsg);
+				handleNewMessage(latestMsgFromServer);
 			}
 
 			msgToClient = new Message(splitMsg);

@@ -1,41 +1,35 @@
-2020-02-28 22:54:59,405 [myid:] - INFO  [main:QuorumPeerConfig@136] - Reading configuration from: conf/zoo.cfg
-2020-02-28 22:54:59,408 [myid:] - INFO  [main:DatadirCleanupManager@78] - autopurge.snapRetainCount set to 3
-2020-02-28 22:54:59,408 [myid:] - INFO  [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0
-2020-02-28 22:54:59,408 [myid:] - INFO  [main:DatadirCleanupManager@101] - Purge task is not scheduled.
-2020-02-28 22:54:59,408 [myid:] - WARN  [main:QuorumPeerMain@116] - Either no config or no quorum defined in config, running  in standalone mode
-2020-02-28 22:54:59,415 [myid:] - INFO  [main:QuorumPeerConfig@136] - Reading configuration from: conf/zoo.cfg
-2020-02-28 22:54:59,416 [myid:] - INFO  [main:ZooKeeperServerMain@98] - Starting server
-2020-02-28 22:54:59,423 [myid:] - INFO  [main:Environment@100] - Server environment:zookeeper.version=3.4.11-37e277162d567b55a07d1755f0b31c32e93c01a0, built on 11/01/2017 18:06 GMT
-2020-02-28 22:54:59,423 [myid:] - INFO  [main:Environment@100] - Server environment:host.name=ug230.eecg.toronto.edu
-2020-02-28 22:54:59,423 [myid:] - INFO  [main:Environment@100] - Server environment:java.version=1.8.0_242
-2020-02-28 22:54:59,423 [myid:] - INFO  [main:Environment@100] - Server environment:java.vendor=Oracle Corporation
-2020-02-28 22:54:59,423 [myid:] - INFO  [main:Environment@100] - Server environment:java.home=/usr/lib/jvm/java-8-openjdk-amd64/jre
-2020-02-28 22:54:59,423 [myid:] - INFO  [main:Environment@100] - Server environment:java.class.path=/homes/s/syedasid/ece419_m2/m2/zookeeper-3.4.11/bin/../build/classes:/homes/s/syedasid/ece419_m2/m2/zookeeper-3.4.11/bin/../build/lib/*.jar:/homes/s/syedasid/ece419_m2/m2/zookeeper-3.4.11/bin/../lib/slf4j-log4j12-1.6.1.jar:/homes/s/syedasid/ece419_m2/m2/zookeeper-3.4.11/bin/../lib/slf4j-api-1.6.1.jar:/homes/s/syedasid/ece419_m2/m2/zookeeper-3.4.11/bin/../lib/netty-3.10.5.Final.jar:/homes/s/syedasid/ece419_m2/m2/zookeeper-3.4.11/bin/../lib/log4j-1.2.16.jar:/homes/s/syedasid/ece419_m2/m2/zookeeper-3.4.11/bin/../lib/jline-0.9.94.jar:/homes/s/syedasid/ece419_m2/m2/zookeeper-3.4.11/bin/../lib/audience-annotations-0.5.0.jar:/homes/s/syedasid/ece419_m2/m2/zookeeper-3.4.11/bin/../zookeeper-3.4.11.jar:/homes/s/syedasid/ece419_m2/m2/zookeeper-3.4.11/bin/../src/java/lib/*.jar:/homes/s/syedasid/ece419_m2/m2/zookeeper-3.4.11/bin/../conf:
-2020-02-28 22:54:59,424 [myid:] - INFO  [main:Environment@100] - Server environment:java.library.path=/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
-2020-02-28 22:54:59,424 [myid:] - INFO  [main:Environment@100] - Server environment:java.io.tmpdir=/tmp
-2020-02-28 22:54:59,424 [myid:] - INFO  [main:Environment@100] - Server environment:java.compiler=<NA>
-2020-02-28 22:54:59,425 [myid:] - INFO  [main:Environment@100] - Server environment:os.name=Linux
-2020-02-28 22:54:59,425 [myid:] - INFO  [main:Environment@100] - Server environment:os.arch=amd64
-2020-02-28 22:54:59,425 [myid:] - INFO  [main:Environment@100] - Server environment:os.version=4.9.0-11-amd64
-2020-02-28 22:54:59,425 [myid:] - INFO  [main:Environment@100] - Server environment:user.name=syedasid
-2020-02-28 22:54:59,425 [myid:] - INFO  [main:Environment@100] - Server environment:user.home=/homes/s/syedasid
-2020-02-28 22:54:59,425 [myid:] - INFO  [main:Environment@100] - Server environment:user.dir=/nfs/ug/homes-0/s/syedasid/ece419_m2/m2/zookeeper-3.4.11
-2020-02-28 22:54:59,429 [myid:] - INFO  [main:ZooKeeperServer@825] - tickTime set to 2000
-2020-02-28 22:54:59,429 [myid:] - INFO  [main:ZooKeeperServer@834] - minSessionTimeout set to -1
-2020-02-28 22:54:59,429 [myid:] - INFO  [main:ZooKeeperServer@843] - maxSessionTimeout set to -1
-2020-02-28 22:54:59,434 [myid:] - INFO  [main:ServerCnxnFactory@117] - Using org.apache.zookeeper.server.NIOServerCnxnFactory as server connection factory
-2020-02-28 22:54:59,436 [myid:] - INFO  [main:NIOServerCnxnFactory@89] - binding to port 0.0.0.0/0.0.0.0:2181
-2020-02-28 22:54:59,437 [myid:] - ERROR [main:ZooKeeperServerMain@66] - Unexpected exception, exiting abnormally
-java.net.BindException: Address already in use
-	at sun.nio.ch.Net.bind0(Native Method)
-	at sun.nio.ch.Net.bind(Net.java:433)
-	at sun.nio.ch.Net.bind(Net.java:425)
-	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:220)
-	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:85)
-	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:78)
-	at org.apache.zookeeper.server.NIOServerCnxnFactory.configure(NIOServerCnxnFactory.java:90)
-	at org.apache.zookeeper.server.ZooKeeperServerMain.runFromConfig(ZooKeeperServerMain.java:119)
-	at org.apache.zookeeper.server.ZooKeeperServerMain.initializeAndRun(ZooKeeperServerMain.java:89)
-	at org.apache.zookeeper.server.ZooKeeperServerMain.main(ZooKeeperServerMain.java:55)
-	at org.apache.zookeeper.server.quorum.QuorumPeerMain.initializeAndRun(QuorumPeerMain.java:119)
-	at org.apache.zookeeper.server.quorum.QuorumPeerMain.main(QuorumPeerMain.java:81)
+2020-03-02 13:55:36,079 [myid:] - INFO  [main:QuorumPeerConfig@136] - Reading configuration from: conf/zoo.cfg
+2020-03-02 13:55:36,082 [myid:] - INFO  [main:DatadirCleanupManager@78] - autopurge.snapRetainCount set to 3
+2020-03-02 13:55:36,082 [myid:] - INFO  [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0
+2020-03-02 13:55:36,082 [myid:] - INFO  [main:DatadirCleanupManager@101] - Purge task is not scheduled.
+2020-03-02 13:55:36,083 [myid:] - WARN  [main:QuorumPeerMain@116] - Either no config or no quorum defined in config, running  in standalone mode
+2020-03-02 13:55:36,089 [myid:] - INFO  [main:QuorumPeerConfig@136] - Reading configuration from: conf/zoo.cfg
+2020-03-02 13:55:36,090 [myid:] - INFO  [main:ZooKeeperServerMain@98] - Starting server
+2020-03-02 13:55:36,097 [myid:] - INFO  [main:Environment@100] - Server environment:zookeeper.version=3.4.11-37e277162d567b55a07d1755f0b31c32e93c01a0, built on 11/01/2017 18:06 GMT
+2020-03-02 13:55:36,097 [myid:] - INFO  [main:Environment@100] - Server environment:host.name=ug132.eecg.toronto.edu
+2020-03-02 13:55:36,097 [myid:] - INFO  [main:Environment@100] - Server environment:java.version=1.8.0_242
+2020-03-02 13:55:36,097 [myid:] - INFO  [main:Environment@100] - Server environment:java.vendor=Oracle Corporation
+2020-03-02 13:55:36,097 [myid:] - INFO  [main:Environment@100] - Server environment:java.home=/usr/lib/jvm/java-8-openjdk-amd64/jre
+2020-03-02 13:55:36,097 [myid:] - INFO  [main:Environment@100] - Server environment:java.class.path=/homes/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11/bin/../build/classes:/homes/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11/bin/../build/lib/*.jar:/homes/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11/bin/../lib/slf4j-log4j12-1.6.1.jar:/homes/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11/bin/../lib/slf4j-api-1.6.1.jar:/homes/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11/bin/../lib/netty-3.10.5.Final.jar:/homes/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11/bin/../lib/log4j-1.2.16.jar:/homes/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11/bin/../lib/jline-0.9.94.jar:/homes/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11/bin/../lib/audience-annotations-0.5.0.jar:/homes/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11/bin/../zookeeper-3.4.11.jar:/homes/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11/bin/../src/java/lib/*.jar:/homes/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11/bin/../conf:
+2020-03-02 13:55:36,097 [myid:] - INFO  [main:Environment@100] - Server environment:java.library.path=/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2020-03-02 13:55:36,097 [myid:] - INFO  [main:Environment@100] - Server environment:java.io.tmpdir=/tmp
+2020-03-02 13:55:36,097 [myid:] - INFO  [main:Environment@100] - Server environment:java.compiler=<NA>
+2020-03-02 13:55:36,098 [myid:] - INFO  [main:Environment@100] - Server environment:os.name=Linux
+2020-03-02 13:55:36,098 [myid:] - INFO  [main:Environment@100] - Server environment:os.arch=amd64
+2020-03-02 13:55:36,098 [myid:] - INFO  [main:Environment@100] - Server environment:os.version=4.9.0-11-amd64
+2020-03-02 13:55:36,098 [myid:] - INFO  [main:Environment@100] - Server environment:user.name=singalan
+2020-03-02 13:55:36,098 [myid:] - INFO  [main:Environment@100] - Server environment:user.home=/homes/s/singalan
+2020-03-02 13:55:36,098 [myid:] - INFO  [main:Environment@100] - Server environment:user.dir=/nfs/ug/homes-0/s/singalan/ece419/Cloud-Database/m2/zookeeper-3.4.11
+2020-03-02 13:55:36,106 [myid:] - INFO  [main:ZooKeeperServer@825] - tickTime set to 2000
+2020-03-02 13:55:36,106 [myid:] - INFO  [main:ZooKeeperServer@834] - minSessionTimeout set to -1
+2020-03-02 13:55:36,106 [myid:] - INFO  [main:ZooKeeperServer@843] - maxSessionTimeout set to -1
+2020-03-02 13:55:36,111 [myid:] - INFO  [main:ServerCnxnFactory@117] - Using org.apache.zookeeper.server.NIOServerCnxnFactory as server connection factory
+2020-03-02 13:55:36,117 [myid:] - INFO  [main:NIOServerCnxnFactory@89] - binding to port 0.0.0.0/0.0.0.0:2181
+2020-03-02 14:09:59,736 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@215] - Accepted socket connection from /127.0.0.1:41984
+2020-03-02 14:09:59,741 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@938] - Client attempting to establish new session at /127.0.0.1:41984
+2020-03-02 14:09:59,742 [myid:] - INFO  [SyncThread:0:FileTxnLog@209] - Creating new log file: log.1
+2020-03-02 14:09:59,749 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@683] - Established session 0x100a08e9dc80000 with negotiated timeout 4000 for client /127.0.0.1:41984
+2020-03-02 14:21:18,439 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@376] - Unable to read additional data from client sessionid 0x100a08e9dc80000, likely client has closed socket
+2020-03-02 14:21:18,439 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1040] - Closed socket connection for client /127.0.0.1:41984 which had sessionid 0x100a08e9dc80000
+2020-03-02 14:21:23,062 [myid:] - INFO  [SessionTracker:ZooKeeperServer@354] - Expiring session 0x100a08e9dc80000, timeout of 4000ms exceeded
+2020-03-02 14:21:23,062 [myid:] - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@487] - Processed session termination for sessionid: 0x100a08e9dc80000

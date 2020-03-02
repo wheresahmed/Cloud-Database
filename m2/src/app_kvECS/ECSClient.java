@@ -175,19 +175,19 @@ public class ECSClient implements IECSClient {
 
     @Override
     public boolean start() {
-        boolean success = ecs.start()
+        boolean success = ecs.start();
         return success;
     }
 
     @Override
     public boolean stop() {
-        boolean success = ecs.stop()
+        boolean success = ecs.stop();
         return success;
     }
 
     @Override
     public boolean shutdown() {
-        boolean success = ecs.shutdownAll()
+        boolean success = ecs.shutdownAll();
         return success;
     }
 
