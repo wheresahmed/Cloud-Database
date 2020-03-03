@@ -64,49 +64,50 @@ public class ClientConnection implements Runnable {
 					// System.out.println("TOKEN[0]: " + token[0]);
 					// System.out.println("TOKEN LEN: " + token.length);
 
-					if (server.getServerState() == ServerStateType.STOPPED) {
-						msg = "SERVER_STOPPED";
-					} else if (server.isWriterLocked()) {
-						msg = "SERVER_WRITE_LOCK";
-
-					} else if(token[0].equals("put")) {
+					if(token[0].equals("put")) {
 						logger.info("Message received with PUT request.");
 
-						if (!(token.length >= 2)) {
-							msg = "INVALID_PUT";
-						} else if (server.isCorrectServer(token[1])) {
-							if ((token.length == 3 && token[2].equalsIgnoreCase("null")) || token.length == 2) {
-								// delete operation
-								if (server.inStorage(token[1])) {
-									msg = "DELETE_SUCCESS < "; 
-								} else {
-									msg = "DELETE_ERROR < "; 
+						if (server.getServerState() == ServerStateType.STOPPED) {
+							msg = "SERVER_STOPPED";
+						} else if (server.isWriterLocked()) {
+							msg = "SERVER_WRITE_LOCK";
+						} else{
+							if (!(token.length >= 2)) {
+								msg = "INVALID_PUT";
+							} else if (server.isCorrectServer(token[1])) {
+								if ((token.length == 3 && token[2].equalsIgnoreCase("null")) || token.length == 2) {
+									// delete operation
+									if (server.inStorage(token[1])) {
+										msg = "DELETE_SUCCESS < "; 
+									} else {
+										msg = "DELETE_ERROR < "; 
+									}
+								} else if (token.length > 2) {
+									if (server.inStorage(token[1])) {
+										msg = "PUT_UPDATE < ";
+									} else {
+										msg = "PUT_SUCCESS < ";
+									}
 								}
-							} else if (token.length > 2) {
-								if (server.inStorage(token[1])) {
-									msg = "PUT_UPDATE < ";
-								} else {
-									msg = "PUT_SUCCESS < ";
+
+								String value = "";
+
+								for (int i = 2; i < token.length; i++) {
+									value += token[i] + " ";
 								}
+
+								value.trim();
+
+								try {
+									server.putKV(token[1], value);
+								} catch (Exception e) {
+									logger.error("PUT ERROR! Error in PUT function");
+								}
+
+								msg += token[1] + " , " + value + " >";
+							} else {
+								msg = server.getMetaData();
 							}
-
-							String value = "";
-
-							for (int i = 2; i < token.length; i++) {
-								value += token[i] + " ";
-							}
-
-							value.trim();
-
-							try {
-								server.putKV(token[1], value);
-							} catch (Exception e) {
-								logger.error("PUT ERROR! Error in PUT function");
-							}
-
-							msg += token[1] + " , " + value + " >";
-						} else {
-							msg = server.getMetaData();
 						}
 
 						sendMessage(new TextMessage(msg));
@@ -114,25 +115,31 @@ public class ClientConnection implements Runnable {
 						// System.out.println("In GET");
 						logger.info("Message received with GET request."); 
 						// System.out.println("Key : " + token[1]);
-						String value = "";
-						
-						if (token.length == 2 && server.isCorrectServer(token[1]) && server.inStorage(token[1])) {
-							try {
-								value = server.getKV(token[1]);
-								msg = "GET_SUCCESS < ";
-							} catch (Exception e) {
-								logger.error("GET_ERROR! Could not find key in DB.");
-							}
-						} else if (token.length != 2) {
-							msg = "GET_ERROR < ";
-						} else if (!server.isCorrectServer(token[1])) {
-							msg = server.getMetaData();
+						if (server.getServerState() == ServerStateType.STOPPED) {
+							msg = "SERVER_STOPPED";
 						} else {
-							msg = "GET_ERROR < ";
-						}
+							String value = "";
+							
+							if (token.length == 2 && server.isCorrectServer(token[1]) && server.inStorage(token[1])) {
+								try {
+									value = server.getKV(token[1]);
+									msg = "GET_SUCCESS < ";
+								} catch (Exception e) {
+									logger.error("GET_ERROR! Could not find key in DB.");
+								}
+							} else if (token.length != 2) {
+								msg = "GET_ERROR < ";
+							} else if (!server.isCorrectServer(token[1])) {
+								msg = server.getMetaData();
+							} else {
+								msg = "GET_ERROR < ";
+							}
 
-						msg += token[1] + ", " + value + " >";
+							msg += token[1] + ", " + value + " >";
+						}
 						sendMessage(new TextMessage(msg));
+					} else if (token[0].equals("transfer")){
+						transfer(token);
 					} else if (token[0].equals("start")) {
 						server.start();
 						msg = "Server is started";
@@ -151,10 +158,7 @@ public class ClientConnection implements Runnable {
 						
 					} else if (token[0].equals("update_metadata")) {
 						server.loadMetadataFromZookeeper();
-					} else if (token[0].equals("transfer")){
-						transfer(token);
-					}
-					else {
+					} else {
 						// System.out.println("In default");
 						sendMessage(latestMsg);		
 					} 
