@@ -1,0 +1,58 @@
+2020-03-02 22:39:44,756 INFO  [main] root: Connection established
+2020-03-02 22:39:48,448 INFO  [main] root: Send message:	 'get a'
+2020-03-02 22:39:48,449 INFO  [main] root: Receive message:	 'GET_ERROR < a,  >'
+2020-03-02 22:39:56,591 INFO  [main] root: Send message:	 'put a b'
+2020-03-02 22:39:56,594 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , b  >'
+2020-03-02 22:40:31,671 INFO  [main] root: Send message:	 'get a'
+2020-03-02 22:40:31,672 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, b  >'
+2020-03-02 22:40:46,239 INFO  [main] root: Send message:	 'put q b'
+2020-03-02 22:40:46,248 INFO  [main] root: Receive message:	 'PUT_SUCCESS < q , b  >'
+2020-03-02 22:40:51,522 INFO  [main] root: Send message:	 'get a'
+2020-03-02 22:40:51,524 INFO  [main] root: Receive message:	 'GET_ERROR < a,  >'
+2020-03-02 22:40:53,690 INFO  [main] root: Send message:	 'get q'
+2020-03-02 22:40:53,690 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-02 22:43:52,535 INFO  [main] root: try to close connection ...
+2020-03-02 22:43:52,535 INFO  [main] root: tearing down the connection ...
+2020-03-02 22:43:52,535 INFO  [main] root: connection closed!
+2020-03-02 22:43:52,536 DEBUG [main] root: M1_Client> 
+2020-03-02 22:43:52,536 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-02 22:44:21,299 INFO  [main] root: Unable to parse argument <port>
+java.lang.NumberFormatException: For input string: "500000"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:64)
+	at app_kvClient.KVClient.run(KVClient.java:41)
+	at app_kvClient.KVClient.main(KVClient.java:359)
+2020-03-02 22:44:31,620 INFO  [main] root: Connection established
+2020-03-02 22:46:19,352 INFO  [main] root: try to close connection ...
+2020-03-02 22:46:19,352 INFO  [main] root: tearing down the connection ...
+2020-03-02 22:46:19,352 INFO  [main] root: connection closed!
+2020-03-02 22:46:19,353 DEBUG [main] root: M1_Client> 
+2020-03-02 22:46:19,353 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-02 22:46:42,673 INFO  [main] root: Connection established
+2020-03-02 22:46:56,265 INFO  [main] root: Send message:	 'get a'
+2020-03-02 22:46:56,266 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, b  >'
+2020-03-02 22:47:05,535 INFO  [main] root: try to close connection ...
+2020-03-02 22:47:05,538 INFO  [main] root: tearing down the connection ...
+2020-03-02 22:47:05,538 INFO  [main] root: connection closed!
+2020-03-02 22:47:05,538 DEBUG [main] root: M1_Client> 
+2020-03-02 22:47:05,538 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-02 22:47:16,435 INFO  [main] root: Connection established
+2020-03-02 22:47:20,465 INFO  [main] root: Send message:	 'get a'
+2020-03-02 22:47:20,467 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, b  >'
+2020-03-02 22:47:26,875 INFO  [main] root: Send message:	 'get q'
+2020-03-02 22:47:26,876 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-02 22:52:48,072 INFO  [main] root: Send message:	 'get a'
+2020-03-02 22:52:48,074 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, b  >'
+2020-03-02 22:52:55,307 INFO  [main] root: try to close connection ...
+2020-03-02 22:52:55,307 INFO  [main] root: tearing down the connection ...
+2020-03-02 22:52:55,307 INFO  [main] root: connection closed!
+2020-03-02 22:52:55,308 DEBUG [main] root: M1_Client> 
+2020-03-02 22:52:55,308 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-02 22:53:07,866 INFO  [main] root: Connection established
+2020-03-02 22:53:40,159 INFO  [main] root: try to close connection ...
+2020-03-02 22:53:40,159 INFO  [main] root: tearing down the connection ...
+2020-03-02 22:53:40,159 INFO  [main] root: connection closed!
+2020-03-02 22:53:40,160 DEBUG [main] root: M1_Client> 
+2020-03-02 22:53:40,160 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000

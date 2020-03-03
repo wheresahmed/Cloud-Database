@@ -45,134 +45,150 @@ public class ECSClient implements IECSClient {
 	}
 
     private void handleCommand(String cmdLine){
-		String[] tokens = cmdLine.split("\\s+");
+       String[] tokens = cmdLine.split("\\s+");
+       if (tokens[0].equals("init")) {
+	  command_init(tokens);
+       } else if (tokens[0].equals("start")) {
+	 command_start(tokens);
+       } else if (tokens[0].equals("stop")) {
+	 command_stop(tokens);
+       } else if (tokens[0].equals("shutdown")) {
+	 command_shutdown(tokens);
+       } else if (tokens[0].equals("addNode")) {
+	  command_addnode(tokens);
+       } else if (tokens[0].equals("addNodes")) {
+	  command_addnodes(tokens);
+       } else if (tokens[0].equals("removeNode")) {
+	  command_removenode(tokens);
+       } else if (tokens[0].equals("logLevel")) {
+	  command_loglevel(tokens);
+       } else if (tokens[0].equals("quit")) {
+	 command_quit(tokens);
+       } else if (tokens[0].equals("help")) {
+	  printHelp();
+       } else {
+	  printError("Invalid command");
+	  printHelp();
+      	}
+   }
+   private void command_init(String[] tokens){
+      if (tokens.length!=4){
+	     System.out.println(PROMPT + "Invalid arguments, please use:");
+	     System.out.println(PROMPT + "init <numberOfServers> <cacheSize> <cacheStrategy>");
+	 }else {
+	    if (done_init){
+	       System.out.println("Cannot initialize storage server more than once");
+	    }
+	    if (!done_init) {
+	       if (!tokens[3].equalsIgnoreCase("LRU") && !tokens[3].equalsIgnoreCase("LFU") && !tokens[3].equalsIgnoreCase("FIFO")) {
+		  System.out.println(PROMPT + "Invalid cache strategy. Cache strategy must be: LRU, LFU, or FIFO");
+	       } else {
+		  System.out.println(PROMPT + "Initializing Storage Servers.....");
+		  ecs = new ECS(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3]);
+		  System.out.println(PROMPT + "Initialized Storage Service with " + ecs.servers_launched + " server(s).");
+		  done_init = true;
+	       }
+	    }
+      }
+   }
+   private void command_start(String[]tokens){
+      if (!done_init) {
+	 printError("Please initialize Storage service before starting");
+      } else {
+	 start();
+      }
+   }
+   private void command_stop(String[]tokens){
+      if (!done_init) {
+	 printError("Please initialize Storage service before stopping");
+      } else {
+	 stop();
+      }
+   }
+   private void command_shutdown(String[]tokens){
+      if (!done_init) {
+	 printError("no servers to shutdown, storage service has not been initialized");
+      } else {
+	 shutdown();
+	 done_init = false;
+      } 
+   }
+   private void command_addnode(String[]tokens){
+      if(!done_init) {
+	    printError("Please initialize storage service before adding node");
+	 }
+      else {
+	 if (tokens.length==3) {
+	    if (!tokens[2].equalsIgnoreCase("LRU") && !tokens[2].equalsIgnoreCase("LFU") && !tokens[2].equalsIgnoreCase("FIFO")) {
+	       System.out.println(PROMPT + "Invalid cache strategy. Cache strategy must be LRU, LFU, or FIFO");
+	    } else {
+	       System.out.println(PROMPT + "New node being added....");
+	       addNode(tokens[2], Integer.parseInt(tokens[1]));
+	    }
+	 } else {
+	    System.out.println(PROMPT + "Invalid arguments, please use:");
+	    System.out.println(PROMPT + "addNode <cacheSize> <cacheStrategy>");
+	 }
+      } 
 
-		if (tokens[0].equals("init")) {
-			if (tokens.length == 4) {
-				if (!done_init) {
-					if (!tokens[3].equalsIgnoreCase("LRU") && !tokens[3].equalsIgnoreCase("LFU") && !tokens[3].equalsIgnoreCase("FIFO")) {
-						System.out.println(PROMPT + "cacheStrategy must be LRU, LFU, FIFO");
-					} else {
-						System.out.println(PROMPT + "Initializing.....");
-						ecs = new ECS(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3]);
+   }
+   private void command_addnodes(String[]tokens){
+      if(!done_init) {
+	 printError("Please initialize storage service before adding nodes");
+      }
 
-						System.out.println(PROMPT + "Storage Service Initialized with " + ecs.servers_launched + " server(s).");
-						done_init = true;
-					}
-				} else {
-					System.out.println("Storage Service has already been initialized");
-				}
-			}
-			else {
-				System.out.println(PROMPT + "Invalid arguments, please use:");
-				System.out.println(PROMPT + "init <numberOfServers> <cacheSize> <cacheStrategy>");
-			}
-
-		} else if (tokens[0].equals("start")) {
-			if (done_init) {
-				start();
-			} else {
-				printError("no servers to start, storage service has not been initialized");
-			}
-
-		} else if (tokens[0].equals("stop")) {
-			if (done_init) {
-				stop();
-			} else {
-				printError("no servers to stop, storage service has not been initialized");
-			}
-
-		} else if (tokens[0].equals("shutdown")) {
-			if (done_init) {
-				shutdown();
-				done_init = false;
-			} else {
-				printError("no servers to shutdown, storage service has not been initialized");
-			}
-
-		} else if (tokens[0].equals("addNode")) {
-			if (done_init) {
-				if (tokens.length==3) {
-					if (!tokens[2].equalsIgnoreCase("LRU") && !tokens[2].equalsIgnoreCase("LFU") && !tokens[2].equalsIgnoreCase("FIFO")) {
-						System.out.println(PROMPT + "cacheStrategy must be LRU, LFU, FIFO");
-					} else {
-						System.out.println(PROMPT + "Adding new node.......");
-						addNode(tokens[2], Integer.parseInt(tokens[1]));
-					}
-				} else {
-					System.out.println(PROMPT + "Invalid arguments, please use:");
-					System.out.println(PROMPT + "addNode <cacheSize> <cacheStrategy>");
-				}
-			} else {
-				printError("initilize storage service to addNode");
-			}
-
-		} else if (tokens[0].equals("addNodes")) {
-			if (done_init) {
-				if (tokens.length==4) {
-					if (!tokens[3].equalsIgnoreCase("LRU") && !tokens[3].equalsIgnoreCase("LFU") && !tokens[3].equalsIgnoreCase("FIFO")) {
-						System.out.println(PROMPT + "cacheStrategy must be LRU, LFU, FIFO");
-					} else {
-						System.out.println(PROMPT + "Adding node(s).......");
-						addNodes(Integer.parseInt(tokens[1]), tokens[3], Integer.parseInt(tokens[2]));
-					}
-				} else {
-					System.out.println(PROMPT + "Invalid arguments, please use:");
-					System.out.println(PROMPT + "addNodes <count> <cacheSize> <cacheStrategy>");
-				}
-			} else {
-				printError("initilize storage service to addNodes");
-			}
-
-		} else if (tokens[0].equals("removeNode")) {
-			if (done_init){
-				if (tokens.length >= 2) {
-					System.out.println(PROMPT + "Removing node(s).......");
-					ArrayList<String> nodes = new ArrayList<String>();
-
-					for (int i = 1; i < tokens.length; i++) {
-						nodes.add(tokens[i]);
-					}
-					removeNodes(nodes);
-				} else {
-					System.out.println(PROMPT + "Invalid arguments, please use:");
-					System.out.println(PROMPT + "removeNode <index> ....");
-				}
-			} else {
-				printError("initilize storage service to removeNodes");
-			}
-
-		} else if (tokens[0].equals("logLevel")) {
-			if(tokens.length == 2) {
-				String level = setLevel(tokens[1]);
-				if(level.equals(LogSetup.UNKNOWN_LEVEL)) {
-					printError("No valid log level!");
-					printPossibleLogLevels();
-				} else {
-					System.out.println(PROMPT + 
-							"Log level changed to level " + level);
-				}
-			} else {
-				printError("Invalid number of parameters!");
-			}
-
-		} else if (tokens[0].equals("quit")) {
-			if (this.ecs != null) {
-				shutdown();
-				this.ecs = null;
-			}
-
-			System.exit(0);
-
-		} else if (tokens[0].equals("help")) {
-			printHelp();
-
-		} else {
-			printError("Unknown command");
-			printHelp();
-		}
-	}
-
+      else{
+	 if (tokens.length==4) {
+	    if (!tokens[3].equalsIgnoreCase("LRU") && !tokens[3].equalsIgnoreCase("LFU") && !tokens[3].equalsIgnoreCase("FIFO")) {
+	       System.out.println(PROMPT + "Invalid cache strategy. Cache strategy must be LRU, LFU, or FIFO");
+	    } else {
+	       System.out.println(PROMPT + "New node(s) being added....");
+	       addNodes(Integer.parseInt(tokens[1]), tokens[3], Integer.parseInt(tokens[2]));
+	    }
+	 } else {
+	       System.out.println(PROMPT + "Invalid arguments, please use:");
+	       System.out.println(PROMPT + "addNodes <count> <cacheSize> <cacheStrategy>");
+	    }
+      } 
+   }
+   private void command_removenode(String[]tokens){
+      if (done_init){
+	 if (tokens.length >= 2) {
+	    System.out.println(PROMPT + "Removing node(s).......");
+	    ArrayList<String> nodes = new ArrayList<String>();
+	    for (int i = 1; i < tokens.length; i++) {
+	       nodes.add(tokens[i]);
+	    }
+	    removeNodes(nodes);
+	 } else {
+	    System.out.println(PROMPT + "Invalid arguments, please use:");
+	    System.out.println(PROMPT + "removeNode <index> ....");
+	 }
+      } else {
+	 printError("initialize storage service to removeNodes");
+      }
+   }
+   private void command_loglevel(String[]tokens){
+     if(tokens.length == 2) {
+	String level = setLevel(tokens[1]);
+	if(level.equals(LogSetup.UNKNOWN_LEVEL)) {
+	   printError("No valid log level!");
+	   printPossibleLogLevels();
+        } else {
+	   System.out.println(PROMPT + 
+	   "Log level changed to level " + level);
+	 }
+      } else {
+	 printError("Invalid number of parameters!");
+      }
+   }
+   private void command_quit(String[]tokens){
+      if (this.ecs != null) {
+	 shutdown();
+	 this.ecs = null;
+      }
+      System.exit(0);
+   }
     @Override
     public boolean start() {
         boolean success = ecs.start();
@@ -227,7 +243,7 @@ public class ECSClient implements IECSClient {
     public boolean removeNodes(Collection<String> nodeNames) {
         if (ecs.getNumberofNodes() == 0) {
 			
-            printError("There are no nodes");
+            printError("Remove error: there are no nodes to remove");
 			done_init = false;
 			return false;
 
