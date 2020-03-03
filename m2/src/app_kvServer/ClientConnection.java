@@ -106,11 +106,11 @@ public class ClientConnection implements Runnable {
 
 								msg += token[1] + " , " + value + " >";
 							} else {
-								msg = server.getMetaData();
+								msg = "SERVER_NOT_RESPONSIBLE " + server.getMetaData();
 							}
 						}
 
-						sendMessage(new TextMessage(msg));
+						// sendMessage(new TextMessage(msg));
 					} else if (token[0].equals("get")) {
 						// System.out.println("In GET");
 						logger.info("Message received with GET request."); 
@@ -130,14 +130,14 @@ public class ClientConnection implements Runnable {
 							} else if (token.length != 2) {
 								msg = "GET_ERROR < ";
 							} else if (!server.isCorrectServer(token[1])) {
-								msg = server.getMetaData();
+								msg = "SERVER_NOT_RESPONSIBLE " + server.getMetaData();
 							} else {
 								msg = "GET_ERROR < ";
 							}
 
 							msg += token[1] + ", " + value + " >";
 						}
-						sendMessage(new TextMessage(msg));
+						// sendMessage(new TextMessage(msg));
 					} else if (token[0].equals("transfer")){
 						transfer(token);
 					} else if (token[0].equals("start")) {
@@ -150,8 +150,8 @@ public class ClientConnection implements Runnable {
 						server.shutdown();
 						msg = "Server is shutdown";
 					} else if (token[0].equals("lockWrite")) {
-						server.lockWrite();
 						server.moveData(token[2].split("-"), token[1]);
+						server.lockWrite();
 					} else if (token[0].equals("unlockWrite")) {
 						server.unlockWrite();
 					} else if (token[0].equals("moveData")) {
@@ -159,9 +159,10 @@ public class ClientConnection implements Runnable {
 					} else if (token[0].equals("update_metadata")) {
 						server.loadMetadataFromZookeeper();
 					} else {
-						// System.out.println("In default");
-						sendMessage(latestMsg);		
+						msg = latestMsg.toString();
 					} 
+
+					sendMessage(new TextMessage(msg));
 					
 				/* connection either terminated by the client or lost due to 
 				 * network problems*/	

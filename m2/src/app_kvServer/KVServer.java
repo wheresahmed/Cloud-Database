@@ -59,7 +59,7 @@ public class KVServer implements IKVServer {
 	private ArrayList<ClientConnection> connections;
 	// @TODO: initialize cache and persistent storage
 	private ServerStateType serverStatus = ServerStateType.STOPPED;
-	private boolean lockWrite = true;
+	private boolean lockWrite = false;
 	private ZooKeeper zookeeper;
 	private Map<String, String[]> metaData = new HashMap<>();
 	private static final int BUFFER_SIZE = 1024;
@@ -68,6 +68,12 @@ public class KVServer implements IKVServer {
 	private Socket socket;
 	private OutputStream output;
 	private InputStream input;
+
+	public static final String LOCAL_HOST = "127.0.0.1";
+	public static final String ZK_HOST = LOCAL_HOST;
+	public static final String ZK_PORT = "2181";
+	public static final String ZK_CONN = ZK_HOST + ":" + ZK_PORT;
+	public static final int ZK_TIMEOUT = 2000;
 
 	
 	public KVServer(int port, int cacheSize, String strategy) {
@@ -233,24 +239,44 @@ public class KVServer implements IKVServer {
 		}
 	}
 
-	public void loadMetadataFromZookeeper() {
-		this.metaData.clear();
-		try {
-			String data = new String (zookeeper.getData("/server", false, null), "UTF-8");
-			String[] token = data.split("\\s+");
-			String key = "";
+	private String getData(String path){
+		String data = "";
+		try{
+			byte[] b = zookeeper.getData(path, false,null);
+			data = new String(b, "UTF-8");
 
-			for(int i = 0; i < token.length; i++) {
-				if (i % 2 == 0) {
-					// key
-					key = token[i];
-				} else {
-					// value, store with key
-					this.metaData.put(key, token[i].split("-"));
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		}catch(Exception e){
+			System.out.println(e.getMessage()); 
+		}
+		return data;
+	}
+
+	public void loadMetadataFromZookeeper() {
+		// this.metaData.clear();
+		// try {
+		// 	String data = new String (zookeeper.getData("/server", false, null), "UTF-8");
+		// 	String[] token = data.split("\\s+");
+		// 	String key = "";
+
+		// 	for(int i = 0; i < token.length; i++) {
+		// 		if (i % 2 == 0) {
+		// 			// key
+		// 			key = token[i];
+		// 		} else {
+		// 			// value, store with key
+		// 			this.metaData.put(key, token[i].split("-"));
+		// 		}
+		// 	}
+		// } catch (Exception e) {
+		// 	e.printStackTrace();
+		// }
+		String data = getData("/server");
+		String[] dataPieces = data.split("\\s+");
+		this.metaData.clear(); 
+		for (int i = 0; i < dataPieces.length; i +=2){
+
+			String[] value = dataPieces[i+1].split("-");
+			this.metaData.put(dataPieces[i],value);
 		}
 	}
 	
@@ -375,31 +401,71 @@ public class KVServer implements IKVServer {
 		return meta;
 	}
 
-	public boolean isCorrectServer(String data) {
-		boolean res = false;
-
+	public String convertToMD5(String md5) {
 		try {
-			byte[] bytesOfMessage = data.getBytes("UTF-8");
 			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] thedigest = md.digest(bytesOfMessage);
-			//@TODO: I dont convert space to 0 or something
-
-			String hash = thedigest.toString();
-			String lowerBound = metaData.get("127.0.0.1:" + Integer.toString(this.port))[0];
-			String upperBound = metaData.get("127.0.0.1:" + Integer.toString(this.port))[1];
-
-			if (hash.compareTo(lowerBound) > 0 && hash.compareTo(upperBound) <= 0) {
-				res = true;
-			} else if (lowerBound.compareTo(upperBound) >= 0 && (hash.compareTo(lowerBound) > 0 || hash.compareTo(upperBound) <= 0)) {
-				res = true;
-			} else if (lowerBound.compareTo(upperBound) == 0) {
-				res = true;
+			byte[] array = md.digest(md5.getBytes());
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < array.length; ++i) {
+				sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			return sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+		}	      
+		return null;
+	}  
 
-		return res;
+	public boolean isCorrectServer(String data) {
+		// boolean res = false;
+
+		// try {
+		// 	byte[] bytesOfMessage = data.getBytes("UTF-8");
+		// 	MessageDigest md = MessageDigest.getInstance("MD5");
+		// 	byte[] thedigest = md.digest(bytesOfMessage);
+		// 	//@TODO: I dont convert space to 0 or something
+
+		// 	String hash = thedigest.toString();
+		// 	String lowerBound = metaData.get("127.0.0.1:" + Integer.toString(this.port))[0];
+		// 	String upperBound = metaData.get("127.0.0.1:" + Integer.toString(this.port))[1];
+
+		// 	if (hash.compareTo(lowerBound) > 0 && hash.compareTo(upperBound) <= 0) {
+		// 		res = true;
+		// 	} else if (lowerBound.compareTo(upperBound) >= 0 && (hash.compareTo(lowerBound) > 0 || hash.compareTo(upperBound) <= 0)) {
+		// 		res = true;
+		// 	} else if (lowerBound.compareTo(upperBound) == 0) {
+		// 		res = true;
+		// 	}
+		// } catch (Exception e) {
+		// 	e.printStackTrace();
+		// }
+
+		// return res;
+
+		String keyHash = convertToMD5(data);
+
+		String[] hash_range = metaData.get(LOCAL_HOST+":"+Integer.toString(this.port));
+		
+		String start = hash_range[0];
+		String end = hash_range[1];
+
+		//wrap around case: start is bigger than end
+		if (start.compareTo(end) >= 0){
+			if( keyHash.compareTo(start) >0 || keyHash.compareTo(end) <= 0 ){
+				return  true;
+			}			
+		}
+		else {
+
+			//if start and end are the same => only 1 server
+			if (start.compareTo(end) == 0) {
+				return true;
+			}	      
+			//			System.out.println ("non wrap around case");
+			if( keyHash.compareTo(start) >0 && keyHash.compareTo(end) <= 0 ){
+				return  true;
+			}
+		}
+		return false;
 	}
 
 	public void moveData(String[] range, String server) {
@@ -424,19 +490,20 @@ public class KVServer implements IKVServer {
 		//delete from current server
 		for (Map.Entry <String, String> pair : this.cache.entrySet()){
 			String key = pair.getKey();
-			String keyHash = "";
+			String keyHash = convertToMD5(key);
+			// String keyHash = "";
 
-			try {
-				// convert to hash
-				byte[] bytesOfMessage = key.getBytes("UTF-8");
-				MessageDigest md = MessageDigest.getInstance("MD5");
-				byte[] thedigest = md.digest(bytesOfMessage);
-				//@TODO: I dont convert space to 0 or something
+			// try {
+			// 	// convert to hash
+			// 	byte[] bytesOfMessage = key.getBytes("UTF-8");
+			// 	MessageDigest md = MessageDigest.getInstance("MD5");
+			// 	byte[] thedigest = md.digest(bytesOfMessage);
+			// 	//@TODO: I dont convert space to 0 or something
 
-				keyHash = thedigest.toString();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			// 	keyHash = thedigest.toString();
+			// } catch (Exception e) {
+			// 	e.printStackTrace();
+			// }
 
 			boolean move_key=false;
 

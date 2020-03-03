@@ -257,7 +257,7 @@ public class ECSClient implements IECSClient {
 			try {
 				ecs.removeNode(Integer.parseInt(nodes.get(i)));
 			} catch(Exception e) {
-				printError(e.getMessage());
+				printError("Exception " + e.getMessage());
 				return false;
 			}
         }
@@ -278,7 +278,7 @@ public class ECSClient implements IECSClient {
     }
 
     private void printError(String error){
-		System.out.println(PROMPT + "Error! " +  error);
+		System.out.println(PROMPT + "Error!! " +  error);
 	}
 
     private void printHelp() {
