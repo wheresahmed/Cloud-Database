@@ -64,12 +64,17 @@ public class ClientConnection implements Runnable {
 					// System.out.println("TOKEN[0]: " + token[0]);
 					// System.out.println("TOKEN LEN: " + token.length);
 
-					if(token[0].equals("put")) {
+					if (server.getServerState() == ServerStateType.STOPPED) {
+						msg = "SERVER_STOPPED";
+					} else if (server.isWriterLocked()) {
+						msg = "SERVER_WRITE_LOCK";
+
+					} else if(token[0].equals("put")) {
 						logger.info("Message received with PUT request.");
 
 						if (!(token.length >= 2)) {
 							msg = "INVALID_PUT";
-						} else {
+						} else if (server.isCorrectServer(token[1])) {
 							if ((token.length == 3 && token[2].equalsIgnoreCase("null")) || token.length == 2) {
 								// delete operation
 								if (server.inStorage(token[1])) {
@@ -100,6 +105,8 @@ public class ClientConnection implements Runnable {
 							}
 
 							msg += token[1] + " , " + value + " >";
+						} else {
+							msg = server.getMetaData();
 						}
 
 						sendMessage(new TextMessage(msg));
@@ -109,20 +116,45 @@ public class ClientConnection implements Runnable {
 						// System.out.println("Key : " + token[1]);
 						String value = "";
 						
-						if (token.length == 2 && server.inStorage(token[1])) {
+						if (token.length == 2 && server.isCorrectServer(token[1]) && server.inStorage(token[1])) {
 							try {
 								value = server.getKV(token[1]);
 								msg = "GET_SUCCESS < ";
 							} catch (Exception e) {
 								logger.error("GET_ERROR! Could not find key in DB.");
 							}
+						} else if (token.length != 2) {
+							msg = "GET_ERROR < ";
+						} else if (!server.isCorrectServer(token[1])) {
+							msg = server.getMetaData();
 						} else {
 							msg = "GET_ERROR < ";
 						}
 
 						msg += token[1] + ", " + value + " >";
 						sendMessage(new TextMessage(msg));
-					} else {
+					} else if (token[0].equals("start")) {
+						server.start();
+						msg = "Server is started";
+					} else if (token[0].equals("stop")) {
+						server.stop();
+						msg = "Server is stopped";
+					} else if (token[0].equals("shutdown")) {
+						server.shutdown();
+						msg = "Server is shutdown";
+					} else if (token[0].equals("lockWrite")) {
+						server.lockWrite();
+						server.moveData(token[2].split("-"), token[1]);
+					} else if (token[0].equals("unlockWrite")) {
+						server.unlockWrite();
+					} else if (token[0].equals("moveData")) {
+						
+					} else if (token[0].equals("update_metadata")) {
+						server.loadMetadataFromZookeeper();
+					} else if (token[0].equals("transfer")){
+						transfer(token);
+					}
+					else {
 						// System.out.println("In default");
 						sendMessage(latestMsg);		
 					} 
@@ -150,6 +182,51 @@ public class ClientConnection implements Runnable {
 				logger.error("Error! Unable to tear down connection!", ioe);
 			}
 		}
+	}
+
+	private void transfer(String[] splitMsg){
+
+		String message = "";
+
+		if(splitMsg.length >= 3){
+
+			if (server.inCache(splitMsg[1])){
+				message = "TRANSFER_UPDATE < ";
+			}else{
+				message = "TRANSFER_SUCCESS < ";
+			}
+
+			String value = "";
+
+			for (int i =2; i < splitMsg.length - 1; i++ ){
+				value += splitMsg[i];
+				value+= " ";
+			}
+
+			value += splitMsg[splitMsg.length -1];
+
+			try {
+				server.putKV(splitMsg[1],value);
+			}
+			catch (Exception e){
+				logger.error("Transfer Error");
+
+			}
+			message += splitMsg[1] + 
+					" , " + value + " >";
+
+		}
+		else{
+			message = "ERROR: Invlaid format";
+		}
+		//Send message back to the client 
+		try {
+			sendMessage(new TextMessage(message));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	/**
@@ -239,4 +316,3 @@ public class ClientConnection implements Runnable {
 
 	
 }
-
