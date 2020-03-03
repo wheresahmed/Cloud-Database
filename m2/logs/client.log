@@ -56,3 +56,176 @@ java.lang.NumberFormatException: For input string: "500000"
 2020-03-02 22:53:40,159 INFO  [main] root: connection closed!
 2020-03-02 22:53:40,160 DEBUG [main] root: M1_Client> 
 2020-03-02 22:53:40,160 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-03 09:16:19,910 INFO  [main] root: Connection established
+2020-03-03 09:16:24,250 INFO  [main] root: try to close connection ...
+2020-03-03 09:16:24,250 INFO  [main] root: tearing down the connection ...
+2020-03-03 09:16:24,250 INFO  [main] root: connection closed!
+2020-03-03 09:16:24,251 DEBUG [main] root: M1_Client> 
+2020-03-03 09:16:24,251 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-03 09:16:51,583 WARN  [main] root: Could not establish connection!
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at java.net.Socket.<init>(Socket.java:452)
+	at java.net.Socket.<init>(Socket.java:229)
+	at client.KVStore.connect(KVStore.java:68)
+	at app_kvClient.KVClient.newConnection(KVClient.java:198)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:65)
+	at app_kvClient.KVClient.run(KVClient.java:41)
+	at app_kvClient.KVClient.main(KVClient.java:359)
+2020-03-03 09:17:15,265 INFO  [main] root: Connection established
+2020-03-03 09:17:20,959 INFO  [main] root: Send message:	 'get a'
+2020-03-03 09:17:20,971 INFO  [main] root: Receive message:	 'GET_ERROR < a,  >'
+2020-03-03 09:17:23,052 INFO  [main] root: Send message:	 'put a'
+2020-03-03 09:17:23,053 INFO  [main] root: Receive message:	 'SERVER_WRITE_LOCK'
+2020-03-03 09:17:46,806 INFO  [main] root: Send message:	 'put a b'
+2020-03-03 09:17:46,811 INFO  [main] root: Receive message:	 'SERVER_WRITE_LOCK'
+2020-03-03 09:20:29,376 INFO  [main] root: Connection established
+2020-03-03 09:20:34,321 INFO  [main] root: Send message:	 'get a'
+2020-03-03 09:20:34,328 INFO  [main] root: Receive message:	 'GET_ERROR < a,  >'
+2020-03-03 09:20:38,036 INFO  [main] root: Send message:	 'put a b'
+2020-03-03 09:20:38,038 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , b  >'
+2020-03-03 09:28:08,891 INFO  [main] root: Send message:	 'get a'
+2020-03-03 09:28:08,893 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, b  >'
+2020-03-03 09:28:12,925 INFO  [main] root: Send message:	 'put q b'
+2020-03-03 09:28:12,936 INFO  [main] root: Receive message:	 'PUT_SUCCESS < q , b  >'
+2020-03-03 09:28:19,032 INFO  [main] root: Send message:	 'get q'
+2020-03-03 09:28:19,033 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-03 09:28:23,711 INFO  [main] root: Send message:	 'put ankita sidra'
+2020-03-03 09:28:23,716 INFO  [main] root: Receive message:	 'PUT_SUCCESS < ankita , sidra  >'
+2020-03-03 09:28:29,664 INFO  [main] root: Send message:	 'get sidra'
+2020-03-03 09:28:29,665 INFO  [main] root: Receive message:	 'GET_ERROR < sidra,  >'
+2020-03-03 09:28:32,113 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 09:28:32,114 INFO  [main] root: Receive message:	 'GET_SUCCESS < ankita, sidra  >'
+2020-03-03 09:29:02,455 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 09:29:02,456 INFO  [main] root: Receive message:	 'GET_SUCCESS < ankita, sidra  >'
+2020-03-03 09:29:19,797 INFO  [main] root: Send message:	 'put b c'
+2020-03-03 09:29:19,799 INFO  [main] root: Receive message:	 'PUT_SUCCESS < b , c  >'
+2020-03-03 09:30:03,712 WARN  [main] root: Could not establish connection!
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at java.net.Socket.<init>(Socket.java:452)
+	at java.net.Socket.<init>(Socket.java:229)
+	at client.KVStore.connect(KVStore.java:68)
+	at app_kvClient.KVClient.newConnection(KVClient.java:198)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:65)
+	at app_kvClient.KVClient.run(KVClient.java:41)
+	at app_kvClient.KVClient.main(KVClient.java:359)
+2020-03-03 09:30:11,167 INFO  [main] root: Connection established
+2020-03-03 09:30:14,222 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 09:30:14,229 INFO  [main] root: Receive message:	 '127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 ankita,  >'
+2020-03-03 09:30:41,186 INFO  [main] root: Send message:	 'put u y'
+2020-03-03 09:30:41,188 INFO  [main] root: Receive message:	 '127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2'
+2020-03-03 09:39:36,698 INFO  [main] root: Connection established
+2020-03-03 09:39:39,784 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 09:39:39,791 INFO  [main] root: Receive message:	 'GET_SUCCESS < ankita, sidra  >'
+2020-03-03 09:39:49,121 INFO  [main] root: Send message:	 'get a'
+2020-03-03 09:39:49,123 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, b  >'
+2020-03-03 09:39:54,580 INFO  [main] root: Send message:	 'get p'
+2020-03-03 09:39:54,584 INFO  [main] root: Receive message:	 'GET_ERROR < p,  >'
+2020-03-03 09:40:09,565 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 09:40:09,566 INFO  [main] root: Receive message:	 'GET_SUCCESS < ankita, sidra  >'
+2020-03-03 09:40:44,613 INFO  [main] root: Send message:	 'put n m'
+2020-03-03 09:40:44,616 INFO  [main] root: Receive message:	 'PUT_SUCCESS < n , m  >'
+2020-03-03 09:40:50,088 INFO  [main] root: Send message:	 'get n'
+2020-03-03 09:40:50,089 INFO  [main] root: Receive message:	 'GET_SUCCESS < n, m  >'
+2020-03-03 09:41:27,388 INFO  [main] root: Send message:	 'get n'
+2020-03-03 09:41:27,389 INFO  [main] root: Receive message:	 'GET_SUCCESS < n, m  >'
+2020-03-03 09:41:29,879 INFO  [main] root: try to close connection ...
+2020-03-03 09:41:29,879 INFO  [main] root: tearing down the connection ...
+2020-03-03 09:41:29,879 INFO  [main] root: connection closed!
+2020-03-03 09:41:29,879 DEBUG [main] root: M1_Client> 
+2020-03-03 09:41:29,879 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-03 09:42:22,014 INFO  [main] root: Connection established
+2020-03-03 09:42:27,721 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 09:42:27,728 INFO  [main] root: Receive message:	 '127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 ankita,  >'
+2020-03-03 09:48:33,447 INFO  [main] root: Connection established
+2020-03-03 09:49:05,514 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 09:49:05,536 INFO  [main] root: Receive message:	 'GET_SUCCESS < ankita, sidra  >'
+2020-03-03 09:49:26,310 INFO  [main] root: Send message:	 'put o i'
+2020-03-03 09:49:26,312 INFO  [main] root: Receive message:	 'PUT_SUCCESS < o , i  >'
+2020-03-03 09:49:40,409 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 09:49:40,410 INFO  [main] root: Receive message:	 'GET_SUCCESS < ankita, sidra  >'
+2020-03-03 09:49:44,900 INFO  [main] root: Send message:	 'get o'
+2020-03-03 09:49:44,906 INFO  [main] root: Receive message:	 'GET_SUCCESS < o, i  >'
+2020-03-03 09:49:51,390 INFO  [main] root: try to close connection ...
+2020-03-03 09:49:51,393 INFO  [main] root: tearing down the connection ...
+2020-03-03 09:49:51,393 INFO  [main] root: connection closed!
+2020-03-03 09:49:51,397 DEBUG [main] root: M1_Client> 
+2020-03-03 09:49:51,397 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-03 09:50:02,669 INFO  [main] root: Connection established
+2020-03-03 09:50:12,918 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 09:50:12,927 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 ankita,  >'
+2020-03-03 09:54:42,566 INFO  [main] root: Connection established
+2020-03-03 09:54:46,478 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 09:54:46,484 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 ankita,  >'
+2020-03-03 10:02:34,799 INFO  [main] root: Connection established
+2020-03-03 10:02:40,892 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 10:02:40,900 INFO  [main] root: Receive message:	 'GET_SUCCESS < ankita, sidra  >'
+2020-03-03 10:02:45,249 INFO  [main] root: Send message:	 'put a'
+2020-03-03 10:02:45,252 INFO  [main] root: Receive message:	 'DELETE_SUCCESS < a ,  >'
+2020-03-03 10:03:00,657 INFO  [main] root: Send message:	 'put a b'
+2020-03-03 10:03:00,659 INFO  [main] root: Receive message:	 'PUT_SUCCESS < a , b  >'
+2020-03-03 10:03:07,115 INFO  [main] root: Send message:	 'put a'
+2020-03-03 10:03:07,118 INFO  [main] root: Receive message:	 'DELETE_SUCCESS < a ,  >'
+2020-03-03 10:03:09,613 INFO  [main] root: try to close connection ...
+2020-03-03 10:03:09,613 INFO  [main] root: tearing down the connection ...
+2020-03-03 10:03:09,613 INFO  [main] root: connection closed!
+2020-03-03 10:03:09,613 DEBUG [main] root: M1_Client> 
+2020-03-03 10:03:09,614 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-03 10:03:22,782 WARN  [main] root: Could not establish connection!
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at java.net.Socket.<init>(Socket.java:452)
+	at java.net.Socket.<init>(Socket.java:229)
+	at client.KVStore.connect(KVStore.java:68)
+	at app_kvClient.KVClient.newConnection(KVClient.java:198)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:65)
+	at app_kvClient.KVClient.run(KVClient.java:41)
+	at app_kvClient.KVClient.main(KVClient.java:359)
+2020-03-03 10:03:31,193 INFO  [main] root: Connection established
+2020-03-03 10:03:43,590 INFO  [main] root: Send message:	 'get ankita'
+2020-03-03 10:03:43,598 INFO  [main] root: Receive message:	 'GET_SUCCESS < ankita, sidra  >'
+2020-03-03 10:03:49,290 INFO  [main] root: Send message:	 'get a'
+2020-03-03 10:03:49,291 INFO  [main] root: Receive message:	 'GET_ERROR < a,  >'
+2020-03-03 10:03:59,967 INFO  [main] root: Send message:	 'put b'
+2020-03-03 10:03:59,969 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2'
+2020-03-03 10:03:59,969 INFO  [main] root: try to close connection ...
+2020-03-03 10:03:59,969 INFO  [main] root: tearing down the connection ...
+2020-03-03 10:03:59,969 INFO  [main] root: connection closed!
+2020-03-03 10:03:59,969 DEBUG [main] root: M1_Client> 
+2020-03-03 10:03:59,970 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-03 10:03:59,970 WARN  [main] root: Could not establish connection!
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at java.net.Socket.<init>(Socket.java:452)
+	at java.net.Socket.<init>(Socket.java:229)
+	at client.KVStore.connect(KVStore.java:68)
+	at app_kvClient.KVClient.newConnection(KVClient.java:198)
+	at app_kvClient.KVClient.retryput(KVClient.java:219)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:96)
+	at app_kvClient.KVClient.run(KVClient.java:41)
+	at app_kvClient.KVClient.main(KVClient.java:359)
