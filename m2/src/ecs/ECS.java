@@ -63,18 +63,13 @@ public class ECS {
    private Socket ecsSocket;
    private OutputStream output;
    private InputStream input;
-   private static final int MAXKEYLENGTH = 20;
-   private static final int MAXVALUELENGTH = 1024 * 120;
    private static final int BUFFER_SIZE = 1024;
    private static final int DROP_SIZE = 1024 * BUFFER_SIZE;
    
    public ECS(int num_servers,int cache_size, String cache_strategy){
       zk_start();
       zk_connect();
-      ecs_nodes_initialize(num_servers);
-      storage_cache_size=cache_size;
-      storage_cache_strategy=cache_strategy;
-      launch_servers(cache_size,cache_strategy);
+      ecs_nodes_initialize(num_servers, cache_size,cache_strategy);
    }
    public void zk_start(){
      //check if zookeepr is runninging already. if not running, start a new one
@@ -111,7 +106,6 @@ public class ECS {
    private void zk_connect(){
       final CountDownLatch connected_signal=new CountDownLatch(1);
       try{
-         System.out.println("before zookeeper connect");
 	 zk=new ZooKeeper(ZK_CONN,ZK_TIMEOUT,new Watcher(){
 	    public void process (WatchedEvent we){
 	       if (we.getState()==KeeperState.SyncConnected){
@@ -119,10 +113,8 @@ public class ECS {
 	       }
 	    }
     });
-    System.out.println("after zookeeper connect");
       }catch(IOException e){
-         System.out.println("Hit Exception in zk_connect");
-	//  logger.error("Client connection to Zookeeper failed");
+        logger.error("Failed to connect Client to Zookeeper");
       }
       try{
 	 connected_signal.await();
@@ -130,12 +122,12 @@ public class ECS {
 	 e.printStackTrace();
       }
    }
-   private void ecs_nodes_initialize(int num_servers){
+   private void ecs_nodes_initialize(int num_servers, int cache_size, String cache_strategy){
 
-      populate_storage_and_idle_servers(num_servers); 
+      populate_storage_and_idle_servers(num_servers, cache_size, cache_strategy); 
       create_ecsnode_and_zknode();
    }
-   private void populate_storage_and_idle_servers(int num_servers){
+   private void populate_storage_and_idle_servers(int num_servers, int cache_size, String cache_strategy){
       File file =new File(confFile);
       servers_launched=0;
       try{
@@ -151,13 +143,14 @@ public class ECS {
 	       idleNodes.add(node);
 	    } else {
 	       storageNodes.add(node);
-	       servers_launched++;
+	       launchServer(node,cache_size,cache_strategy);
+	       //servers_launched++;
 	       metadata.put(node.getNodeHash(),node);
 	    }
 	    total_servers++;
 	 }
       }catch(FileNotFoundException e){
-	 System.out.println("File not found"+ e); 
+	 System.out.println("Could not find file"+ e); 
       }
    }
    private void create_ecsnode_and_zknode(){
@@ -220,26 +213,11 @@ public class ECS {
       }
       return stat!=null;
    }
-   private void launch_servers(int cache_size,String cache_strategy){
-      for (ECSNode node:storageNodes){
-	 Process proc;
-	 Runtime run = Runtime.getRuntime();
-	 String script;
-	 String output = "";
-	 String host = node.getNodeHost();
-	 int port = node.getNodePort();
-	 script = "script.sh " + host + " " + Integer.toString(port) + " " + cache_size + " " + cache_strategy;
-	 try{
-	    proc = run.exec(script);
-	 }catch(IOException e){
-	    e.printStackTrace();
-	 }
-      }
-   }
+   
    public Collection<IECSNode> addNodes(int num_nodes, String replacementStrategy, int cacheSize) throws Exception {
       
       ArrayList added = new ArrayList<ECSNode>();
-      if(servers_launched+num_nodes<=total_servers){
+      if(storageNodes.size()+num_nodes<=total_servers){
 	 for (int i = 0; i < num_nodes; i++) {
 	    added.add(addNode(cacheSize, replacementStrategy));
 	 }
@@ -251,7 +229,7 @@ public class ECS {
    }
    public ECSNode addNode(int cacheSize, String replacementStrategy) throws Exception {
       if (idleNodes == null || idleNodes.size() == 0) {
-	 throw new Exception("Cannot add server. All servers are active.");
+	 throw new Exception("Cannot add server since all servers are active.");
       }
       ECSNode node= add_idle_node_to_storagenodes();
       update_node_range_and_metadata(node);
@@ -262,7 +240,6 @@ public class ECS {
 	 }catch(InterruptedException e){
 	    e.printStackTrace();
 	 }
-      servers_launched++;
       lockwrite_successor_while_servers_update_metadata(node);
       return node; 
    }
@@ -409,6 +386,7 @@ public class ECS {
 	 }catch(IOException e){
 	    e.printStackTrace();
    	}
+	servers_launched++;
       }
    public void sendMessage(TextMessage msg) throws IOException {
       byte[] msgBytes = msg.getMsgBytes();
@@ -485,7 +463,6 @@ public class ECS {
       setData(dataPath,data);
    }
    public boolean start(){
-      //wait a while so that servers finish starting up
       try{
 	 TimeUnit.MILLISECONDS.sleep(storageNodes.size() * 1000);
 	}catch(InterruptedException e){
@@ -523,36 +500,27 @@ public class ECS {
       if (index < 0 || index >= storageNodes.size()) {
 	 throw new Exception("Node to remove not found");
       }		   
-      String currentData, data= "";
-      if (storageNodes.size() == 1){
-	 sendShutdownMessage(storageNodes.get(0)); 
-	 storageNodes.clear();
-	 idleNodes.clear();
-	 metadata.clear();
-	 disconnectfromZK();
-	 return;
-      }
-      // Send an SSH call to invoke the KV Server process
+      
+      add_storageNode_to_idle_nodes(index);
       ECSNode node = storageNodes.get(index);
-      ECSNode successorNode = metadata.get(getSuccessorHash(node.getNodeHash())); 
-      // recalculate metadata - update metadata for node and sucessor
-      // set up zookeeper znode and metadata 
+      ECSNode successorNode = getSuccessorNode(node); 
+      update_metadata_and_shutdown(node, successorNode);
+   }
+   private void  add_storageNode_to_idle_nodes(int index){
+      ECSNode node = storageNodes.get(index);
+      ECSNode successorNode = getSuccessorNode(node); 
       removeFromCurrentPath(node);
       storageNodes.remove(index);
       metadata.remove(node.getNodeHash());
       idleNodes.add(node);
-      // Update successor in metadata
+   }
+   
+   private void update_metadata_and_shutdown(ECSNode node,ECSNode successorNode){
       updateMetadata(successorNode);
-      // send metadata update to successor server
       update_servers_metadata();
-      // node that needs to transfer data is current
-      // node that gets data is sucessor
       sendLockWriteMessage(node, successorNode);
-      //tell all servers to update metadata
-      //update_servers_metadata();
       sendUnlockWriteMessage(node);	
-      // shutdown the respective storage servers
-      sendShutdownMessage(node);        	
+      sendShutdownMessage(node); 
    }
    private void sendShutdownMessage(ECSNode node) {
       try {
@@ -606,7 +574,6 @@ public class ECS {
 	 }catch(Exception e){
 	    e.printStackTrace();
 	 }
-	 //wait a while so that servers finish starting up
 	 try{
 	    TimeUnit.MILLISECONDS.sleep(storageNodes.size() * 1000);
 	 }catch(InterruptedException e){
@@ -618,27 +585,26 @@ public class ECS {
    }
    public boolean shutdownAll(){
       if (storageNodes != null){
-	 for (int i = 0; i < storageNodes.size(); i++ ){
-	    sendShutdownMessage(storageNodes.get(i));
-			}
-			storageNodes.clear();
-		}
+	 for (ECSNode node:storageNodes){
+	    sendShutdownMessage(node);
+	 }
+	 storageNodes.clear();
+      }
 
-		if (idleNodes != null){
-			idleNodes.clear();
-		}
+      if (idleNodes != null){
+	 idleNodes.clear();
+      }
 
-		if (metadata != null){
-			metadata.clear();
-		}
+      if (metadata != null){
+	 metadata.clear();
+      }
 
+      disconnectfromZK();
 
-		disconnectfromZK();
-
-		return true;
-	}
+      return true;
+   }
    public int getNumberofNodes(){
-		return this.storageNodes.size();
-	}
+      return this.storageNodes.size();
+   }
 
 }
