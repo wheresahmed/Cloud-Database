@@ -542,19 +542,20 @@ public class ECS {
 	      throw new Exception("Node to remove not found");
       }		   
 
-      System.out.println("Before add storageNode");
-      add_storageNode_to_idle_nodes(index);
-      System.out.println("After add storageNode" + index);
+      
       ECSNode node = storageNodes.get(index);
-      ECSNode successorNode = getSuccessorNode(node); 
-      System.out.println("Before update metadata and shutdown");
-      update_metadata_and_shutdown(node, successorNode);
-      System.out.println("After update metadata and shutdown");
+      add_storageNode_to_idle_nodes(index);
+      if (storageNodes.size()==0){
+	 sendShutdownMessage(node);
+      }
+      else{
+	 ECSNode successorNode = getSuccessorNode(node); 
+	 update_metadata_and_shutdown(node, successorNode);
+      }
    }
 
    private void  add_storageNode_to_idle_nodes(int index){
       ECSNode node = storageNodes.get(index);
-      ECSNode successorNode = getSuccessorNode(node); 
       removeFromCurrentPath(node);
       storageNodes.remove(index);
       metadata.remove(node.getNodeHash());
