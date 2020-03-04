@@ -374,3 +374,411 @@ java.net.ConnectException: Connection refused (Connection refused)
 2020-03-03 18:30:19,030 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, q  >'
 2020-03-03 18:34:50,006 INFO  [main] root: Send message:	 'get a'
 2020-03-03 18:34:50,021 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, q  >'
+2020-03-04 17:16:17,249 INFO  [main] root: Connection established
+2020-03-04 17:16:33,179 INFO  [main] root: Send message:	 'put a b'
+2020-03-04 17:16:33,180 INFO  [main] root: Receive message:	 'SERVER_STOPPED'
+2020-03-04 17:16:44,505 INFO  [main] root: Send message:	 'put a b'
+2020-03-04 17:16:44,515 INFO  [main] root: Receive message:	 'PUT_UPDATE < a , b  >'
+2020-03-04 17:16:53,198 INFO  [main] root: Send message:	 'put q b'
+2020-03-04 17:16:53,202 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2'
+2020-03-04 17:16:53,202 INFO  [main] root: try to close connection ...
+2020-03-04 17:16:53,202 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:16:53,203 INFO  [main] root: connection closed!
+2020-03-04 17:16:53,203 DEBUG [main] root: M1_Client> 
+2020-03-04 17:16:53,203 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:16:53,203 INFO  [main] root: Connection established
+2020-03-04 17:16:53,203 INFO  [main] root: Send message:	 'put q b'
+2020-03-04 17:16:53,213 INFO  [main] root: Receive message:	 'PUT_UPDATE < q , b  >'
+2020-03-04 17:16:53,213 INFO  [main] root: try to close connection ...
+2020-03-04 17:16:53,213 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:16:53,213 INFO  [main] root: connection closed!
+2020-03-04 17:16:53,213 DEBUG [main] root: M1_Client> 
+2020-03-04 17:16:53,213 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 17:16:53,213 INFO  [main] root: Connection established
+2020-03-04 17:17:33,848 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:17:33,849 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 q,  >'
+2020-03-04 17:17:33,850 INFO  [main] root: try to close connection ...
+2020-03-04 17:17:33,850 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:17:33,850 INFO  [main] root: connection closed!
+2020-03-04 17:17:33,850 DEBUG [main] root: M1_Client> 
+2020-03-04 17:17:33,850 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:17:33,850 INFO  [main] root: Connection established
+2020-03-04 17:17:33,850 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:17:33,853 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 17:17:33,853 INFO  [main] root: try to close connection ...
+2020-03-04 17:17:33,853 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:17:33,853 INFO  [main] root: connection closed!
+2020-03-04 17:17:33,853 DEBUG [main] root: M1_Client> 
+2020-03-04 17:17:33,853 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 17:17:33,853 INFO  [main] root: Connection established
+2020-03-04 17:26:12,169 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:26:12,170 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 q,  >'
+2020-03-04 17:26:12,171 INFO  [main] root: try to close connection ...
+2020-03-04 17:26:12,171 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:26:12,171 INFO  [main] root: connection closed!
+2020-03-04 17:26:12,171 DEBUG [main] root: M1_Client> 
+2020-03-04 17:26:12,171 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:26:12,171 INFO  [main] root: Connection established
+2020-03-04 17:26:12,171 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:26:12,172 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 17:26:12,173 INFO  [main] root: try to close connection ...
+2020-03-04 17:26:12,173 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:26:12,173 INFO  [main] root: connection closed!
+2020-03-04 17:26:12,173 DEBUG [main] root: M1_Client> 
+2020-03-04 17:26:12,173 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 17:26:12,173 INFO  [main] root: Connection established
+2020-03-04 17:27:37,465 INFO  [main] root: try to close connection ...
+2020-03-04 17:27:37,465 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:27:37,465 INFO  [main] root: connection closed!
+2020-03-04 17:27:37,465 DEBUG [main] root: M1_Client> 
+2020-03-04 17:27:37,465 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:28:31,460 INFO  [main] root: Connection established
+2020-03-04 17:28:43,281 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:28:43,283 INFO  [main] root: Receive message:	 'SERVER_STOPPED'
+2020-03-04 17:30:01,065 INFO  [main] root: try to close connection ...
+2020-03-04 17:30:01,065 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:30:01,065 INFO  [main] root: connection closed!
+2020-03-04 17:30:01,066 DEBUG [main] root: M1_Client> 
+2020-03-04 17:30:01,066 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:30:28,001 INFO  [main] root: Connection established
+2020-03-04 17:30:41,813 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:30:41,820 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 q,  >'
+2020-03-04 17:32:43,229 INFO  [main] root: try to close connection ...
+2020-03-04 17:32:43,229 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:32:43,229 INFO  [main] root: connection closed!
+2020-03-04 17:32:43,230 DEBUG [main] root: M1_Client> 
+2020-03-04 17:32:43,230 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:33:29,245 INFO  [main] root: Connection established
+2020-03-04 17:33:31,642 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:33:31,652 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 q,  >'
+2020-03-04 17:33:31,653 INFO  [main] root: try to close connection ...
+2020-03-04 17:33:31,653 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:33:31,653 INFO  [main] root: connection closed!
+2020-03-04 17:33:31,654 DEBUG [main] root: M1_Client> 
+2020-03-04 17:33:31,654 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:33:31,654 INFO  [main] root: Connection established
+2020-03-04 17:33:31,654 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:33:31,661 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 17:33:31,662 INFO  [main] root: try to close connection ...
+2020-03-04 17:33:31,662 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:33:31,662 INFO  [main] root: connection closed!
+2020-03-04 17:33:31,662 DEBUG [main] root: M1_Client> 
+2020-03-04 17:33:31,662 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 17:33:31,662 INFO  [main] root: Connection established
+2020-03-04 17:35:30,833 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:35:30,834 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 q,  >'
+2020-03-04 17:35:30,834 INFO  [main] root: try to close connection ...
+2020-03-04 17:35:30,834 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:35:30,835 INFO  [main] root: connection closed!
+2020-03-04 17:35:30,835 DEBUG [main] root: M1_Client> 
+2020-03-04 17:35:30,835 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:35:30,835 INFO  [main] root: Connection established
+2020-03-04 17:35:30,835 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:35:30,837 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 17:35:30,837 INFO  [main] root: try to close connection ...
+2020-03-04 17:35:30,837 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:35:30,837 INFO  [main] root: connection closed!
+2020-03-04 17:35:30,837 DEBUG [main] root: M1_Client> 
+2020-03-04 17:35:30,838 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 17:35:30,838 INFO  [main] root: Connection established
+2020-03-04 17:36:05,179 INFO  [main] root: try to close connection ...
+2020-03-04 17:36:05,182 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:36:05,182 INFO  [main] root: connection closed!
+2020-03-04 17:36:05,182 DEBUG [main] root: M1_Client> 
+2020-03-04 17:36:05,182 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:37:24,808 INFO  [main] root: Connection established
+2020-03-04 17:37:26,226 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:37:26,233 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 q,  >'
+2020-03-04 17:37:26,234 INFO  [main] root: try to close connection ...
+2020-03-04 17:37:26,234 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:37:26,234 INFO  [main] root: connection closed!
+2020-03-04 17:37:26,235 DEBUG [main] root: M1_Client> 
+2020-03-04 17:37:26,235 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:37:26,235 INFO  [main] root: Connection established
+2020-03-04 17:37:26,235 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:37:26,243 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 17:37:26,243 INFO  [main] root: try to close connection ...
+2020-03-04 17:37:26,243 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:37:26,243 INFO  [main] root: connection closed!
+2020-03-04 17:37:26,243 DEBUG [main] root: M1_Client> 
+2020-03-04 17:37:26,243 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 17:37:26,243 INFO  [main] root: Connection established
+2020-03-04 17:38:41,932 INFO  [main] root: try to close connection ...
+2020-03-04 17:38:41,932 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:38:41,932 INFO  [main] root: connection closed!
+2020-03-04 17:38:41,932 DEBUG [main] root: M1_Client> 
+2020-03-04 17:38:41,932 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:39:33,242 INFO  [main] root: Connection established
+2020-03-04 17:39:35,160 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:39:35,167 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 q,  >'
+2020-03-04 17:39:35,168 INFO  [main] root: try to close connection ...
+2020-03-04 17:39:35,168 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:39:35,168 INFO  [main] root: connection closed!
+2020-03-04 17:39:35,169 DEBUG [main] root: M1_Client> 
+2020-03-04 17:39:35,169 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:39:35,169 INFO  [main] root: Connection established
+2020-03-04 17:39:35,169 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:39:35,176 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 17:39:35,176 INFO  [main] root: try to close connection ...
+2020-03-04 17:39:35,176 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:39:35,177 INFO  [main] root: connection closed!
+2020-03-04 17:39:35,177 DEBUG [main] root: M1_Client> 
+2020-03-04 17:39:35,177 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 17:39:35,177 INFO  [main] root: Connection established
+2020-03-04 17:40:16,841 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:40:16,842 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 q,  >'
+2020-03-04 17:40:16,842 INFO  [main] root: try to close connection ...
+2020-03-04 17:40:16,842 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:40:16,842 INFO  [main] root: connection closed!
+2020-03-04 17:40:16,842 DEBUG [main] root: M1_Client> 
+2020-03-04 17:40:16,842 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:40:16,843 INFO  [main] root: Connection established
+2020-03-04 17:40:16,843 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:40:16,844 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 17:40:16,845 INFO  [main] root: try to close connection ...
+2020-03-04 17:40:16,845 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:40:16,845 INFO  [main] root: connection closed!
+2020-03-04 17:40:16,845 DEBUG [main] root: M1_Client> 
+2020-03-04 17:40:16,845 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 17:40:16,845 INFO  [main] root: Connection established
+2020-03-04 17:45:41,773 INFO  [main] root: try to close connection ...
+2020-03-04 17:45:41,774 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:45:41,774 INFO  [main] root: connection closed!
+2020-03-04 17:45:41,774 DEBUG [main] root: M1_Client> 
+2020-03-04 17:45:41,774 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:46:46,117 INFO  [main] root: Connection established
+2020-03-04 17:46:48,380 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:46:48,387 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 q,  >'
+2020-03-04 17:48:32,532 INFO  [main] root: try to close connection ...
+2020-03-04 17:48:32,532 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:48:32,532 INFO  [main] root: connection closed!
+2020-03-04 17:48:32,533 DEBUG [main] root: M1_Client> 
+2020-03-04 17:48:32,533 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:49:02,592 INFO  [main] root: Connection established
+2020-03-04 17:49:04,306 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:49:04,313 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 q,  >'
+2020-03-04 17:49:04,314 INFO  [main] root: try to close connection ...
+2020-03-04 17:49:04,314 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:49:04,314 INFO  [main] root: connection closed!
+2020-03-04 17:49:04,315 DEBUG [main] root: M1_Client> 
+2020-03-04 17:49:04,315 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:49:04,315 INFO  [main] root: Connection established
+2020-03-04 17:49:04,315 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:49:04,322 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 17:49:04,323 INFO  [main] root: try to close connection ...
+2020-03-04 17:49:04,323 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:49:04,323 INFO  [main] root: connection closed!
+2020-03-04 17:49:04,323 DEBUG [main] root: M1_Client> 
+2020-03-04 17:49:04,323 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 17:49:04,323 INFO  [main] root: Connection established
+2020-03-04 17:52:59,081 INFO  [main] root: try to close connection ...
+2020-03-04 17:52:59,082 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:52:59,082 INFO  [main] root: connection closed!
+2020-03-04 17:52:59,082 DEBUG [main] root: M1_Client> 
+2020-03-04 17:52:59,082 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:53:42,326 INFO  [main] root: Connection established
+2020-03-04 17:53:46,983 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:53:46,990 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2'
+2020-03-04 17:53:46,991 INFO  [main] root: try to close connection ...
+2020-03-04 17:53:46,991 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:53:46,991 INFO  [main] root: connection closed!
+2020-03-04 17:53:46,992 DEBUG [main] root: M1_Client> 
+2020-03-04 17:53:46,992 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:53:46,992 INFO  [main] root: Connection established
+2020-03-04 17:53:46,992 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:53:47,000 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 17:53:47,001 INFO  [main] root: try to close connection ...
+2020-03-04 17:53:47,001 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:53:47,001 INFO  [main] root: connection closed!
+2020-03-04 17:53:47,001 DEBUG [main] root: M1_Client> 
+2020-03-04 17:53:47,001 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 17:53:47,001 INFO  [main] root: Connection established
+2020-03-04 17:55:35,673 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:55:35,676 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2'
+2020-03-04 17:55:35,677 INFO  [main] root: try to close connection ...
+2020-03-04 17:55:35,677 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:55:35,677 INFO  [main] root: connection closed!
+2020-03-04 17:55:35,677 DEBUG [main] root: M1_Client> 
+2020-03-04 17:55:35,677 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 17:55:35,677 INFO  [main] root: Connection established
+2020-03-04 17:55:35,677 INFO  [main] root: Send message:	 'get q'
+2020-03-04 17:55:35,686 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 17:55:35,686 INFO  [main] root: try to close connection ...
+2020-03-04 17:55:35,687 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:55:35,687 INFO  [main] root: connection closed!
+2020-03-04 17:55:35,687 DEBUG [main] root: M1_Client> 
+2020-03-04 17:55:35,687 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 17:55:35,687 INFO  [main] root: Connection established
+2020-03-04 17:58:45,252 INFO  [main] root: try to close connection ...
+2020-03-04 17:58:45,256 INFO  [main] root: tearing down the connection ...
+2020-03-04 17:58:45,256 INFO  [main] root: connection closed!
+2020-03-04 17:58:45,256 DEBUG [main] root: M1_Client> 
+2020-03-04 17:58:45,257 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 18:01:47,796 INFO  [main] root: Connection established
+2020-03-04 18:01:49,888 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:01:49,895 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2'
+2020-03-04 18:01:49,897 INFO  [main] root: try to close connection ...
+2020-03-04 18:01:49,897 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:01:49,897 INFO  [main] root: connection closed!
+2020-03-04 18:01:49,897 DEBUG [main] root: M1_Client> 
+2020-03-04 18:01:49,897 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 18:01:49,897 INFO  [main] root: Connection established
+2020-03-04 18:01:49,897 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:01:49,905 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 18:01:49,905 INFO  [main] root: try to close connection ...
+2020-03-04 18:01:49,905 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:01:49,906 INFO  [main] root: connection closed!
+2020-03-04 18:01:49,906 DEBUG [main] root: M1_Client> 
+2020-03-04 18:01:49,906 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 18:01:49,906 INFO  [main] root: Connection established
+2020-03-04 18:02:10,371 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:02:10,372 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2'
+2020-03-04 18:02:10,372 INFO  [main] root: try to close connection ...
+2020-03-04 18:02:10,372 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:02:10,372 INFO  [main] root: connection closed!
+2020-03-04 18:02:10,372 DEBUG [main] root: M1_Client> 
+2020-03-04 18:02:10,372 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 18:02:10,373 INFO  [main] root: Connection established
+2020-03-04 18:02:10,373 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:02:10,375 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, b  >'
+2020-03-04 18:02:10,375 INFO  [main] root: try to close connection ...
+2020-03-04 18:02:10,375 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:02:10,375 INFO  [main] root: connection closed!
+2020-03-04 18:02:10,375 DEBUG [main] root: M1_Client> 
+2020-03-04 18:02:10,375 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 18:02:10,375 INFO  [main] root: Connection established
+2020-03-04 18:10:57,812 INFO  [main] root: Connection established
+2020-03-04 18:10:59,492 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:10:59,499 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2'
+2020-03-04 18:10:59,501 INFO  [main] root: try to close connection ...
+2020-03-04 18:10:59,501 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:10:59,501 INFO  [main] root: connection closed!
+2020-03-04 18:10:59,501 DEBUG [main] root: M1_Client> 
+2020-03-04 18:10:59,501 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 18:10:59,502 INFO  [main] root: Connection established
+2020-03-04 18:10:59,502 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:10:59,511 INFO  [main] root: Receive message:	 'GET_ERROR < q,  >'
+2020-03-04 18:10:59,511 INFO  [main] root: try to close connection ...
+2020-03-04 18:10:59,511 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:10:59,512 INFO  [main] root: connection closed!
+2020-03-04 18:10:59,512 DEBUG [main] root: M1_Client> 
+2020-03-04 18:10:59,512 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 18:10:59,512 INFO  [main] root: Connection established
+2020-03-04 18:11:26,712 INFO  [main] root: try to close connection ...
+2020-03-04 18:11:26,715 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:11:26,715 INFO  [main] root: connection closed!
+2020-03-04 18:11:26,716 DEBUG [main] root: M1_Client> 
+2020-03-04 18:11:26,716 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-04 18:12:34,113 INFO  [main] root: Connection established
+2020-03-04 18:12:38,239 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:12:38,246 INFO  [main] root: Receive message:	 'GET_ERROR < q,  >'
+2020-03-04 18:12:56,057 INFO  [main] root: Send message:	 'put q a'
+2020-03-04 18:12:56,061 INFO  [main] root: Receive message:	 'PUT_SUCCESS < q , a  >'
+2020-03-04 18:13:47,255 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:13:47,256 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 b3638a32c297f43aa37e63bbd839fc7e-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2 127.0.0.1:50002 358343938402ebb5110716c6e836f5a2-b3638a32c297f43aa37e63bbd839fc7e'
+2020-03-04 18:13:47,257 INFO  [main] root: try to close connection ...
+2020-03-04 18:13:47,257 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:13:47,258 INFO  [main] root: connection closed!
+2020-03-04 18:13:47,258 DEBUG [main] root: M1_Client> 
+2020-03-04 18:13:47,258 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 18:13:47,259 INFO  [main] root: Connection established
+2020-03-04 18:13:47,259 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:13:47,259 INFO  [main] root: Receive message:	 'SERVER_STOPPED'
+2020-03-04 18:13:47,259 INFO  [main] root: try to close connection ...
+2020-03-04 18:13:47,259 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:13:47,259 INFO  [main] root: connection closed!
+2020-03-04 18:13:47,259 DEBUG [main] root: M1_Client> 
+2020-03-04 18:13:47,259 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50002
+2020-03-04 18:13:47,260 INFO  [main] root: Connection established
+2020-03-04 18:14:39,139 INFO  [main] root: try to close connection ...
+2020-03-04 18:14:39,139 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:14:39,139 INFO  [main] root: connection closed!
+2020-03-04 18:14:39,139 DEBUG [main] root: M1_Client> 
+2020-03-04 18:14:39,139 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-04 18:14:50,509 INFO  [main] root: Connection established
+2020-03-04 18:14:53,817 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:14:53,818 INFO  [main] root: Receive message:	 'SERVER_STOPPED'
+2020-03-04 18:15:19,409 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:15:19,416 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, a >'
+2020-03-04 18:15:53,867 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:15:53,867 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50003 b3638a32c297f43aa37e63bbd839fc7e-a98109598267087dfc364fae4cf24578 127.0.0.1:50002 a98109598267087dfc364fae4cf24578-b3638a32c297f43aa37e63bbd839fc7e'
+2020-03-04 18:15:53,868 INFO  [main] root: try to close connection ...
+2020-03-04 18:15:53,868 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:15:53,868 INFO  [main] root: connection closed!
+2020-03-04 18:15:53,868 DEBUG [main] root: M1_Client> 
+2020-03-04 18:15:53,868 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50002
+2020-03-04 18:15:53,868 INFO  [main] root: Connection established
+2020-03-04 18:15:53,868 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:15:53,869 INFO  [main] root: Receive message:	 'SERVER_STOPPED'
+2020-03-04 18:15:53,869 INFO  [main] root: try to close connection ...
+2020-03-04 18:15:53,869 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:15:53,869 INFO  [main] root: connection closed!
+2020-03-04 18:15:53,869 DEBUG [main] root: M1_Client> 
+2020-03-04 18:15:53,869 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50003
+2020-03-04 18:15:53,869 INFO  [main] root: Connection established
+2020-03-04 18:25:58,621 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:25:58,621 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50003 b3638a32c297f43aa37e63bbd839fc7e-a98109598267087dfc364fae4cf24578 127.0.0.1:50002 a98109598267087dfc364fae4cf24578-b3638a32c297f43aa37e63bbd839fc7e'
+2020-03-04 18:25:58,622 INFO  [main] root: try to close connection ...
+2020-03-04 18:25:58,622 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:25:58,622 INFO  [main] root: connection closed!
+2020-03-04 18:25:58,622 DEBUG [main] root: M1_Client> 
+2020-03-04 18:25:58,622 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50002
+2020-03-04 18:25:58,622 INFO  [main] root: Connection established
+2020-03-04 18:25:58,622 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:25:58,629 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, a >'
+2020-03-04 18:25:58,629 INFO  [main] root: try to close connection ...
+2020-03-04 18:25:58,629 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:25:58,629 INFO  [main] root: connection closed!
+2020-03-04 18:25:58,629 DEBUG [main] root: M1_Client> 
+2020-03-04 18:25:58,629 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50003
+2020-03-04 18:25:58,630 INFO  [main] root: Connection established
+2020-03-04 18:26:22,805 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:26:22,806 INFO  [main] root: Receive message:	 'SERVER_STOPPED'
+2020-03-04 18:26:34,796 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:26:34,797 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50003 b3638a32c297f43aa37e63bbd839fc7e-a98109598267087dfc364fae4cf24578 127.0.0.1:50002 a98109598267087dfc364fae4cf24578-b3638a32c297f43aa37e63bbd839fc7e'
+2020-03-04 18:26:34,797 INFO  [main] root: try to close connection ...
+2020-03-04 18:26:34,797 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:26:34,797 INFO  [main] root: connection closed!
+2020-03-04 18:26:34,797 DEBUG [main] root: M1_Client> 
+2020-03-04 18:26:34,797 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50002
+2020-03-04 18:26:34,797 INFO  [main] root: Connection established
+2020-03-04 18:26:34,797 INFO  [main] root: Send message:	 'get q'
+2020-03-04 18:26:34,798 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, a >'
+2020-03-04 18:26:34,798 INFO  [main] root: try to close connection ...
+2020-03-04 18:26:34,798 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:26:34,798 INFO  [main] root: connection closed!
+2020-03-04 18:26:34,798 DEBUG [main] root: M1_Client> 
+2020-03-04 18:26:34,798 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50003
+2020-03-04 18:26:34,798 INFO  [main] root: Connection established
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        2020-03-04 18:28:15,585 INFO  [main] root: try to close connection ...
+2020-03-04 18:28:15,586 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:28:15,586 INFO  [main] root: connection closed!
+2020-03-04 18:28:15,586 DEBUG [main] root: M1_Client> 
+2020-03-04 18:28:15,586 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50002
+2020-03-04 18:28:22,664 INFO  [main] root: Connection established
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      va:68)
+	at app_kvClient.KVClient.newConnection(KVClient.java:198)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:65)
+	at app_kvClient.KVClient.run(KVClient.java:41)
+	at app_kvClient.KVClient.main(KVClient.java:361)
+2020-03-04 18:29:44,810 WARN  [main] root: Could not establish connection!
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at java.net.Socket.connect(Socket.java:556)
+	at java.net.Socket.<init>(Socket.java:452)
+	at java.net.Socket.<init>(Socket.java:229)
+	at client.KVStore.connect(KVStore.java:68)
+	at app_kvClient.KVClient.newConnection(KVClient.java:198)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:65)
+	at app_kvClient.KVClient.run(KVClient.java:41)
+	at app_kvClient.KVClient.main(KVClient.java:361)
+2020-03-04 18:33:26,085 INFO  [main] root: try to close connection ...
+2020-03-04 18:33:26,086 INFO  [main] root: tearing down the connection ...
+2020-03-04 18:33:26,086 INFO  [main] root: connection closed!
+2020-03-04 18:33:26,086 DEBUG [main] root: M1_Client> 
+2020-03-04 18:33:26,086 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50002

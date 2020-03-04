@@ -549,15 +549,23 @@ public class ECS {
    public void removeNode(int index) throws Exception {
       if (index < 0 || index >= storageNodes.size()) {
 	      throw new Exception("Node to remove not found");
-      }		   
+      }
+
       ECSNode node = storageNodes.get(index);
+
+      System.out.println("Adding server to idle servers...");
       add_storageNode_to_idle_nodes(index);
       if (storageNodes.size()==0){
 	      sendShutdownMessage(node);
       } else {
          ECSNode successorNode = getSuccessorNode(node); 
+         System.out.println("Updating metadata of all servers and shutting down " + node.getNodePort() + "...");
          update_metadata_and_shutdown(node, successorNode);
       }
+
+      // System.out.println("Computing key-range of new server...");
+      // System.out.println("Launching new server...");
+      // 
    }
 
    private void  add_storageNode_to_idle_nodes(int index){

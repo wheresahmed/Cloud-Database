@@ -196,7 +196,7 @@ public class KVServer implements IKVServer {
 	@Override
     public void clearStorage(){
 		// TODO Auto-generated method stub
-		persistentDb.clearDb();
+		// persistentDb.clearDb();
 		logger.info("Clearing storage");
 		if (cache != null){
 			cache.clear();
@@ -373,6 +373,7 @@ public class KVServer implements IKVServer {
 	@Override
     public void close(){
 		// TODO Auto-generated method stub
+		clearStorage();
 		running = false;
         try {
 			logger.info("Closing server.");

@@ -24,7 +24,7 @@ public class KVClient implements IKVClient {
     private boolean stop = false;
 
     // Metadata Structure - "ip:port", range of hash values
-	private Map<String,String[]> metadata = new HashMap<>();
+	// private Map<String,String[]> metadata = new HashMap<>();
 
     private String serverAddress;
     private int serverPort;

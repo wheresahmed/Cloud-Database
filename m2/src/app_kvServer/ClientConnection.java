@@ -112,6 +112,7 @@ public class ClientConnection implements Runnable {
 					} else if (token[0].equalsIgnoreCase("get")) {
 						// System.out.println("In GET");
 						logger.info("Message received with GET request."); 
+						boolean append = true;
 						// System.out.println("Key : " + token[1]);
 						if (server.getServerState() == ServerStateType.STOPPED) {
 							msg = "SERVER_STOPPED";
@@ -129,11 +130,13 @@ public class ClientConnection implements Runnable {
 								msg = "GET_ERROR < ";
 							} else if (!server.isCorrectServer(token[1])) {
 								msg = "SERVER_NOT_RESPONSIBLE " + server.getMetaData();
+								append = false;
 							} else {
 								msg = "GET_ERROR < ";
 							}
-
-							msg += token[1] + ", " + value + " >";
+							if (append) {
+								msg += token[1] + ", " + value + " >";
+							}
 						}
 					} else if (token[0].equalsIgnoreCase("transfer")){
 						transfer(token);
@@ -149,10 +152,10 @@ public class ClientConnection implements Runnable {
 					} else if (token[0].equalsIgnoreCase("lockwrite")) {
 						server.moveData(token[2].split("-"), token[1]);
 						server.lockWrite();
-						msg = "Locked write and moved data...";
+						msg = "Locked write at " + server.getPort() + " and moved data...";
 					} else if (token[0].equalsIgnoreCase("unlockwrite")) {
 						server.unlockWrite();
-						msg = "Unlocked write...";
+						msg = "Unlocked write at " + server.getPort() + "...";
 					} else if (token[0].equalsIgnoreCase("moveData")) {
 						
 					} else if (token[0].equalsIgnoreCase("update_metadata")) {
