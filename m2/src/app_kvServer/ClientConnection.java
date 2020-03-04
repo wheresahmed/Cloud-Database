@@ -64,7 +64,7 @@ public class ClientConnection implements Runnable {
 					// System.out.println("TOKEN[0]: " + token[0]);
 					// System.out.println("TOKEN LEN: " + token.length);
 
-					if(token[0].equals("put")) {
+					if(token[0].equalsIgnoreCase("put")) {
 						logger.info("Message received with PUT request.");
 
 						if (server.getServerState() == ServerStateType.STOPPED) {
@@ -109,9 +109,7 @@ public class ClientConnection implements Runnable {
 								msg = "SERVER_NOT_RESPONSIBLE " + server.getMetaData();
 							}
 						}
-
-						// sendMessage(new TextMessage(msg));
-					} else if (token[0].equals("get")) {
+					} else if (token[0].equalsIgnoreCase("get")) {
 						// System.out.println("In GET");
 						logger.info("Message received with GET request."); 
 						// System.out.println("Key : " + token[1]);
@@ -137,27 +135,29 @@ public class ClientConnection implements Runnable {
 
 							msg += token[1] + ", " + value + " >";
 						}
-						// sendMessage(new TextMessage(msg));
-					} else if (token[0].equals("transfer")){
+					} else if (token[0].equalsIgnoreCase("transfer")){
 						transfer(token);
-					} else if (token[0].equals("start")) {
+					} else if (token[0].equalsIgnoreCase("start")) {
 						server.start();
 						msg = "Server is started";
-					} else if (token[0].equals("stop")) {
+					} else if (token[0].equalsIgnoreCase("stop")) {
 						server.stop();
 						msg = "Server is stopped";
-					} else if (token[0].equals("shutdown")) {
+					} else if (token[0].equalsIgnoreCase("shutdown")) {
 						server.shutdown();
 						msg = "Server is shutdown";
-					} else if (token[0].equals("lockWrite")) {
+					} else if (token[0].equalsIgnoreCase("lockwrite")) {
 						server.moveData(token[2].split("-"), token[1]);
 						server.lockWrite();
-					} else if (token[0].equals("unlockWrite")) {
+						msg = "Locked write and moved data...";
+					} else if (token[0].equalsIgnoreCase("unlockwrite")) {
 						server.unlockWrite();
-					} else if (token[0].equals("moveData")) {
+						msg = "Unlocked write...";
+					} else if (token[0].equalsIgnoreCase("moveData")) {
 						
-					} else if (token[0].equals("update_metadata")) {
+					} else if (token[0].equalsIgnoreCase("update_metadata")) {
 						server.loadMetadataFromZookeeper();
+						msg = "Updating metadata on " + server.getPort();
 					} else {
 						msg = latestMsg.toString();
 					} 

@@ -248,8 +248,10 @@ public class ECS {
       }
 
       ECSNode node= add_idle_node_to_storagenodes();
+      System.out.println("Computing key-range of new server...");
       update_node_range_and_metadata(node);
       appendToCurrentPath(node);
+      System.out.println("Launching new server...");
       launchServer(node, cacheSize, replacementStrategy);
 
       try{
@@ -257,6 +259,8 @@ public class ECS {
       }catch(InterruptedException e){
          e.printStackTrace();
       }
+
+      System.out.println("Updating metadata of all servers...");
       lockwrite_successor_while_servers_update_metadata(node);
       return node; 
    }
@@ -348,6 +352,9 @@ public class ECS {
          output = ecsSocket.getOutputStream();
          input = ecsSocket.getInputStream();
          sendMessage (new TextMessage("unlockwrite"));
+         TextMessage latestMsg = receiveMessage();
+         System.out.println(PROMPT + latestMsg.getMsg());
+
          try {
             input.close();
             output.close();
@@ -387,6 +394,8 @@ public class ECS {
             output= ecsSocket.getOutputStream();
             input = ecsSocket.getInputStream();
             sendMessage (new TextMessage("update_metadata"));
+            latestMsg = receiveMessage();
+            System.out.println(PROMPT + latestMsg.getMsg());
             try{
                input.close();
                output.close();
@@ -542,14 +551,10 @@ public class ECS {
 	      throw new Exception("Node to remove not found");
       }		   
 
-      System.out.println("Before add storageNode");
       add_storageNode_to_idle_nodes(index);
-      System.out.println("After add storageNode" + index);
       ECSNode node = storageNodes.get(index);
       ECSNode successorNode = getSuccessorNode(node); 
-      System.out.println("Before update metadata and shutdown");
       update_metadata_and_shutdown(node, successorNode);
-      System.out.println("After update metadata and shutdown");
    }
 
    private void  add_storageNode_to_idle_nodes(int index){

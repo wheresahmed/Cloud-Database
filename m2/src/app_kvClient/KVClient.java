@@ -240,9 +240,11 @@ public class KVClient implements IKVClient {
 		KVMessage msg;
 
 		do {
-			String address = store.searchKey(key);
+            System.out.println("in do loop");
+            String address = store.searchKey(key);
+            System.out.println("address : " + address );            
 			if (!address.equals(serverAddress + ":" + Integer.toString(serverPort))) {
-
+                System.out.println("address does not equal serverAddress, so switch");
 				if (store!=null && store.isClientRunning()){
 					store.disconnect();
 					store=null;
