@@ -248,8 +248,10 @@ public class ECS {
       }
 
       ECSNode node= add_idle_node_to_storagenodes();
+      System.out.println("Computing key-range of new server...");
       update_node_range_and_metadata(node);
       appendToCurrentPath(node);
+      System.out.println("Launching new server...");
       launchServer(node, cacheSize, replacementStrategy);
 
       try{
@@ -257,6 +259,8 @@ public class ECS {
       }catch(InterruptedException e){
          e.printStackTrace();
       }
+
+      System.out.println("Updating metadata of all servers...");
       lockwrite_successor_while_servers_update_metadata(node);
       return node; 
    }
@@ -348,6 +352,9 @@ public class ECS {
          output = ecsSocket.getOutputStream();
          input = ecsSocket.getInputStream();
          sendMessage (new TextMessage("unlockwrite"));
+         TextMessage latestMsg = receiveMessage();
+         System.out.println(PROMPT + latestMsg.getMsg());
+
          try {
             input.close();
             output.close();
@@ -387,6 +394,8 @@ public class ECS {
             output= ecsSocket.getOutputStream();
             input = ecsSocket.getInputStream();
             sendMessage (new TextMessage("update_metadata"));
+            latestMsg = receiveMessage();
+            System.out.println(PROMPT + latestMsg.getMsg());
             try{
                input.close();
                output.close();
@@ -540,18 +549,23 @@ public class ECS {
    public void removeNode(int index) throws Exception {
       if (index < 0 || index >= storageNodes.size()) {
 	      throw new Exception("Node to remove not found");
-      }		   
+      }
 
-      
       ECSNode node = storageNodes.get(index);
+
+      System.out.println("Adding server to idle servers...");
       add_storageNode_to_idle_nodes(index);
       if (storageNodes.size()==0){
-	 sendShutdownMessage(node);
+	      sendShutdownMessage(node);
+      } else {
+         ECSNode successorNode = getSuccessorNode(node); 
+         System.out.println("Updating metadata of all servers and shutting down " + node.getNodePort() + "...");
+         update_metadata_and_shutdown(node, successorNode);
       }
-      else{
-	 ECSNode successorNode = getSuccessorNode(node); 
-	 update_metadata_and_shutdown(node, successorNode);
-      }
+
+      // System.out.println("Computing key-range of new server...");
+      // System.out.println("Launching new server...");
+      // 
    }
 
    private void  add_storageNode_to_idle_nodes(int index){
@@ -616,6 +630,7 @@ public class ECS {
                input.close();
                output.close();
                ecsSocket.close();
+               System.out.println("Stopped node " + node.getNodePort());
             }catch(IOException e){
                e.printStackTrace();
             }

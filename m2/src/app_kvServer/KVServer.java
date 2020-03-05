@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator; 
 
 import javax.naming.NameNotFoundException;
 
@@ -55,27 +56,13 @@ public class KVServer implements IKVServer {
 	private boolean running;
 	private static KVServer server;
 	private Map<String,String>cache;
-	// @TODO: figure out what is this ClientConnection?
 	private ArrayList<ClientConnection> connections;
-	// @TODO: initialize cache and persistent storage
+
 	private ServerStateType serverStatus = ServerStateType.STOPPED;
 	private boolean lockWrite = false;
 	private ZooKeeper zookeeper;
 	private Map<String, String[]> metaData = new HashMap<>();
-	private static final int BUFFER_SIZE = 1024;
-	private static final int DROP_SIZE = 128 * BUFFER_SIZE;
 
-	private Socket socket;
-	private OutputStream output;
-	private InputStream input;
-
-	public static final String LOCAL_HOST = "127.0.0.1";
-	public static final String ZK_HOST = LOCAL_HOST;
-	public static final String ZK_PORT = "2181";
-	public static final String ZK_CONN = ZK_HOST + ":" + ZK_PORT;
-	public static final int ZK_TIMEOUT = 2000;
-
-	
 	public KVServer(int port, int cacheSize, String strategy) {
 		// TODO Auto-generated method stub
 		this.port = port;
@@ -196,7 +183,7 @@ public class KVServer implements IKVServer {
 	@Override
     public void clearStorage(){
 		// TODO Auto-generated method stub
-		persistentDb.clearDb();
+		// persistentDb.clearDb();
 		logger.info("Clearing storage");
 		if (cache != null){
 			cache.clear();
@@ -240,43 +227,35 @@ public class KVServer implements IKVServer {
 	}
 
 	private String getData(String path){
-		String data = "";
 		try{
 			byte[] b = zookeeper.getData(path, false,null);
-			data = new String(b, "UTF-8");
-
+			String data = new String(b, "UTF-8");
+			return data;
 		}catch(Exception e){
 			System.out.println(e.getMessage()); 
 		}
-		return data;
+		return "";
 	}
 
 	public void loadMetadataFromZookeeper() {
-		// this.metaData.clear();
-		// try {
-		// 	String data = new String (zookeeper.getData("/server", false, null), "UTF-8");
-		// 	String[] token = data.split("\\s+");
-		// 	String key = "";
+		this.metaData.clear();
 
-		// 	for(int i = 0; i < token.length; i++) {
-		// 		if (i % 2 == 0) {
-		// 			// key
-		// 			key = token[i];
-		// 		} else {
-		// 			// value, store with key
-		// 			this.metaData.put(key, token[i].split("-"));
-		// 		}
-		// 	}
-		// } catch (Exception e) {
-		// 	e.printStackTrace();
-		// }
-		String data = getData("/server");
-		String[] dataPieces = data.split("\\s+");
-		this.metaData.clear(); 
-		for (int i = 0; i < dataPieces.length; i +=2){
+		try {
+			String data = new String (zookeeper.getData("/server", false, null), "UTF-8");
+			String[] token = data.split("\\s+");
+			String key = "";
 
-			String[] value = dataPieces[i+1].split("-");
-			this.metaData.put(dataPieces[i],value);
+			for(int i = 0; i < token.length; i++) {
+				if (i % 2 == 0) {
+					// key
+					key = token[i];
+				} else {
+					// value, store with key
+					this.metaData.put(key, token[i].split("-"));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -373,6 +352,7 @@ public class KVServer implements IKVServer {
 	@Override
     public void close(){
 		// TODO Auto-generated method stub
+		clearStorage();
 		running = false;
         try {
 			logger.info("Closing server.");
@@ -401,156 +381,93 @@ public class KVServer implements IKVServer {
 		return meta;
 	}
 
-	public String convertToMD5(String md5) {
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] array = md.digest(md5.getBytes());
-			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < array.length; ++i) {
-				sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
-			}
-			return sb.toString();
-		} catch (NoSuchAlgorithmException e) {
-		}	      
-		return null;
-	}  
-
 	public boolean isCorrectServer(String data) {
-		// boolean res = false;
+		boolean res = false;
 
-		// try {
-		// 	byte[] bytesOfMessage = data.getBytes("UTF-8");
-		// 	MessageDigest md = MessageDigest.getInstance("MD5");
-		// 	byte[] thedigest = md.digest(bytesOfMessage);
-		// 	//@TODO: I dont convert space to 0 or something
-
-		// 	String hash = thedigest.toString();
-		// 	String lowerBound = metaData.get("127.0.0.1:" + Integer.toString(this.port))[0];
-		// 	String upperBound = metaData.get("127.0.0.1:" + Integer.toString(this.port))[1];
-
-		// 	if (hash.compareTo(lowerBound) > 0 && hash.compareTo(upperBound) <= 0) {
-		// 		res = true;
-		// 	} else if (lowerBound.compareTo(upperBound) >= 0 && (hash.compareTo(lowerBound) > 0 || hash.compareTo(upperBound) <= 0)) {
-		// 		res = true;
-		// 	} else if (lowerBound.compareTo(upperBound) == 0) {
-		// 		res = true;
-		// 	}
-		// } catch (Exception e) {
-		// 	e.printStackTrace();
-		// }
-
-		// return res;
-
-		String keyHash = convertToMD5(data);
-
-		String[] hash_range = metaData.get(LOCAL_HOST+":"+Integer.toString(this.port));
-		
-		String start = hash_range[0];
-		String end = hash_range[1];
-
-		//wrap around case: start is bigger than end
-		if (start.compareTo(end) >= 0){
-			if( keyHash.compareTo(start) >0 || keyHash.compareTo(end) <= 0 ){
-				return  true;
-			}			
-		}
-		else {
-
-			//if start and end are the same => only 1 server
-			if (start.compareTo(end) == 0) {
-				return true;
-			}	      
-			//			System.out.println ("non wrap around case");
-			if( keyHash.compareTo(start) >0 && keyHash.compareTo(end) <= 0 ){
-				return  true;
-			}
-		}
-		return false;
-	}
-
-	public void moveData(String[] range, String server) {
-		String start = range[0];
-		String end = range[1];	
-		String[] host_port = server.split(":");
-		String host = host_port[0];
-		int port = Integer.parseInt(host_port[1]);
-
-		ArrayList<String> keys_to_delete = new ArrayList<String>();
-
-		//create socket to talk to server to transfer data to
 		try {
-			socket =  new Socket (host, port);
-			output = socket.getOutputStream();
-			input = socket.getInputStream();
-		} catch(Exception e){
-			logger.error("Connection could not be established!");
-		}
-
-		//loop through cache and transfer key,value
-		//delete from current server
-		for (Map.Entry <String, String> pair : this.cache.entrySet()){
-			String key = pair.getKey();
-			String keyHash = convertToMD5(key);
-			// String keyHash = "";
-
-			// try {
-			// 	// convert to hash
-			// 	byte[] bytesOfMessage = key.getBytes("UTF-8");
-			// 	MessageDigest md = MessageDigest.getInstance("MD5");
-			// 	byte[] thedigest = md.digest(bytesOfMessage);
-			// 	//@TODO: I dont convert space to 0 or something
-
-			// 	keyHash = thedigest.toString();
-			// } catch (Exception e) {
-			// 	e.printStackTrace();
-			// }
-
-			boolean move_key=false;
-
-			//Check if this key falls in the range we want to move
-			if (start.compareTo(end) > 0){
-				if( keyHash.compareTo(start) >0 || keyHash.compareTo(end) <= 0 ){
-					move_key=true;
-				}			
-			}
-			else {
-				if( keyHash.compareTo(start) >0 && keyHash.compareTo(end) <= 0 ){
-					move_key=true;
-				}
+			byte[] bytesOfMessage = data.getBytes("UTF-8");
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] thedigest = md.digest(bytesOfMessage);
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < thedigest.length; ++i) {
+				sb.append(Integer.toHexString((thedigest[i] & 0xFF) | 0x100).substring(1,3));
 			}
 
-			if (!move_key){
-				continue;
+			String hash = sb.toString();
+
+			String lowerBound = metaData.get("127.0.0.1:" + Integer.toString(this.port))[0];
+			String upperBound = metaData.get("127.0.0.1:" + Integer.toString(this.port))[1];
+
+			if (hash.compareTo(lowerBound) > 0 && hash.compareTo(upperBound) <= 0) {
+				res = true;
+			} else if (lowerBound.compareTo(upperBound) >= 0 && (hash.compareTo(lowerBound) > 0 || hash.compareTo(upperBound) <= 0)) {
+				res = true;
+			} else if (lowerBound.compareTo(upperBound) == 0) {
+				res = true;
 			}
-
-			String value = pair.getValue();
-
-			//delete from current cache
-			keys_to_delete.add(key);
-			//send to new server
-			try{
-				sendMessage(new TextMessage("transfer " + key + " " + value));
-				TextMessage latestMsg= receiveMessage();
-			}
-			catch(Exception e){
-				System.out.println(e.getMessage());
-			}
-		}
-
-		for (int i = 0; i < keys_to_delete.size(); i++){
-			cache.remove(keys_to_delete.get(i));
-		}
-
-		//close the socket
-		try{
-			input.close();
-			output.close();
-			socket.close();
-		}catch(IOException e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		socket = null; 
+		return res;
+	}
+
+	
+
+	public List<List<String>> moveData(String[] range) {
+
+		String lowerBound = range[0];
+		String upperBound = range[1];
+		List<String> movedDataKeys = new ArrayList<String>();
+		List<String> movedDataValues = new ArrayList<String>();
+
+		// createSocket(server.split(":")[0], Integer.parseInt(server.split(":")[1]));
+
+		Iterator it = this.cache.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<String, String> pair = (Map.Entry<String, String>)it.next();
+
+			String key = pair.getKey();
+			String hash = "";
+			try {
+				// convert to hash
+				byte[] bytesOfMessage = key.getBytes("UTF-8");
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				byte[] thedigest = md.digest(bytesOfMessage);
+				StringBuffer sb = new StringBuffer();
+				for (int i = 0; i < thedigest.length; ++i) {
+					sb.append(Integer.toHexString((thedigest[i] & 0xFF) | 0x100).substring(1,3));
+				}
+
+				hash = sb.toString();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			boolean res = false;
+			// Does key fall in lowerBound and upperBound range?
+			if (hash.compareTo(lowerBound) > 0 && hash.compareTo(upperBound) <= 0) {
+				res = true;
+			} else if (lowerBound.compareTo(upperBound) >= 0 && (hash.compareTo(lowerBound) > 0 || hash.compareTo(upperBound) <= 0)) {
+				res = true;
+			}
+
+			if(res) {
+				movedDataKeys.add(key);
+				movedDataValues.add(pair.getValue());
+			}
+			it.remove(); // avoids a ConcurrentModificationException
+		}
+
+		for (String s : movedDataKeys) {
+            cache.remove(s);
+		}
+		
+		List<List<String>> listOfLists = new ArrayList<List<String>>();
+		listOfLists.add(movedDataKeys);
+		listOfLists.add(movedDataValues);
+
+		return listOfLists;
 	}
 
 	public void start() {
@@ -571,81 +488,6 @@ public class KVServer implements IKVServer {
 
 	public void unlockWrite() {
 		this.lockWrite = false;
-	}
-
-	/**
-	 * Method sends a TextMessage using this socket.
-	 * @param msg the message that is to be sent.
-	 * @throws IOException some I/O error regarding the output stream 
-	 */
-	public void sendMessage(TextMessage msg) throws IOException {
-		byte[] msgBytes = msg.getMsgBytes();
-		output.write(msgBytes, 0, msgBytes.length);
-		output.flush();
-		logger.info("SEND \t<" 
-				+ socket.getInetAddress().getHostAddress() + ":" 
-				+ socket.getPort() + ">: '" 
-				+ msg.getMsg() +"'");
-	}
-
-	private TextMessage receiveMessage() throws IOException {
-		int index = 0;
-		byte[] msgBytes = null, tmp = null;
-		byte[] bufferBytes = new byte[BUFFER_SIZE];
-
-		/* read first char from stream */
-		byte read = (byte) input.read();	
-		boolean reading = true;
-
-		while(/*read != 13  && */ read != 10 && read !=-1 && reading) {/* CR, LF, error */
-			/* if buffer filled, copy to msg array */
-			if(index == BUFFER_SIZE) {
-				if(msgBytes == null){
-					tmp = new byte[BUFFER_SIZE];
-					System.arraycopy(bufferBytes, 0, tmp, 0, BUFFER_SIZE);
-				} else {
-					tmp = new byte[msgBytes.length + BUFFER_SIZE];
-					System.arraycopy(msgBytes, 0, tmp, 0, msgBytes.length);
-					System.arraycopy(bufferBytes, 0, tmp, msgBytes.length,
-							BUFFER_SIZE);
-				}
-
-				msgBytes = tmp;
-				bufferBytes = new byte[BUFFER_SIZE];
-				index = 0;
-			} 
-
-			/* only read valid characters, i.e. letters and constants */
-			bufferBytes[index] = read;
-			index++;
-
-			/* stop reading is DROP_SIZE is reached */
-			if(msgBytes != null && msgBytes.length + index >= DROP_SIZE) {
-				reading = false;
-			}
-
-			/* read next char from stream */
-			read = (byte) input.read();
-		}
-
-		if(msgBytes == null){
-			tmp = new byte[index];
-			System.arraycopy(bufferBytes, 0, tmp, 0, index);
-		} else {
-			tmp = new byte[msgBytes.length + index];
-			System.arraycopy(msgBytes, 0, tmp, 0, msgBytes.length);
-			System.arraycopy(bufferBytes, 0, tmp, msgBytes.length, index);
-		}
-
-		msgBytes = tmp;
-
-		/* build final String */
-		TextMessage msg = new TextMessage(msgBytes);
-		logger.info("RECEIVE \t<" 
-				+ socket.getInetAddress().getHostAddress() + ":" 
-				+ socket.getPort() + ">: '" 
-				+ msg.getMsg() + "'");
-		return msg;
 	}
 
 	public static void main(String[] args) {
