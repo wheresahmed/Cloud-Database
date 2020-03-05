@@ -630,6 +630,7 @@ public class ECS {
                input.close();
                output.close();
                ecsSocket.close();
+               System.out.println("Stopped node " + node.getNodePort());
             }catch(IOException e){
                e.printStackTrace();
             }

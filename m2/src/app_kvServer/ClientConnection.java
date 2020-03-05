@@ -7,6 +7,9 @@ import java.net.Socket;
 
 import org.apache.log4j.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a connection end point for a particular client that is 
  * connected to the server. This class is responsible for message reception 
@@ -25,6 +28,10 @@ public class ClientConnection implements Runnable {
 	private Socket clientSocket;
 	private InputStream input;
 	private OutputStream output;
+
+	private Socket socket;
+	private OutputStream outputS;
+	private InputStream inputS;
 
 	private KVServer server = null;
 	
@@ -47,99 +54,41 @@ public class ClientConnection implements Runnable {
 			output = clientSocket.getOutputStream();
 			input = clientSocket.getInputStream();
 		
-			// sendMessage(new TextMessage(
-			// 		"Connection to MSRG Echo server established: " 
-			// 		+ clientSocket.getLocalAddress() + " / "
-			// 		+ clientSocket.getLocalPort()));
-			
 			while(isOpen) {
 				try {
-					TextMessage latestMsg = receiveMessage();
+					TextMessage latestMsg = receiveMessage(true);
 					String msg = "";
 
 					// parse msg and take action accordingly
 					String[] token = null;
 					token = latestMsg.getMsg().trim().split("\\s+");
-					// System.out.println("MSG: " + latestMsg.getMsg() + "\n");
-					// System.out.println("TOKEN[0]: " + token[0]);
-					// System.out.println("TOKEN LEN: " + token.length);
 
-					if(token[0].equalsIgnoreCase("put")) {
-						logger.info("Message received with PUT request.");
-
-						if (server.getServerState() == ServerStateType.STOPPED) {
-							msg = "SERVER_STOPPED";
-						} else if (server.isWriterLocked()) {
-							msg = "SERVER_WRITE_LOCK";
-						} else{
-							if (!(token.length >= 2)) {
-								msg = "INVALID_PUT";
-							} else if (server.isCorrectServer(token[1])) {
-								if ((token.length == 3 && token[2].equalsIgnoreCase("null")) || token.length == 2) {
-									// delete operation
-									if (server.inStorage(token[1])) {
-										msg = "DELETE_SUCCESS < "; 
-									} else {
-										msg = "DELETE_ERROR < "; 
-									}
-								} else if (token.length > 2) {
-									if (server.inStorage(token[1])) {
-										msg = "PUT_UPDATE < ";
-									} else {
-										msg = "PUT_SUCCESS < ";
-									}
-								}
-
-								String value = "";
-
-								for (int i = 2; i < token.length; i++) {
-									value += token[i] + " ";
-								}
-
-								value.trim();
-
-								try {
-									server.putKV(token[1], value);
-								} catch (Exception e) {
-									logger.error("PUT ERROR! Error in PUT function");
-								}
-
-								msg += token[1] + " , " + value + " >";
-							} else {
-								msg = "SERVER_NOT_RESPONSIBLE " + server.getMetaData();
+					if (token[0].equalsIgnoreCase("transfer")) {
+						if(token.length >= 3){
+							if (server.inCache(token[1])){
+								msg = "TRANSFER_UPDATE < ";
+							}else{
+								msg = "TRANSFER_SUCCESS < ";
 							}
-						}
-					} else if (token[0].equalsIgnoreCase("get")) {
-						// System.out.println("In GET");
-						logger.info("Message received with GET request."); 
-						boolean append = true;
-						// System.out.println("Key : " + token[1]);
-						if (server.getServerState() == ServerStateType.STOPPED) {
-							msg = "SERVER_STOPPED";
-						} else {
+
 							String value = "";
-							
-							if (token.length == 2 && server.isCorrectServer(token[1]) && server.inStorage(token[1])) {
-								try {
-									value = server.getKV(token[1]);
-									msg = "GET_SUCCESS < ";
-								} catch (Exception e) {
-									logger.error("GET_ERROR! Could not find key in DB.");
-								}
-							} else if (token.length != 2) {
-								msg = "GET_ERROR < ";
-							} else if (!server.isCorrectServer(token[1])) {
-								msg = "SERVER_NOT_RESPONSIBLE " + server.getMetaData();
-								append = false;
-							} else {
-								msg = "GET_ERROR < ";
+
+							for (int i = 2; i < token.length; i++) {
+								value += token[i] + " ";
 							}
-							if (append) {
-								msg += token[1] + ", " + value + " >";
+
+							value.trim();
+
+							try {
+								server.putKV(token[1], value);
+							} catch (Exception e) {
+								logger.error("TRANSFER ERROR! Error in PUT function");
 							}
+
+							msg += token[1] + " , " + value + " >";
+						}else {
+							msg = "TRANSFER ERROR: Invalid format";
 						}
-					} else if (token[0].equalsIgnoreCase("transfer")){
-						transfer(token);
 					} else if (token[0].equalsIgnoreCase("start")) {
 						server.start();
 						msg = "Server is started";
@@ -149,23 +98,100 @@ public class ClientConnection implements Runnable {
 					} else if (token[0].equalsIgnoreCase("shutdown")) {
 						server.shutdown();
 						msg = "Server is shutdown";
-					} else if (token[0].equalsIgnoreCase("lockwrite")) {
-						server.moveData(token[2].split("-"), token[1]);
+					} else if (token[0].equalsIgnoreCase("lockWrite")) {
+						createSocket(token[1].split(":")[0], Integer.parseInt(token[1].split(":")[1]));
+						List<List<String>> movedData = server.moveData(token[2].split("-"));
+						transferData(movedData);
+						try {
+							if (socket != null) {
+								inputS.close();
+								outputS.close();
+								socket.close();
+							}
+						} catch (IOException ioe) {
+							logger.error("Error! Unable to tear down connection!", ioe);
+						}
+						socket = null;
 						server.lockWrite();
 						msg = "Locked write at " + server.getPort() + " and moved data...";
-					} else if (token[0].equalsIgnoreCase("unlockwrite")) {
+					} else if (token[0].equalsIgnoreCase("unlockWrite")) {
 						server.unlockWrite();
 						msg = "Unlocked write at " + server.getPort() + "...";
-					} else if (token[0].equalsIgnoreCase("moveData")) {
-						
 					} else if (token[0].equalsIgnoreCase("update_metadata")) {
 						server.loadMetadataFromZookeeper();
 						msg = "Updating metadata on " + server.getPort();
+					} else if (server.getServerState() == ServerStateType.STOPPED) {
+						msg = "SERVER_STOPPED";
+					} else if (token[0].equalsIgnoreCase("get")) {
+						logger.info("Message received with GET request."); 
+						boolean append = true;
+						String value = "";
+						
+						if (token.length == 2 && server.isCorrectServer(token[1]) && server.inStorage(token[1])) {
+							try {
+								value = server.getKV(token[1]);
+								msg = "GET_SUCCESS < ";
+							} catch (Exception e) {
+								logger.error("GET_ERROR! Could not find key in DB.");
+							}
+						} else if (token.length != 2) {
+							msg = "GET_ERROR < ";
+						} else if (!server.isCorrectServer(token[1])) {
+							msg = "SERVER_NOT_RESPONSIBLE " + server.getMetaData();
+							append = false;
+						} else {
+							msg = "GET_ERROR < ";
+						}
+
+						if (append) {
+							msg += token[1] + ", " + value + " >";
+						}
+					} else if (server.isWriterLocked()) {
+						msg = "SERVER_WRITE_LOCK";
+					} else if(token[0].equalsIgnoreCase("put")) {
+						logger.info("Message received with PUT request.");
+
+						if (!(token.length >= 2)) {
+							msg = "INVALID_PUT";
+						} else if (server.isCorrectServer(token[1])) {
+							if ((token.length == 3 && token[2].equalsIgnoreCase("null")) || token.length == 2) {
+								// delete operation
+								if (server.inStorage(token[1])) {
+									msg = "DELETE_SUCCESS < "; 
+								} else {
+									msg = "DELETE_ERROR < "; 
+								}
+							} else if (token.length > 2) {
+								if (server.inStorage(token[1])) {
+									msg = "PUT_UPDATE < ";
+								} else {
+									msg = "PUT_SUCCESS < ";
+								}
+							}
+
+							String value = "";
+
+							for (int i = 2; i < token.length; i++) {
+								value += token[i] + " ";
+							}
+
+							value.trim();
+
+							try {
+								server.putKV(token[1], value);
+							} catch (Exception e) {
+								logger.error("PUT ERROR! Error in PUT function");
+							}
+
+							msg += token[1] + " , " + value + " >";
+						} else {
+							msg = "SERVER_NOT_RESPONSIBLE " + server.getMetaData();
+						}
 					} else {
 						msg = latestMsg.toString();
 					} 
 
-					sendMessage(new TextMessage(msg));
+					sendMessage(new TextMessage(msg), true);
 					
 				/* connection either terminated by the client or lost due to 
 				 * network problems*/	
@@ -192,49 +218,29 @@ public class ClientConnection implements Runnable {
 		}
 	}
 
-	private void transfer(String[] splitMsg){
-
-		String message = "";
-
-		if(splitMsg.length >= 3){
-
-			if (server.inCache(splitMsg[1])){
-				message = "TRANSFER_UPDATE < ";
-			}else{
-				message = "TRANSFER_SUCCESS < ";
-			}
-
-			String value = "";
-
-			for (int i =2; i < splitMsg.length - 1; i++ ){
-				value += splitMsg[i];
-				value+= " ";
-			}
-
-			value += splitMsg[splitMsg.length -1];
-
-			try {
-				server.putKV(splitMsg[1],value);
-			}
-			catch (Exception e){
-				logger.error("Transfer Error");
-
-			}
-			message += splitMsg[1] + 
-					" , " + value + " >";
-
-		}
-		else{
-			message = "ERROR: Invlaid format";
-		}
-		//Send message back to the client 
+	public void createSocket(String host, int port) {
 		try {
-			sendMessage(new TextMessage(message));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			socket = new Socket(host, port);
+			outputS = socket.getOutputStream();
+			inputS = socket.getInputStream();
+		} catch(Exception e) {
+			logger.error("Error! Cannot establish connection.");
 		}
+	}
 
+	public void transferData(List<List<String>> movedData) {
+		List<String> movedDataKeys = movedData.get(0);
+		List<String> movedDataValues = movedData.get(1);
+		
+		for (String s : movedDataKeys) {
+			try{
+				sendMessage(new TextMessage("transfer " + s + " " + movedDataValues.get(movedDataKeys.indexOf(s))), false);
+				TextMessage latestMsg = receiveMessage(false);
+			}
+			catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 	
 	/**
@@ -242,19 +248,27 @@ public class ClientConnection implements Runnable {
 	 * @param msg the message that is to be sent.
 	 * @throws IOException some I/O error regarding the output stream 
 	 */
-	public void sendMessage(TextMessage msg) throws IOException {
+	public void sendMessage(TextMessage msg, boolean isClient) throws IOException {
 		byte[] msgBytes = msg.getMsgBytes();
-		output.write(msgBytes, 0, msgBytes.length);
-		output.flush();
-		logger.info("SEND \t<" 
-				+ clientSocket.getInetAddress().getHostAddress() + ":" 
-				+ clientSocket.getPort() + ">: '" 
-				+ msg.getMsg() +"'");
+		if(isClient) {
+			output.write(msgBytes, 0, msgBytes.length);
+			output.flush();
+			logger.info("SEND \t<" 
+					+ clientSocket.getInetAddress().getHostAddress() + ":" 
+					+ clientSocket.getPort() + ">: '" 
+					+ msg.getMsg() +"'");
+		} else {
+			outputS.write(msgBytes, 0, msgBytes.length);
+			outputS.flush();
+			logger.info("SEND \t<" 
+					+ socket.getInetAddress().getHostAddress() + ":" 
+					+ socket.getPort() + ">: '" 
+					+ msg.getMsg() +"'");
+		}
     }
 	
 	
-	private TextMessage receiveMessage() throws IOException {
-		
+	private TextMessage receiveMessage(boolean isClient) throws IOException {
 		int index = 0;
 		byte[] msgBytes = null, tmp = null;
 		byte[] bufferBytes = new byte[BUFFER_SIZE];
@@ -314,10 +328,17 @@ public class ClientConnection implements Runnable {
 		
 		/* build final String */
 		TextMessage msg = new TextMessage(msgBytes);
-		logger.info("RECEIVE \t<" 
-				+ clientSocket.getInetAddress().getHostAddress() + ":" 
-				+ clientSocket.getPort() + ">: '" 
-				+ msg.getMsg().trim() + "'");
+		if(isClient) {
+			logger.info("RECEIVE \t<" 
+					+ clientSocket.getInetAddress().getHostAddress() + ":" 
+					+ clientSocket.getPort() + ">: '" 
+					+ msg.getMsg().trim() + "'");
+		} else {
+			logger.info("RECEIVE \t<" 
+					+ socket.getInetAddress().getHostAddress() + ":" 
+					+ socket.getPort() + ">: '" 
+					+ msg.getMsg().trim() + "'");
+		}
 		return msg;
     }
 	

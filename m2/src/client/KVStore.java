@@ -116,17 +116,17 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 		for (int i = 0; i < data.length; i +=2) {
 			String[] value = data[i+1].split("-");
 			this.metadata.put(data[i],value);
-			System.out.println("data[i] : " + data[i]);
-			System.out.println("value : " + value[0]);
-			System.out.println("value : " + value[1]);
+			// System.out.println("data[i] : " + data[i]);
+			// System.out.println("value : " + value[0]);
+			// System.out.println("value : " + value[1]);
 		}
 
-		String meta = "";
-		for (Map.Entry <String,String[]> pair : this.metadata.entrySet()) {
-			meta += pair.getKey() + " " + pair.getValue()[0] +  "-" +  pair.getValue()[1] + " ";
-		}
+		// String meta = "";
+		// for (Map.Entry <String,String[]> pair : this.metadata.entrySet()) {
+		// 	meta += pair.getKey() + " " + pair.getValue()[0] +  "-" +  pair.getValue()[1] + " ";
+		// }
 
-		System.out.println("METADATA AT LOADMETADATA : " + meta);
+		// System.out.println("METADATA AT LOADMETADATA : " + meta);
 	}
 
 	// Inspired from: https://stackoverflow.com/questions/415953/how-can-i-generate-an-md5-hash
@@ -150,16 +150,16 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 
 	public String searchKey(String key){
 		String keyHash = convertToMD5(key);
-		System.out.println("IN SEARCH KEYYYY");
-		String meta = "";
-		for (Map.Entry <String,String[]> pair : this.metadata.entrySet()) {
-			meta += pair.getKey() + " " + pair.getValue()[0] +  "-" +  pair.getValue()[1] + " ";
-		}
+		// System.out.println("IN SEARCH KEYYYY");
+		// String meta = "";
+		// for (Map.Entry <String,String[]> pair : this.metadata.entrySet()) {
+		// 	meta += pair.getKey() + " " + pair.getValue()[0] +  "-" +  pair.getValue()[1] + " ";
+		// }
 
-		System.out.println("METADATA AT SEARCHKEY : " + meta);
+		// System.out.println("METADATA AT SEARCHKEY : " + meta);
 		
 		for (Map.Entry <String,String[]> pair : this.metadata.entrySet()) {
-			System.out.println("IN FOR LOOP");
+			// System.out.println("IN FOR LOOP");
 
 			String start = pair.getValue()[0];
 			String end = pair.getValue()[1];
@@ -184,8 +184,8 @@ public class KVStore extends Thread implements KVCommInterface, ClientSocketList
 
 		for (int i = 1; i < msg.length; i++) {
 			metadata[i-1] =  msg[i];
-			System.out.println("Metadata[i-1] : " + metadata[i-1]);
-			System.out.println("msg[i] : " + msg[i]);
+			// System.out.println("Metadata[i-1] : " + metadata[i-1]);
+			// System.out.println("msg[i] : " + msg[i]);
 		}
 
 		loadMetadata(metadata);
