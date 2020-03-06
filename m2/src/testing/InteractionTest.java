@@ -7,6 +7,7 @@ import junit.framework.TestCase;
 import shared.messages.KVMessage;
 import shared.messages.KVMessage.StatusType;
 
+import app_kvServer.FileIO;
 
 public class InteractionTest extends TestCase {
 
@@ -22,6 +23,7 @@ public class InteractionTest extends TestCase {
 
 	public void tearDown() {
 		kvClient.disconnect();
+		FileIO.eraseFile();
 	}
 	
 	
