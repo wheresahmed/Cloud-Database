@@ -23,7 +23,7 @@ public class InteractionTest extends TestCase {
 
 	public void tearDown() {
 		kvClient.disconnect();
-		FileIO.eraseFile();
+		persistentDb.clearDb();
 	}
 	
 	

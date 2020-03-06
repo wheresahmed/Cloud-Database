@@ -13,7 +13,7 @@ public class ConnectionTest extends TestCase {
 	
 	public void tearDown(){
 		
-		FileIO.eraseFile();
+		persistentDb.clearDb();
 
 	}
 
