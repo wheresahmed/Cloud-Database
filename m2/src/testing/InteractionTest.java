@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 import shared.messages.KVMessage;
 import shared.messages.KVMessage.StatusType;
 
-import app_kvServer.FileIO;
+import app_kvServer.persistentDb;
 
 public class InteractionTest extends TestCase {
 
