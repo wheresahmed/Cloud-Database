@@ -22,7 +22,7 @@ import app_kvServer.persistentDb;
 
 import shared.messages.KVMessage;
 
-public class m2_additional_test extends TestCase {
+public class M2Test extends TestCase {
 
 	public void setUp(){
 
@@ -394,7 +394,7 @@ public class m2_additional_test extends TestCase {
 			if (!address.equals(serverAddress + ":" + Integer.toString(serverPort))){
 
 				//disconnect from current server
-				if (store!=null && store.client_is_up()){
+				if (store!=null && store.isClientRunning()){
 					store.disconnect();
 					store=null;
 				}
@@ -416,7 +416,7 @@ public class m2_additional_test extends TestCase {
 		//Connect back to original server 
 
 		if (store.port != serverPort || !store.address.equals(serverAddress)){
-			if (store!=null && store.client_is_up()){
+			if (store!=null && store.isClientRunning()){
 				store.disconnect();
 				store=null;
 			}
@@ -442,7 +442,7 @@ public class m2_additional_test extends TestCase {
 			if (!address.equals(serverAddress + ":" + Integer.toString(serverPort))){
 
 				//disconnect from current server
-				if (store!=null && store.client_is_up()){
+				if (store!=null && store.isClientRunning()){
 					store.disconnect();
 					store=null;
 				}
@@ -465,7 +465,7 @@ public class m2_additional_test extends TestCase {
 		//Connect back to original server 
 
 		if (store.port != serverPort || !store.address.equals(serverAddress)){
-			if (store!=null && store.client_is_up()){
+			if (store!=null && store.isClientRunning()){
 				store.disconnect();
 				store=null;
 			}
@@ -535,7 +535,7 @@ public class m2_additional_test extends TestCase {
 				//String value = readFile(path + Integer.toString(i+1) + ".");
 				String value = Integer.toString(i);
 				int j = i % num_clients;
-				if(clients[j] != null && clients[j].client_is_up()){
+				if(clients[j] != null && clients[j].isClientRunning()){
 					try{
 						retryput(clients[j],"127.0.0.1",50000,Integer.toString(i+1),value);
 					}catch(Exception e){
@@ -549,7 +549,7 @@ public class m2_additional_test extends TestCase {
 			//gets
 			for(int i = 0; i < getload ; i ++){
 				int j = i % num_clients;
-				if(clients[j] != null && clients[j].client_is_up()){
+				if(clients[j] != null && clients[j].isClientRunning()){
 					try{
 						retryget(clients[j],"127.0.0.1",50000,Integer.toString(i+1));
 					}catch(Exception e){
@@ -584,7 +584,7 @@ public class m2_additional_test extends TestCase {
 				//String value = readFile(path + Integer.toString(i+1) + ".");
 				String value = Integer.toString(i);
 				int j = i % num_clients;
-				if(clients[j] != null && clients[j].client_is_up()){
+				if(clients[j] != null && clients[j].isClientRunning()){
 					try{
 						retryput(clients[j],"127.0.0.1",50000 + j,Integer.toString(i+1),value);
 					}catch(Exception e){
@@ -600,7 +600,7 @@ public class m2_additional_test extends TestCase {
 			getstart = System.nanoTime();
 			for(int i = 0; i < getload ; i ++){
 				int j = i % num_clients;
-				if(clients[j] != null && clients[j].client_is_up()){
+				if(clients[j] != null && clients[j].isClientRunning()){
 					try{
 						retryget(clients[j],"127.0.0.1",50000 + j ,Integer.toString(i+1));
 					}catch(Exception e){
