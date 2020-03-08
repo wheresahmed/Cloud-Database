@@ -281,30 +281,34 @@ public class ECSClient implements IECSClient {
 		System.out.println(PROMPT + "Error!! " +  error);
 	}
 
-    private void printHelp() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(PROMPT).append("KV CLIENT HELP (Usage):\n");
-        sb.append(PROMPT);
-        sb.append("::::::::::::::::::::::::::::::::");
-        sb.append("::::::::::::::::::::::::::::::::\n");
-        sb.append(PROMPT).append("connect <host> <port>");
-        sb.append("\t establishes a connection to a server\n");
-        sb.append(PROMPT).append("get <key> ");
-        sb.append("\t\t\t gets value associated with key from the server\n");
-        sb.append(PROMPT).append("put <key> <value>");
-        sb.append("\t\t creates or updates key value pair in the server\n");
-        sb.append(PROMPT).append("disconnect");
-        sb.append("\t\t\t disconnects from the server \n");
-
-        sb.append(PROMPT).append("logLevel");
-        sb.append("\t\t\t changes the logLevel \n");
-        sb.append(PROMPT).append("\t\t\t\t ");
-        sb.append("ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF \n");
-
-        sb.append(PROMPT).append("quit");
-        sb.append("\t\t\t\t exits the program");
-        System.out.println(sb.toString());
-    }
+    private void printHelp(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(PROMPT).append("BASIC STORAGE SERVICE ADMIN CONSOLE HELP (Usage):\n");
+		sb.append(PROMPT);
+		sb.append("::::::::::::::::::::::::::::::::");
+		sb.append("::::::::::::::::::::::::::::::::\n");
+		sb.append(PROMPT).append("init <numberOfServers> <cacheSize> <cacheStrategy>");
+		sb.append("\t initializes the storage service with the specified config \n");
+		sb.append(PROMPT).append("start");
+		sb.append("\t\t starts all initialized/or added storage servers in the service \n");
+		sb.append(PROMPT).append("stop");
+		sb.append("\t\t stops all initialized/or added storage servers in the service \n");
+		sb.append(PROMPT).append("shutdown");
+		sb.append("\t\t shuts down all initialized/or added storage servers in the service \n");
+		sb.append(PROMPT).append("addNode <cacheSize> <cacheStrategy>");
+		sb.append("\t\t adds a storage server to the service with the specified config \n");
+		sb.append(PROMPT).append("addNodes <count> <cacheSize> <cacheStrategy>");
+		sb.append("\t\t adds a number of storage servers to the service with the specified config \n");
+		sb.append(PROMPT).append("removeNode <index> <index> ....");
+		sb.append("\t\t removes a set of indices of storage servers based on order of addition into the server \n");
+		sb.append(PROMPT).append("logLevel");
+		sb.append("\t\t\t changes the logLevel \n");
+		sb.append(PROMPT).append("\t\t\t\t ");
+		sb.append("ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF \n");
+		sb.append(PROMPT).append("quit ");
+		sb.append("\t\t\t exits the program");
+		System.out.println(sb.toString());
+	}
 
     private void printPossibleLogLevels() {
         System.out.println(PROMPT
