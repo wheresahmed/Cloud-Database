@@ -18899,3 +18899,83 @@ java.net.ConnectException: Connection refused (Connection refused)
 2020-03-04 20:39:08,853 INFO  [main] root: connection closed!
 2020-03-04 20:39:08,853 DEBUG [main] root: M1_Client> 
 2020-03-04 20:39:08,854 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-08 22:55:03,236 INFO  [main] root: Connection established
+2020-03-08 22:55:12,122 INFO  [main] root: Send message:	 'put a b'
+2020-03-08 22:55:12,137 INFO  [main] root: Receive message:	 'PUT_UPDATE < a , b  >'
+2020-03-08 22:55:16,514 INFO  [main] root: Send message:	 'get a'
+2020-03-08 22:55:16,516 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, b  >'
+2020-03-08 22:55:26,475 INFO  [main] root: Send message:	 'put a'
+2020-03-08 22:55:26,476 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2'
+2020-03-08 22:55:26,477 INFO  [main] root: try to close connection ...
+2020-03-08 22:55:26,477 INFO  [main] root: tearing down the connection ...
+2020-03-08 22:55:26,477 INFO  [main] root: connection closed!
+2020-03-08 22:55:26,477 DEBUG [main] root: M1_Client> 
+2020-03-08 22:55:26,477 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-08 22:55:26,478 INFO  [main] root: Connection established
+2020-03-08 22:55:26,478 INFO  [main] root: Send message:	 'put a'
+2020-03-08 22:55:26,491 INFO  [main] root: Receive message:	 'DELETE_ERROR < a ,  >'
+2020-03-08 22:55:26,491 INFO  [main] root: try to close connection ...
+2020-03-08 22:55:26,491 INFO  [main] root: tearing down the connection ...
+2020-03-08 22:55:26,491 INFO  [main] root: connection closed!
+2020-03-08 22:55:26,491 DEBUG [main] root: M1_Client> 
+2020-03-08 22:55:26,491 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-08 22:55:26,491 INFO  [main] root: Connection established
+2020-03-08 22:55:35,055 INFO  [main] root: Send message:	 'put q t'
+2020-03-08 22:55:35,055 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2'
+2020-03-08 22:55:35,056 INFO  [main] root: try to close connection ...
+2020-03-08 22:55:35,056 INFO  [main] root: tearing down the connection ...
+2020-03-08 22:55:35,056 INFO  [main] root: connection closed!
+2020-03-08 22:55:35,056 DEBUG [main] root: M1_Client> 
+2020-03-08 22:55:35,056 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-08 22:55:35,056 INFO  [main] root: Connection established
+2020-03-08 22:55:35,056 INFO  [main] root: Send message:	 'put q t'
+2020-03-08 22:55:35,061 INFO  [main] root: Receive message:	 'PUT_UPDATE < q , t  >'
+2020-03-08 22:55:35,061 INFO  [main] root: try to close connection ...
+2020-03-08 22:55:35,061 INFO  [main] root: tearing down the connection ...
+2020-03-08 22:55:35,062 INFO  [main] root: connection closed!
+2020-03-08 22:55:35,062 DEBUG [main] root: M1_Client> 
+2020-03-08 22:55:35,062 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-08 22:55:35,062 INFO  [main] root: Connection established
+2020-03-08 22:56:36,239 INFO  [main] root: try to close connection ...
+2020-03-08 22:56:36,240 INFO  [main] root: tearing down the connection ...
+2020-03-08 22:56:36,240 INFO  [main] root: connection closed!
+2020-03-08 22:56:36,240 DEBUG [main] root: M1_Client> 
+2020-03-08 22:56:36,240 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-08 22:56:45,794 INFO  [main] root: Connection established
+2020-03-08 22:56:51,644 INFO  [main] root: Send message:	 'get q'
+2020-03-08 22:56:51,646 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, t  >'
+2020-03-08 22:56:56,542 INFO  [main] root: Send message:	 'get a'
+2020-03-08 22:56:56,543 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, b  >'
+2020-03-08 22:59:13,283 INFO  [main] root: Connection established
+2020-03-08 22:59:17,681 INFO  [main] root: Send message:	 'get a'
+2020-03-08 22:59:17,692 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, b  >'
+2020-03-08 22:59:20,577 INFO  [main] root: Send message:	 'get q'
+2020-03-08 22:59:20,578 INFO  [main] root: Receive message:	 'SERVER_NOT_RESPONSIBLE 127.0.0.1:50001 358343938402ebb5110716c6e836f5a2-dcee0277eb13b76434e8dcd31a387709 127.0.0.1:50000 dcee0277eb13b76434e8dcd31a387709-358343938402ebb5110716c6e836f5a2'
+2020-03-08 22:59:20,578 INFO  [main] root: try to close connection ...
+2020-03-08 22:59:20,578 INFO  [main] root: tearing down the connection ...
+2020-03-08 22:59:20,578 INFO  [main] root: connection closed!
+2020-03-08 22:59:20,579 DEBUG [main] root: M1_Client> 
+2020-03-08 22:59:20,579 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50000
+2020-03-08 22:59:20,579 INFO  [main] root: Connection established
+2020-03-08 22:59:20,579 INFO  [main] root: Send message:	 'get q'
+2020-03-08 22:59:20,580 INFO  [main] root: Receive message:	 'GET_SUCCESS < q, t  >'
+2020-03-08 22:59:20,580 INFO  [main] root: try to close connection ...
+2020-03-08 22:59:20,580 INFO  [main] root: tearing down the connection ...
+2020-03-08 22:59:20,581 INFO  [main] root: connection closed!
+2020-03-08 22:59:20,581 DEBUG [main] root: M1_Client> 
+2020-03-08 22:59:20,581 DEBUG [main] root: Connection terminated: 127.0.0.1 / 50001
+2020-03-08 22:59:20,581 INFO  [main] root: Connection established
+2020-03-08 23:03:05,272 INFO  [main] root: Connection established
+2020-03-08 23:03:14,159 INFO  [main] root: Send message:	 'get a'
+2020-03-08 23:03:14,159 INFO  [main] root: Receive message:	 'SERVER_STOPPED'
+2020-03-08 23:05:06,783 INFO  [main] root: Unable to parse argument <port>
+java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at app_kvClient.KVClient.handleCommand(KVClient.java:64)
+	at app_kvClient.KVClient.run(KVClient.java:41)
+	at app_kvClient.KVClient.main(KVClient.java:361)
+2020-03-08 23:05:20,769 INFO  [main] root: Connection established
+2020-03-08 23:05:36,119 INFO  [main] root: Send message:	 'get a'
+2020-03-08 23:05:36,122 INFO  [main] root: Receive message:	 'GET_SUCCESS < a, b  >'

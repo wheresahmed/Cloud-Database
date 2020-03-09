@@ -1,0 +1,419 @@
+2020-03-04 17:05:13,867 ERROR [Thread-0] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,869 ERROR [Thread-0] root: Port 50000 is already bound!
+2020-03-04 17:05:13,944 ERROR [Thread-12] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,944 ERROR [Thread-12] root: Port 50000 is already bound!
+2020-03-04 17:05:13,961 ERROR [Thread-25] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,962 ERROR [Thread-25] root: Port 40000 is already bound!
+2020-03-04 17:05:13,961 ERROR [Thread-23] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,962 ERROR [Thread-26] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,962 ERROR [Thread-24] root: Error! Connection lost!
+2020-03-04 17:05:13,963 ERROR [Thread-26] root: Port 50000 is already bound!
+2020-03-04 17:05:13,963 ERROR [Thread-23] root: Port 60000 is already bound!
+2020-03-04 17:05:13,964 ERROR [Thread-31] root: Error! Connection lost!
+2020-03-04 17:05:13,964 ERROR [Thread-32] root: Error! Connection lost!
+2020-03-04 17:05:13,970 ERROR [Thread-33] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,970 ERROR [Thread-33] root: Port 60000 is already bound!
+2020-03-04 17:05:13,971 ERROR [Thread-35] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,971 ERROR [Thread-35] root: Port 40000 is already bound!
+2020-03-04 17:05:13,971 ERROR [Thread-37] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,971 ERROR [Thread-37] root: Port 50000 is already bound!
+2020-03-04 17:05:13,974 ERROR [Thread-42] root: Error! Connection lost!
+2020-03-04 17:05:13,974 ERROR [Thread-43] root: Error! Connection lost!
+2020-03-04 17:05:13,977 ERROR [Thread-45] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,977 ERROR [Thread-45] root: Port 40000 is already bound!
+2020-03-04 17:05:13,977 ERROR [Thread-44] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,978 ERROR [Thread-44] root: Port 60000 is already bound!
+2020-03-04 17:05:13,978 ERROR [Thread-46] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,978 ERROR [Thread-46] root: Port 50000 is already bound!
+2020-03-04 17:05:13,980 ERROR [Thread-52] root: Error! Connection lost!
+2020-03-04 17:05:13,980 ERROR [Thread-51] root: Error! Connection lost!
+2020-03-04 17:05:13,981 ERROR [Thread-53] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,982 ERROR [Thread-53] root: Port 60000 is already bound!
+2020-03-04 17:05:13,982 ERROR [Thread-55] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,982 ERROR [Thread-55] root: Port 50000 is already bound!
+2020-03-04 17:05:13,981 ERROR [Thread-54] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,982 ERROR [Thread-54] root: Port 40000 is already bound!
+2020-03-04 17:05:13,992 ERROR [Thread-60] root: Error! Connection lost!
+2020-03-04 17:05:13,992 ERROR [Thread-61] root: Error! Connection lost!
+2020-03-04 17:05:13,993 ERROR [Thread-62] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,993 ERROR [Thread-62] root: Port 60000 is already bound!
+2020-03-04 17:05:13,993 ERROR [Thread-63] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,993 ERROR [Thread-63] root: Port 40000 is already bound!
+2020-03-04 17:05:13,997 ERROR [Thread-64] root: Error! Cannot open server socket:
+2020-03-04 17:05:13,997 ERROR [Thread-64] root: Port 50000 is already bound!
+2020-03-04 17:05:14,012 ERROR [Thread-69] root: Error! Connection lost!
+2020-03-04 17:05:14,013 ERROR [Thread-71] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,014 ERROR [Thread-71] root: Port 60000 is already bound!
+2020-03-04 17:05:14,013 ERROR [Thread-72] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,013 ERROR [Thread-73] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,014 ERROR [Thread-73] root: Port 50000 is already bound!
+2020-03-04 17:05:14,013 ERROR [Thread-70] root: Error! Connection lost!
+2020-03-04 17:05:14,014 ERROR [Thread-72] root: Port 40000 is already bound!
+2020-03-04 17:05:14,018 ERROR [Thread-78] root: Error! Connection lost!
+2020-03-04 17:05:14,018 ERROR [Thread-79] root: Error! Connection lost!
+2020-03-04 17:05:14,020 ERROR [Thread-80] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,020 ERROR [Thread-80] root: Port 60000 is already bound!
+2020-03-04 17:05:14,021 ERROR [Thread-81] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,021 ERROR [Thread-81] root: Port 40000 is already bound!
+2020-03-04 17:05:14,022 ERROR [Thread-82] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,022 ERROR [Thread-82] root: Port 50000 is already bound!
+2020-03-04 17:05:14,026 ERROR [Thread-88] root: Error! Connection lost!
+2020-03-04 17:05:14,026 ERROR [Thread-87] root: Error! Connection lost!
+2020-03-04 17:05:14,027 ERROR [Thread-89] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,027 ERROR [Thread-89] root: Port 60000 is already bound!
+2020-03-04 17:05:14,027 ERROR [Thread-90] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,027 ERROR [Thread-90] root: Port 40000 is already bound!
+2020-03-04 17:05:14,028 ERROR [Thread-91] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,031 ERROR [Thread-91] root: Port 50000 is already bound!
+2020-03-04 17:05:14,037 ERROR [Thread-96] root: Error! Connection lost!
+2020-03-04 17:05:14,037 ERROR [Thread-97] root: Error! Connection lost!
+2020-03-04 17:05:14,039 ERROR [Thread-98] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,039 ERROR [Thread-98] root: Port 60000 is already bound!
+2020-03-04 17:05:14,039 ERROR [Thread-99] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,039 ERROR [Thread-99] root: Port 40000 is already bound!
+2020-03-04 17:05:14,039 ERROR [Thread-100] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,039 ERROR [Thread-100] root: Port 50000 is already bound!
+2020-03-04 17:05:14,042 ERROR [Thread-105] root: Error! Connection lost!
+2020-03-04 17:05:14,044 ERROR [Thread-106] root: Error! Connection lost!
+2020-03-04 17:05:14,047 ERROR [Thread-107] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,047 ERROR [Thread-107] root: Port 60000 is already bound!
+2020-03-04 17:05:14,054 ERROR [Thread-108] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,054 ERROR [Thread-108] root: Port 40000 is already bound!
+2020-03-04 17:05:14,061 ERROR [Thread-109] root: Error! Cannot open server socket:
+2020-03-04 17:05:14,061 ERROR [Thread-109] root: Port 50000 is already bound!
+2020-03-04 17:05:19,905 ERROR [Thread-114] root: Error! Connection lost!
+2020-03-04 17:05:19,905 ERROR [Thread-115] root: Error! Connection lost!
+2020-03-04 17:12:58,769 ERROR [Thread-6] root: Error! Connection lost!
+2020-03-04 17:12:58,771 ERROR [Thread-8] root: Error! Connection lost!
+2020-03-04 17:12:58,772 ERROR [Thread-10] root: Error! Connection lost!
+2020-03-04 17:12:58,773 ERROR [Thread-12] root: Error! Connection lost!
+2020-03-04 17:12:58,774 ERROR [Thread-14] root: Error! Connection lost!
+2020-03-04 17:12:58,775 ERROR [Thread-16] root: Error! Connection lost!
+2020-03-04 17:12:58,777 ERROR [Thread-19] root: Error! Cannot open server socket:
+2020-03-04 17:12:58,777 ERROR [Thread-19] root: Port 50000 is already bound!
+2020-03-04 17:12:58,792 ERROR [Thread-5] root: Error! Connection lost!
+2020-03-04 17:13:04,374 ERROR [Thread-25] root: Error! Connection lost!
+2020-03-04 17:13:04,374 ERROR [Thread-26] root: Error! Connection lost!
+2020-03-04 17:13:04,374 ERROR [Thread-24] root: Error! Connection lost!
+2020-03-04 17:13:04,374 ERROR [Thread-27] root: Error! Connection lost!
+2020-03-04 17:13:04,375 ERROR [Thread-28] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,375 ERROR [Thread-28] root: Port 60000 is already bound!
+2020-03-04 17:13:04,375 ERROR [Thread-30] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,375 ERROR [Thread-30] root: Port 50000 is already bound!
+2020-03-04 17:13:04,375 ERROR [Thread-29] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,376 ERROR [Thread-29] root: Port 40000 is already bound!
+2020-03-04 17:13:04,389 ERROR [Thread-35] root: Error! Connection lost!
+2020-03-04 17:13:04,389 ERROR [Thread-36] root: Error! Connection lost!
+2020-03-04 17:13:04,390 ERROR [Thread-38] root: Error! Connection lost!
+2020-03-04 17:13:04,390 ERROR [Thread-37] root: Error! Connection lost!
+2020-03-04 17:13:04,391 ERROR [Thread-49] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,391 ERROR [Thread-48] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,392 ERROR [Thread-50] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,391 ERROR [Thread-49] root: Port 40000 is already bound!
+2020-03-04 17:13:04,392 ERROR [Thread-50] root: Port 50000 is already bound!
+2020-03-04 17:13:04,392 ERROR [Thread-48] root: Port 60000 is already bound!
+2020-03-04 17:13:04,394 ERROR [Thread-55] root: Error! Connection lost!
+2020-03-04 17:13:04,394 ERROR [Thread-56] root: Error! Connection lost!
+2020-03-04 17:13:04,396 ERROR [Thread-58] root: Error! Connection lost!
+2020-03-04 17:13:04,395 ERROR [Thread-61] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,396 ERROR [Thread-61] root: Port 50000 is already bound!
+2020-03-04 17:13:04,394 ERROR [Thread-60] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,397 ERROR [Thread-60] root: Port 40000 is already bound!
+2020-03-04 17:13:04,394 ERROR [Thread-59] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,403 ERROR [Thread-59] root: Port 60000 is already bound!
+2020-03-04 17:13:04,394 ERROR [Thread-57] root: Error! Connection lost!
+2020-03-04 17:13:04,404 ERROR [Thread-70] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,398 ERROR [Thread-69] root: Error! Connection lost!
+2020-03-04 17:13:04,398 ERROR [Thread-67] root: Error! Connection lost!
+2020-03-04 17:13:04,397 ERROR [Thread-68] root: Error! Connection lost!
+2020-03-04 17:13:04,397 ERROR [Thread-66] root: Error! Connection lost!
+2020-03-04 17:13:04,412 ERROR [Thread-79] root: Error! Connection lost!
+2020-03-04 17:13:04,421 ERROR [Thread-90] root: Error! Connection lost!
+2020-03-04 17:13:04,422 ERROR [Thread-91] root: Error! Connection lost!
+2020-03-04 17:13:04,412 ERROR [Thread-78] root: Error! Connection lost!
+2020-03-04 17:13:04,412 ERROR [Thread-77] root: Error! Connection lost!
+2020-03-04 17:13:04,405 ERROR [Thread-70] root: Port 60000 is already bound!
+2020-03-04 17:13:04,404 ERROR [Thread-72] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,404 ERROR [Thread-71] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,423 ERROR [Thread-72] root: Port 50000 is already bound!
+2020-03-04 17:13:04,423 ERROR [Thread-92] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,421 ERROR [Thread-89] root: Error! Connection lost!
+2020-03-04 17:13:04,421 ERROR [Thread-88] root: Error! Connection lost!
+2020-03-04 17:13:04,421 ERROR [Thread-83] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,431 ERROR [Thread-83] root: Port 50000 is already bound!
+2020-03-04 17:13:04,431 ERROR [Thread-99] root: Error! Connection lost!
+2020-03-04 17:13:04,421 ERROR [Thread-80] root: Error! Connection lost!
+2020-03-04 17:13:04,420 ERROR [Thread-82] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,432 ERROR [Thread-82] root: Port 40000 is already bound!
+2020-03-04 17:13:04,420 ERROR [Thread-81] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,436 ERROR [Thread-103] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,432 ERROR [Thread-102] root: Error! Connection lost!
+2020-03-04 17:13:04,431 ERROR [Thread-100] root: Error! Connection lost!
+2020-03-04 17:13:04,431 ERROR [Thread-101] root: Error! Connection lost!
+2020-03-04 17:13:04,424 ERROR [Thread-92] root: Port 60000 is already bound!
+2020-03-04 17:13:04,424 ERROR [Thread-94] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,446 ERROR [Thread-94] root: Port 50000 is already bound!
+2020-03-04 17:13:04,424 ERROR [Thread-93] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,446 ERROR [Thread-93] root: Port 40000 is already bound!
+2020-03-04 17:13:04,424 ERROR [Thread-71] root: Port 40000 is already bound!
+2020-03-04 17:13:04,446 ERROR [Thread-124] root: Error! Connection lost!
+2020-03-04 17:13:04,445 ERROR [Thread-103] root: Port 60000 is already bound!
+2020-03-04 17:13:04,445 ERROR [Thread-123] root: Error! Connection lost!
+2020-03-04 17:13:04,445 ERROR [Thread-122] root: Error! Connection lost!
+2020-03-04 17:13:04,445 ERROR [Thread-121] root: Error! Connection lost!
+2020-03-04 17:13:04,443 ERROR [Thread-116] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,443 ERROR [Thread-115] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,468 ERROR [Thread-115] root: Port 40000 is already bound!
+2020-03-04 17:13:04,443 ERROR [Thread-114] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,471 ERROR [Thread-114] root: Port 60000 is already bound!
+2020-03-04 17:13:04,471 ERROR [Thread-134] root: Error! Connection lost!
+2020-03-04 17:13:04,442 ERROR [Thread-113] root: Error! Connection lost!
+2020-03-04 17:13:04,442 ERROR [Thread-112] root: Error! Connection lost!
+2020-03-04 17:13:04,442 ERROR [Thread-111] root: Error! Connection lost!
+2020-03-04 17:13:04,442 ERROR [Thread-110] root: Error! Connection lost!
+2020-03-04 17:13:04,437 ERROR [Thread-105] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,437 ERROR [Thread-104] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,437 ERROR [Thread-81] root: Port 60000 is already bound!
+2020-03-04 17:13:04,474 ERROR [Thread-104] root: Port 40000 is already bound!
+2020-03-04 17:13:04,474 ERROR [Thread-105] root: Port 50000 is already bound!
+2020-03-04 17:13:04,474 ERROR [Thread-144] root: Error! Connection lost!
+2020-03-04 17:13:04,471 ERROR [Thread-133] root: Error! Connection lost!
+2020-03-04 17:13:04,469 ERROR [Thread-138] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,489 ERROR [Thread-138] root: Port 50000 is already bound!
+2020-03-04 17:13:04,469 ERROR [Thread-137] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,494 ERROR [Thread-137] root: Port 40000 is already bound!
+2020-03-04 17:13:04,469 ERROR [Thread-136] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,496 ERROR [Thread-136] root: Port 60000 is already bound!
+2020-03-04 17:13:04,468 ERROR [Thread-132] root: Error! Connection lost!
+2020-03-04 17:13:04,468 ERROR [Thread-135] root: Error! Connection lost!
+2020-03-04 17:13:04,466 ERROR [Thread-116] root: Port 50000 is already bound!
+2020-03-04 17:13:04,462 ERROR [Thread-127] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,525 ERROR [Thread-127] root: Port 50000 is already bound!
+2020-03-04 17:13:04,462 ERROR [Thread-126] root: Error! Cannot open server socket:
+2020-03-04 17:13:04,537 ERROR [Thread-126] root: Port 40000 is already bound!
+2020-03-04 17:14:22,814 ERROR [Thread-6] root: Error! Connection lost!
+2020-03-04 17:14:22,815 ERROR [Thread-8] root: Error! Connection lost!
+2020-03-04 17:14:22,816 ERROR [Thread-10] root: Error! Connection lost!
+2020-03-04 17:14:22,817 ERROR [Thread-12] root: Error! Connection lost!
+2020-03-04 17:14:22,818 ERROR [Thread-14] root: Error! Connection lost!
+2020-03-04 17:14:22,819 ERROR [Thread-16] root: Error! Connection lost!
+2020-03-04 17:14:22,820 ERROR [Thread-19] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,820 ERROR [Thread-19] root: Port 50000 is already bound!
+2020-03-04 17:14:22,838 ERROR [Thread-32] root: Error! Connection lost!
+2020-03-04 17:14:22,838 ERROR [Thread-33] root: Error! Connection lost!
+2020-03-04 17:14:22,838 ERROR [Thread-24] root: Error! Connection lost!
+2020-03-04 17:14:22,839 ERROR [Thread-37] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,839 ERROR [Thread-38] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,839 ERROR [Thread-37] root: Port 60000 is already bound!
+2020-03-04 17:14:22,840 ERROR [Thread-38] root: Port 40000 is already bound!
+2020-03-04 17:14:22,840 ERROR [Thread-39] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,840 ERROR [Thread-39] root: Port 50000 is already bound!
+2020-03-04 17:14:22,847 ERROR [Thread-46] root: Error! Connection lost!
+2020-03-04 17:14:22,847 ERROR [Thread-5] root: Error! Connection lost!
+2020-03-04 17:14:22,847 ERROR [Thread-45] root: Error! Connection lost!
+2020-03-04 17:14:22,847 ERROR [Thread-25] root: Error! Connection lost!
+2020-03-04 17:14:22,848 ERROR [Thread-47] root: Error! Connection lost!
+2020-03-04 17:14:22,851 ERROR [Thread-44] root: Error! Connection lost!
+2020-03-04 17:14:22,851 ERROR [Thread-49] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,851 ERROR [Thread-48] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,851 ERROR [Thread-49] root: Port 40000 is already bound!
+2020-03-04 17:14:22,852 ERROR [Thread-48] root: Port 60000 is already bound!
+2020-03-04 17:14:22,852 ERROR [Thread-50] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,852 ERROR [Thread-50] root: Port 50000 is already bound!
+2020-03-04 17:14:22,853 ERROR [Thread-55] root: Error! Connection lost!
+2020-03-04 17:14:22,853 ERROR [Thread-56] root: Error! Connection lost!
+2020-03-04 17:14:22,853 ERROR [Thread-57] root: Error! Connection lost!
+2020-03-04 17:14:22,854 ERROR [Thread-58] root: Error! Connection lost!
+2020-03-04 17:14:22,854 ERROR [Thread-59] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,854 ERROR [Thread-59] root: Port 60000 is already bound!
+2020-03-04 17:14:22,855 ERROR [Thread-61] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,855 ERROR [Thread-61] root: Port 50000 is already bound!
+2020-03-04 17:14:22,855 ERROR [Thread-60] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,855 ERROR [Thread-60] root: Port 40000 is already bound!
+2020-03-04 17:14:22,860 ERROR [Thread-66] root: Error! Connection lost!
+2020-03-04 17:14:22,860 ERROR [Thread-68] root: Error! Connection lost!
+2020-03-04 17:14:22,860 ERROR [Thread-67] root: Error! Connection lost!
+2020-03-04 17:14:22,860 ERROR [Thread-69] root: Error! Connection lost!
+2020-03-04 17:14:22,861 ERROR [Thread-70] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,861 ERROR [Thread-70] root: Port 60000 is already bound!
+2020-03-04 17:14:22,862 ERROR [Thread-71] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,862 ERROR [Thread-71] root: Port 40000 is already bound!
+2020-03-04 17:14:22,862 ERROR [Thread-72] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,862 ERROR [Thread-72] root: Port 50000 is already bound!
+2020-03-04 17:14:22,864 ERROR [Thread-79] root: Error! Connection lost!
+2020-03-04 17:14:22,864 ERROR [Thread-78] root: Error! Connection lost!
+2020-03-04 17:14:22,864 ERROR [Thread-77] root: Error! Connection lost!
+2020-03-04 17:14:22,864 ERROR [Thread-80] root: Error! Connection lost!
+2020-03-04 17:14:22,864 ERROR [Thread-81] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,864 ERROR [Thread-81] root: Port 60000 is already bound!
+2020-03-04 17:14:22,870 ERROR [Thread-83] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,870 ERROR [Thread-83] root: Port 50000 is already bound!
+2020-03-04 17:14:22,870 ERROR [Thread-82] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,870 ERROR [Thread-82] root: Port 40000 is already bound!
+2020-03-04 17:14:22,871 ERROR [Thread-90] root: Error! Connection lost!
+2020-03-04 17:14:22,871 ERROR [Thread-88] root: Error! Connection lost!
+2020-03-04 17:14:22,875 ERROR [Thread-89] root: Error! Connection lost!
+2020-03-04 17:14:22,875 ERROR [Thread-92] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,875 ERROR [Thread-92] root: Port 60000 is already bound!
+2020-03-04 17:14:22,876 ERROR [Thread-93] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,876 ERROR [Thread-93] root: Port 40000 is already bound!
+2020-03-04 17:14:22,876 ERROR [Thread-94] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,876 ERROR [Thread-94] root: Port 50000 is already bound!
+2020-03-04 17:14:22,877 ERROR [Thread-91] root: Error! Connection lost!
+2020-03-04 17:14:22,881 ERROR [Thread-100] root: Error! Connection lost!
+2020-03-04 17:14:22,881 ERROR [Thread-101] root: Error! Connection lost!
+2020-03-04 17:14:22,881 ERROR [Thread-99] root: Error! Connection lost!
+2020-03-04 17:14:22,881 ERROR [Thread-102] root: Error! Connection lost!
+2020-03-04 17:14:22,881 ERROR [Thread-103] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,881 ERROR [Thread-103] root: Port 60000 is already bound!
+2020-03-04 17:14:22,881 ERROR [Thread-104] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,882 ERROR [Thread-104] root: Port 40000 is already bound!
+2020-03-04 17:14:22,882 ERROR [Thread-105] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,882 ERROR [Thread-105] root: Port 50000 is already bound!
+2020-03-04 17:14:22,883 ERROR [Thread-111] root: Error! Connection lost!
+2020-03-04 17:14:22,884 ERROR [Thread-112] root: Error! Connection lost!
+2020-03-04 17:14:22,884 ERROR [Thread-113] root: Error! Connection lost!
+2020-03-04 17:14:22,884 ERROR [Thread-110] root: Error! Connection lost!
+2020-03-04 17:14:22,885 ERROR [Thread-114] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,885 ERROR [Thread-114] root: Port 60000 is already bound!
+2020-03-04 17:14:22,886 ERROR [Thread-115] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,886 ERROR [Thread-115] root: Port 40000 is already bound!
+2020-03-04 17:14:22,886 ERROR [Thread-116] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,886 ERROR [Thread-116] root: Port 50000 is already bound!
+2020-03-04 17:14:22,887 ERROR [Thread-122] root: Error! Connection lost!
+2020-03-04 17:14:22,887 ERROR [Thread-121] root: Error! Connection lost!
+2020-03-04 17:14:22,887 ERROR [Thread-123] root: Error! Connection lost!
+2020-03-04 17:14:22,888 ERROR [Thread-124] root: Error! Connection lost!
+2020-03-04 17:14:22,888 ERROR [Thread-125] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,888 ERROR [Thread-125] root: Port 60000 is already bound!
+2020-03-04 17:14:22,889 ERROR [Thread-126] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,889 ERROR [Thread-126] root: Port 40000 is already bound!
+2020-03-04 17:14:22,889 ERROR [Thread-127] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,889 ERROR [Thread-127] root: Port 50000 is already bound!
+2020-03-04 17:14:22,890 ERROR [Thread-134] root: Error! Connection lost!
+2020-03-04 17:14:22,890 ERROR [Thread-133] root: Error! Connection lost!
+2020-03-04 17:14:22,891 ERROR [Thread-136] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,891 ERROR [Thread-136] root: Port 60000 is already bound!
+2020-03-04 17:14:22,891 ERROR [Thread-132] root: Error! Connection lost!
+2020-03-04 17:14:22,891 ERROR [Thread-137] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,891 ERROR [Thread-137] root: Port 40000 is already bound!
+2020-03-04 17:14:22,896 ERROR [Thread-138] root: Error! Cannot open server socket:
+2020-03-04 17:14:22,896 ERROR [Thread-138] root: Port 50000 is already bound!
+2020-03-04 17:14:22,896 ERROR [Thread-135] root: Error! Connection lost!
+2020-03-04 17:14:28,511 ERROR [Thread-145] root: Error! Connection lost!
+2020-03-04 17:14:28,511 ERROR [Thread-143] root: Error! Connection lost!
+2020-03-04 17:14:28,511 ERROR [Thread-146] root: Error! Connection lost!
+2020-03-04 17:14:28,511 ERROR [Thread-144] root: Error! Connection lost!
+2020-03-04 17:18:18,075 ERROR [Thread-6] root: Error! Connection lost!
+2020-03-04 17:18:18,076 ERROR [Thread-8] root: Error! Connection lost!
+2020-03-04 17:18:18,077 ERROR [Thread-10] root: Error! Connection lost!
+2020-03-04 17:18:18,078 ERROR [Thread-12] root: Error! Connection lost!
+2020-03-04 17:18:18,088 ERROR [Thread-14] root: Error! Connection lost!
+2020-03-04 17:18:18,089 ERROR [Thread-16] root: Error! Connection lost!
+2020-03-04 17:18:18,090 ERROR [Thread-5] root: Error! Connection lost!
+2020-03-04 17:18:18,091 ERROR [Thread-19] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,092 ERROR [Thread-19] root: Port 50000 is already bound!
+2020-03-04 17:18:18,095 ERROR [Thread-26] root: Error! Connection lost!
+2020-03-04 17:18:18,095 ERROR [Thread-24] root: Error! Connection lost!
+2020-03-04 17:18:18,095 ERROR [Thread-25] root: Error! Connection lost!
+2020-03-04 17:18:18,095 ERROR [Thread-27] root: Error! Connection lost!
+2020-03-04 17:18:18,096 ERROR [Thread-28] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,096 ERROR [Thread-30] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,096 ERROR [Thread-30] root: Port 50000 is already bound!
+2020-03-04 17:18:18,097 ERROR [Thread-35] root: Error! Connection lost!
+2020-03-04 17:18:18,097 ERROR [Thread-36] root: Error! Connection lost!
+2020-03-04 17:18:18,097 ERROR [Thread-37] root: Error! Connection lost!
+2020-03-04 17:18:18,097 ERROR [Thread-38] root: Error! Connection lost!
+2020-03-04 17:18:18,096 ERROR [Thread-29] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,097 ERROR [Thread-29] root: Port 40000 is already bound!
+2020-03-04 17:18:18,097 ERROR [Thread-28] root: Port 60000 is already bound!
+2020-03-04 17:18:18,098 ERROR [Thread-40] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,098 ERROR [Thread-40] root: Port 40000 is already bound!
+2020-03-04 17:18:18,098 ERROR [Thread-39] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,098 ERROR [Thread-39] root: Port 60000 is already bound!
+2020-03-04 17:18:18,099 ERROR [Thread-41] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,099 ERROR [Thread-41] root: Port 50000 is already bound!
+2020-03-04 17:18:18,103 ERROR [Thread-49] root: Error! Connection lost!
+2020-03-04 17:18:18,103 ERROR [Thread-47] root: Error! Connection lost!
+2020-03-04 17:18:18,103 ERROR [Thread-46] root: Error! Connection lost!
+2020-03-04 17:18:18,104 ERROR [Thread-50] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,104 ERROR [Thread-50] root: Port 60000 is already bound!
+2020-03-04 17:18:18,106 ERROR [Thread-51] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,106 ERROR [Thread-51] root: Port 40000 is already bound!
+2020-03-04 17:18:18,106 ERROR [Thread-48] root: Error! Connection lost!
+2020-03-04 17:18:18,106 ERROR [Thread-52] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,106 ERROR [Thread-52] root: Port 50000 is already bound!
+2020-03-04 17:18:18,109 ERROR [Thread-57] root: Error! Connection lost!
+2020-03-04 17:18:18,109 ERROR [Thread-58] root: Error! Connection lost!
+2020-03-04 17:18:18,109 ERROR [Thread-59] root: Error! Connection lost!
+2020-03-04 17:18:18,110 ERROR [Thread-63] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,110 ERROR [Thread-62] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,110 ERROR [Thread-61] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,110 ERROR [Thread-60] root: Error! Connection lost!
+2020-03-04 17:18:18,111 ERROR [Thread-62] root: Port 40000 is already bound!
+2020-03-04 17:18:18,111 ERROR [Thread-61] root: Port 60000 is already bound!
+2020-03-04 17:18:18,111 ERROR [Thread-63] root: Port 50000 is already bound!
+2020-03-04 17:18:18,111 ERROR [Thread-69] root: Error! Connection lost!
+2020-03-04 17:18:18,112 ERROR [Thread-68] root: Error! Connection lost!
+2020-03-04 17:18:18,112 ERROR [Thread-70] root: Error! Connection lost!
+2020-03-04 17:18:18,113 ERROR [Thread-72] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,113 ERROR [Thread-72] root: Port 60000 is already bound!
+2020-03-04 17:18:18,113 ERROR [Thread-74] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,113 ERROR [Thread-73] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,113 ERROR [Thread-74] root: Port 50000 is already bound!
+2020-03-04 17:18:18,113 ERROR [Thread-73] root: Port 40000 is already bound!
+2020-03-04 17:18:18,113 ERROR [Thread-71] root: Error! Connection lost!
+2020-03-04 17:18:18,121 ERROR [Thread-79] root: Error! Connection lost!
+2020-03-04 17:18:18,121 ERROR [Thread-80] root: Error! Connection lost!
+2020-03-04 17:18:18,121 ERROR [Thread-81] root: Error! Connection lost!
+2020-03-04 17:18:18,121 ERROR [Thread-82] root: Error! Connection lost!
+2020-03-04 17:18:18,122 ERROR [Thread-83] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,122 ERROR [Thread-84] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,122 ERROR [Thread-83] root: Port 60000 is already bound!
+2020-03-04 17:18:18,122 ERROR [Thread-85] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,122 ERROR [Thread-85] root: Port 50000 is already bound!
+2020-03-04 17:18:18,122 ERROR [Thread-84] root: Port 40000 is already bound!
+2020-03-04 17:18:18,123 ERROR [Thread-91] root: Error! Connection lost!
+2020-03-04 17:18:18,123 ERROR [Thread-90] root: Error! Connection lost!
+2020-03-04 17:18:18,123 ERROR [Thread-92] root: Error! Connection lost!
+2020-03-04 17:18:18,123 ERROR [Thread-93] root: Error! Connection lost!
+2020-03-04 17:18:18,123 ERROR [Thread-94] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,123 ERROR [Thread-94] root: Port 60000 is already bound!
+2020-03-04 17:18:18,123 ERROR [Thread-95] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,124 ERROR [Thread-95] root: Port 40000 is already bound!
+2020-03-04 17:18:18,124 ERROR [Thread-96] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,124 ERROR [Thread-96] root: Port 50000 is already bound!
+2020-03-04 17:18:18,124 ERROR [Thread-103] root: Error! Connection lost!
+2020-03-04 17:18:18,124 ERROR [Thread-101] root: Error! Connection lost!
+2020-03-04 17:18:18,125 ERROR [Thread-102] root: Error! Connection lost!
+2020-03-04 17:18:18,125 ERROR [Thread-104] root: Error! Connection lost!
+2020-03-04 17:18:18,135 ERROR [Thread-106] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,135 ERROR [Thread-106] root: Port 40000 is already bound!
+2020-03-04 17:18:18,135 ERROR [Thread-105] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,135 ERROR [Thread-105] root: Port 60000 is already bound!
+2020-03-04 17:18:18,135 ERROR [Thread-107] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,136 ERROR [Thread-107] root: Port 50000 is already bound!
+2020-03-04 17:18:18,137 ERROR [Thread-112] root: Error! Connection lost!
+2020-03-04 17:18:18,138 ERROR [Thread-117] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,138 ERROR [Thread-117] root: Port 40000 is already bound!
+2020-03-04 17:18:18,138 ERROR [Thread-115] root: Error! Connection lost!
+2020-03-04 17:18:18,139 ERROR [Thread-116] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,139 ERROR [Thread-116] root: Port 60000 is already bound!
+2020-03-04 17:18:18,140 ERROR [Thread-118] root: Error! Cannot open server socket:
+2020-03-04 17:18:18,140 ERROR [Thread-118] root: Port 50000 is already bound!
+2020-03-04 17:18:18,156 ERROR [Thread-114] root: Error! Connection lost!
+2020-03-04 17:18:18,157 ERROR [Thread-113] root: Error! Connection lost!
+2020-03-04 17:18:23,737 ERROR [Thread-126] root: Error! Connection lost!
+2020-03-04 17:18:23,737 ERROR [Thread-125] root: Error! Connection lost!
+2020-03-04 17:18:23,737 ERROR [Thread-123] root: Error! Connection lost!
+2020-03-04 17:18:23,737 ERROR [Thread-124] root: Error! Connection lost!
+2020-03-04 17:18:23,738 ERROR [Thread-127] root: Error! Cannot open server socket:
+2020-03-04 17:18:23,738 ERROR [Thread-127] root: Port 60000 is already bound!
+2020-03-04 17:18:23,738 ERROR [Thread-128] root: Error! Cannot open server socket:
+2020-03-04 17:18:23,738 ERROR [Thread-128] root: Port 40000 is already bound!
+2020-03-04 17:18:23,739 ERROR [Thread-129] root: Error! Cannot open server socket:
+2020-03-04 17:18:23,740 ERROR [Thread-129] root: Port 50000 is already bound!
+2020-03-04 17:18:23,756 ERROR [Thread-135] root: Error! Connection lost!
+2020-03-04 17:18:23,756 ERROR [Thread-136] root: Error! Connection lost!
+2020-03-04 17:18:23,756 ERROR [Thread-134] root: Error! Connection lost!
+2020-03-04 17:18:23,756 ERROR [Thread-138] root: Error! Connection lost!

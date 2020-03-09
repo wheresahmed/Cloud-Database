@@ -34,7 +34,7 @@ public class AllTests {
 		clientSuite.addTestSuite(ConnectionTest.class);
 		clientSuite.addTestSuite(InteractionTest.class); 
 		//clientSuite.addTestSuite(AdditionalTest.class); 
-		//clientSuite.addTestSuite(M2Test.class);
+		clientSuite.addTestSuite(M2Test.class);
 		return clientSuite;
 	}
 	
