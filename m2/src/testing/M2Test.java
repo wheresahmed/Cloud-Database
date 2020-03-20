@@ -22,7 +22,7 @@ import app_kvServer.persistentDb;
 
 import shared.messages.KVMessage;
 
-public class m2_additional_test extends TestCase {
+public class M2Test extends TestCase {
 
 	public void setUp(){
 
@@ -32,9 +32,9 @@ public class m2_additional_test extends TestCase {
 		persistentDb.clearDb();
 	}
 
-	//test creation of 1 server through ecs
+
 	@Test
-	public void test_ecs_init(){
+	public void test_ecs_initialize(){
 
 		ECS ecs = new ECS(1, 4, "LRU");
 
@@ -58,16 +58,16 @@ public class m2_additional_test extends TestCase {
 		ecs.shutdownAll();
 	}
 
-	//test addNodes
+
 	@Test
 	public void test_addNodes(){
 
-		ECS ecs = new ECS(1, 4, "LRU");
+		ECS ecs = new ECS(1, 4, "LFU");
 		Exception ex = null;
 
 
 		try{
-			ecs.addNodes(2, "FIFO", 4);
+			ecs.addNodes(2, "LRU", 4);
 			try{
 				TimeUnit.MILLISECONDS.sleep(2000);
 			}catch(InterruptedException e){
@@ -81,13 +81,13 @@ public class m2_additional_test extends TestCase {
 
 
 		try{
-			KVStore kvclient1 = new KVStore("127.0.0.1", 50000);
-			KVStore kvclient2 = new KVStore("127.0.0.1", 50001);
-			KVStore kvclient3 = new KVStore("127.0.0.1", 50002);
+			KVStore kc1 = new KVStore("127.0.0.1", 50000);
+			KVStore kc2 = new KVStore("127.0.0.1", 50001);
+			KVStore kc3 = new KVStore("127.0.0.1", 50002);
 
-			kvclient1.connect();
-			kvclient2.connect();
-			kvclient3.connect();
+			kc1.connect();
+			kc2.connect();
+			kc3.connect();
 		}catch(Exception e){
 			ex = e;
 		}
@@ -97,16 +97,16 @@ public class m2_additional_test extends TestCase {
 		ecs.shutdownAll();
 	}
 
-	//test add a node and remove it
-	@Test
-	public void test_add_remove_node(){
 
-		ECS ecs = new ECS(1, 4, "LRU");
+	@Test
+	public void test_add_and_remove_node(){
+
+		ECS ecs = new ECS(1, 4, "LFU");
 		Exception ex = null;
 
 
 		try{
-			ecs.addNode(4, "FIFO");
+			ecs.addNode(4, "LRU");
 			try{
 				TimeUnit.MILLISECONDS.sleep(2000);
 			}catch(InterruptedException e){
@@ -120,7 +120,7 @@ public class m2_additional_test extends TestCase {
 
 
 		try{
-			KVStore kvclient1 = new KVStore("127.0.0.1", 50000);
+			KVStore kc = new KVStore("127.0.0.1", 50000);
 			ecs.removeNode(0);
 
 			try{
@@ -130,7 +130,7 @@ public class m2_additional_test extends TestCase {
 			}
 
 
-			kvclient1.connect();
+			kc.connect();
 		}catch(Exception e){
 			ex = e;
 		}
@@ -139,7 +139,7 @@ public class m2_additional_test extends TestCase {
 
 		ecs.shutdownAll();
 	}
-	//@Test
+	@Test
 	public void test_start(){
 		ECS ecs = new ECS(1, 4, "LRU");
 		Exception ex = null;
@@ -148,15 +148,15 @@ public class m2_additional_test extends TestCase {
 		KVMessage response = null;
 
 		try{
-			KVStore kvclient = new KVStore("127.0.0.1", 50000);
-			kvclient.connect();
+			KVStore kc = new KVStore("127.0.0.1", 50000);
+			kc.connect();
 
-			response = kvclient.put("a", "b");
+			response = kc.put("a", "b");
 
 		}catch(Exception e){
 			ex = e;
 		}
-		assertTrue(ex == null && response.getStatus() == StatusType.PUT_SUCCESS);
+		assertTrue(ex == null && (response.getStatus() == StatusType.PUT_SUCCESS|| response.getStatus()==StatusType.PUT_UPDATE));
 
 
 
@@ -164,16 +164,16 @@ public class m2_additional_test extends TestCase {
 
 	}
 
-	//@Test
+	 @Test
 	public void test_remove(){
-		ECS ecs = new ECS(1, 4, "LRU");
+		ECS ecs = new ECS(1, 4, "FIFO");
 		Exception ex = null;
 		boolean start_status = ecs.start();
 
 		KVMessage response = null;
 
 		try{
-			KVStore kvclient = new KVStore("127.0.0.1", 50000);
+			KVStore kc = new KVStore("127.0.0.1", 50000);
 
 			ecs.removeNode(0);
 
@@ -183,7 +183,7 @@ public class m2_additional_test extends TestCase {
 
 			}
 
-			kvclient.connect();
+			kc.connect();
 
 		}catch(Exception e){
 			ex = e;
@@ -197,9 +197,9 @@ public class m2_additional_test extends TestCase {
 
 	}
 
-	//@Test
+	@Test
 	public void test_stop(){
-		ECS ecs = new ECS(1, 4, "LRU");
+		ECS ecs = new ECS(1, 4, "FIFO");
 		Exception ex = null;
 		boolean start_status = ecs.start();
 
@@ -222,7 +222,7 @@ public class m2_additional_test extends TestCase {
 
 	}
 
-	//@Test
+	@Test
 	public void removeNode_dataTransfer(){
 		ECS ecs = new ECS(3, 4, "LRU");
 		Exception ex = null;
@@ -232,12 +232,12 @@ public class m2_additional_test extends TestCase {
 		KVMessage response2 = null;
 
 		try{
-			KVStore kvclient = new KVStore("127.0.0.1", 50000);
-			KVStore kvclient2 = new KVStore("127.0.0.1", 50001);
-			KVStore kvclient3 = new KVStore("127.0.0.1", 50002);
+			KVStore kc = new KVStore("127.0.0.1", 50000);
+			KVStore kc2 = new KVStore("127.0.0.1", 50001);
+			KVStore kc3 = new KVStore("127.0.0.1", 50002);
 
-			kvclient.put("a", "b");
-			kvclient2.put("apples", "b");
+			kc.put("1", "2");
+			kc2.put("a", "b");
 
 			//remove
 			ecs.removeNode(0);
@@ -250,8 +250,8 @@ public class m2_additional_test extends TestCase {
 
 			}
 
-			response1= kvclient3.get("apples");
-			response2= kvclient3.get("a");
+			response1= kc3.get("a");
+			response2= kc3.get("1");
 
 		}catch(Exception e){
 			ex = e;
@@ -263,10 +263,9 @@ public class m2_additional_test extends TestCase {
 		ecs.shutdownAll();	
 	}
 	
-        // Test if metadata is correctly updated after adding a node	
-	//@Test
+	@Test
 	public void basic_metadata(){
-		ECS ecs = new ECS(2, 4, "LRU");
+		ECS ecs = new ECS(2, 4, "FIFO");
 		Exception ex = null;
 		boolean start_status = ecs.start();
 		String dataPath = "/server";
@@ -279,10 +278,9 @@ public class m2_additional_test extends TestCase {
 		ecs.shutdownAll();	
 	}
   
-        // Test if metadata is correctly updated after adding a node	
-	//@Test
+	@Test
 	public void addNode_metadatUpdate(){
-		ECS ecs = new ECS(2, 4, "LRU");
+		ECS ecs = new ECS(2, 4, "FIFO");
 		Exception ex = null;
 		boolean start_status = ecs.start();
 		String dataPath = "/server";
@@ -298,7 +296,7 @@ public class m2_additional_test extends TestCase {
                 String afterAdd_actual = null;
 
 		try{
-			ecs.addNode(4, "LRU");
+			ecs.addNode(4, "FIFO");
 			afterAdd_actual = ecs.getData(dataPath);
 			try{
 				TimeUnit.MILLISECONDS.sleep(2000);
@@ -315,10 +313,9 @@ public class m2_additional_test extends TestCase {
 		ecs.shutdownAll();	
 	}
 
-        // Test if metadata is correctly updated after removing a node in the middle	
-	//@Test
+	@Test
 	public void removeNode_metadatUpdate(){
-		ECS ecs = new ECS(3, 4, "LRU");
+		ECS ecs = new ECS(3, 4, "FIFO");
 		Exception ex = null;
 		boolean start_status = ecs.start();
 		String dataPath = "/server";
@@ -351,7 +348,7 @@ public class m2_additional_test extends TestCase {
 		ecs.shutdownAll();	
 	}
 
-
+/*
 	///////PERFORMANCE TESTING /////////////////
 
 	private String readFile(String path){
@@ -394,7 +391,7 @@ public class m2_additional_test extends TestCase {
 			if (!address.equals(serverAddress + ":" + Integer.toString(serverPort))){
 
 				//disconnect from current server
-				if (store!=null && store.client_is_up()){
+				if (store!=null && store.isClientRunning()){
 					store.disconnect();
 					store=null;
 				}
@@ -416,7 +413,7 @@ public class m2_additional_test extends TestCase {
 		//Connect back to original server 
 
 		if (store.port != serverPort || !store.address.equals(serverAddress)){
-			if (store!=null && store.client_is_up()){
+			if (store!=null && store.isClientRunning()){
 				store.disconnect();
 				store=null;
 			}
@@ -442,7 +439,7 @@ public class m2_additional_test extends TestCase {
 			if (!address.equals(serverAddress + ":" + Integer.toString(serverPort))){
 
 				//disconnect from current server
-				if (store!=null && store.client_is_up()){
+				if (store!=null && store.isClientRunning()){
 					store.disconnect();
 					store=null;
 				}
@@ -465,7 +462,7 @@ public class m2_additional_test extends TestCase {
 		//Connect back to original server 
 
 		if (store.port != serverPort || !store.address.equals(serverAddress)){
-			if (store!=null && store.client_is_up()){
+			if (store!=null && store.isClientRunning()){
 				store.disconnect();
 				store=null;
 			}
@@ -535,7 +532,7 @@ public class m2_additional_test extends TestCase {
 				//String value = readFile(path + Integer.toString(i+1) + ".");
 				String value = Integer.toString(i);
 				int j = i % num_clients;
-				if(clients[j] != null && clients[j].client_is_up()){
+				if(clients[j] != null && clients[j].isClientRunning()){
 					try{
 						retryput(clients[j],"127.0.0.1",50000,Integer.toString(i+1),value);
 					}catch(Exception e){
@@ -549,7 +546,7 @@ public class m2_additional_test extends TestCase {
 			//gets
 			for(int i = 0; i < getload ; i ++){
 				int j = i % num_clients;
-				if(clients[j] != null && clients[j].client_is_up()){
+				if(clients[j] != null && clients[j].isClientRunning()){
 					try{
 						retryget(clients[j],"127.0.0.1",50000,Integer.toString(i+1));
 					}catch(Exception e){
@@ -584,7 +581,7 @@ public class m2_additional_test extends TestCase {
 				//String value = readFile(path + Integer.toString(i+1) + ".");
 				String value = Integer.toString(i);
 				int j = i % num_clients;
-				if(clients[j] != null && clients[j].client_is_up()){
+				if(clients[j] != null && clients[j].isClientRunning()){
 					try{
 						retryput(clients[j],"127.0.0.1",50000 + j,Integer.toString(i+1),value);
 					}catch(Exception e){
@@ -600,7 +597,7 @@ public class m2_additional_test extends TestCase {
 			getstart = System.nanoTime();
 			for(int i = 0; i < getload ; i ++){
 				int j = i % num_clients;
-				if(clients[j] != null && clients[j].client_is_up()){
+				if(clients[j] != null && clients[j].isClientRunning()){
 					try{
 						retryget(clients[j],"127.0.0.1",50000 + j ,Integer.toString(i+1));
 					}catch(Exception e){
@@ -720,7 +717,7 @@ public class m2_additional_test extends TestCase {
 
 
 
-
+   */
 
 
 

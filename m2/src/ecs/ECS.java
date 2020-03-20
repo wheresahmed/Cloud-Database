@@ -58,8 +58,6 @@ public class ECS {
    ArrayList<ECSNode> idleNodes = new ArrayList<ECSNode>(); 
    private ZooKeeper zk;
    private static final String dataPath = "/server";
-   private int storage_cache_size = 0; 
-   private String storage_cache_strategy = "LRU"; 
    private Socket ecsSocket;
    private OutputStream output;
    private InputStream input;

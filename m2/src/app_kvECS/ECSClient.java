@@ -154,7 +154,7 @@ public class ECSClient implements IECSClient {
    private void command_removenode(String[]tokens){
       if (done_init){
 	 if (tokens.length >= 2) {
-	    System.out.println(PROMPT + "Removing node(s).......");
+	    System.out.println(PROMPT + "Nodes being removed.....");
 	    ArrayList<String> nodes = new ArrayList<String>();
 	    for (int i = 1; i < tokens.length; i++) {
 	       nodes.add(tokens[i]);
@@ -165,7 +165,7 @@ public class ECSClient implements IECSClient {
 	    System.out.println(PROMPT + "removeNode <index> ....");
 	 }
       } else {
-	 printError("initialize storage service to removeNodes");
+	 printError("Initialize Servers to removeNodes");
       }
    }
    private void command_loglevel(String[]tokens){
@@ -243,7 +243,7 @@ public class ECSClient implements IECSClient {
     public boolean removeNodes(Collection<String> nodeNames) {
         if (ecs.getNumberofNodes() == 0) {
 			
-            printError("Remove error: there are no nodes to remove");
+            printError("Remove error: no nodes");
 			done_init = false;
 			return false;
 
@@ -281,30 +281,34 @@ public class ECSClient implements IECSClient {
 		System.out.println(PROMPT + "Error!! " +  error);
 	}
 
-    private void printHelp() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(PROMPT).append("KV CLIENT HELP (Usage):\n");
-        sb.append(PROMPT);
-        sb.append("::::::::::::::::::::::::::::::::");
-        sb.append("::::::::::::::::::::::::::::::::\n");
-        sb.append(PROMPT).append("connect <host> <port>");
-        sb.append("\t establishes a connection to a server\n");
-        sb.append(PROMPT).append("get <key> ");
-        sb.append("\t\t\t gets value associated with key from the server\n");
-        sb.append(PROMPT).append("put <key> <value>");
-        sb.append("\t\t creates or updates key value pair in the server\n");
-        sb.append(PROMPT).append("disconnect");
-        sb.append("\t\t\t disconnects from the server \n");
-
-        sb.append(PROMPT).append("logLevel");
-        sb.append("\t\t\t changes the logLevel \n");
-        sb.append(PROMPT).append("\t\t\t\t ");
-        sb.append("ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF \n");
-
-        sb.append(PROMPT).append("quit");
-        sb.append("\t\t\t\t exits the program");
-        System.out.println(sb.toString());
-    }
+    private void printHelp(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(PROMPT).append("BASIC STORAGE SERVICE ADMIN CONSOLE HELP (Usage):\n");
+		sb.append(PROMPT);
+		sb.append("::::::::::::::::::::::::::::::::");
+		sb.append("::::::::::::::::::::::::::::::::\n");
+		sb.append(PROMPT).append("init <number Of Servers> <cache size> <cache strategy>");
+		sb.append("\t initialize number of servers with cache size and strategy \n");
+		sb.append(PROMPT).append("start");
+		sb.append("\t\t start all storage servers \n");
+		sb.append(PROMPT).append("stop");
+		sb.append("\t\t stop all storage servers \n");
+		sb.append(PROMPT).append("shutdown");
+		sb.append("\t\t shut down all storage servers \n");
+		sb.append(PROMPT).append("addNode <cache size> <cache strategy>");
+		sb.append("\t\t add a storage server \n");
+		sb.append(PROMPT).append("addNodes <count> <cache size> <cache strategy>");
+		sb.append("\t\t add number of storage servers \n");
+		sb.append(PROMPT).append("removeNode <index> <index> ....");
+		sb.append("\t\t remove node index \n");
+		sb.append(PROMPT).append("logLevel");
+		sb.append("\t\t\t change logLevel \n");
+		sb.append(PROMPT).append("\t\t\t\t ");
+		sb.append("ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF \n");
+		sb.append(PROMPT).append("quit ");
+		sb.append("\t\t\t exit program");
+		System.out.println(sb.toString());
+	}
 
     private void printPossibleLogLevels() {
         System.out.println(PROMPT
@@ -348,7 +352,7 @@ public class ECSClient implements IECSClient {
 
 		} catch (IOException e) {
 
-			System.out.println("Error! Unable to initialize logger!");
+			System.out.println("Error! Cannot initialize logger!");
 			e.printStackTrace();
 			System.exit(1);
 
